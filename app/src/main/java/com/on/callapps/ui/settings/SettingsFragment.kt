@@ -1,4 +1,4 @@
-package com.on.callapps.ui
+package com.on.callapps.ui.settings
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,29 +7,29 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.on.callapps.R
-import com.on.callapps.databinding.FragmentProfileBinding
+import com.on.callapps.databinding.FragmentSettingsBinding
 
-class ProfileFragment : Fragment() {
+class SettingsFragment : Fragment() {
 
-    private lateinit var binding: FragmentProfileBinding
+    private lateinit var binding: FragmentSettingsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentProfileBinding.inflate(inflater, container, false)
+        binding = FragmentSettingsBinding.inflate(inflater,container,false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imgSettings.setOnClickListener {
-            findNavController().navigate(R.id.settingsFragment)
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
         }
 
-        binding.tvCharecters.setOnClickListener {
-            findNavController().navigate(R.id.contactFragment)
+        binding.btnPlay.setOnClickListener {
+            findNavController().navigate(R.id.playGameFragment)
         }
     }
 }

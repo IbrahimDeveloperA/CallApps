@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SettingsFragment">
+    tools:context=".ui.settings.SettingsFragment">
 
     <ImageView
         android:id="@+id/btn_back"
@@ -109,6 +109,7 @@
     <TextView
         style="@style/TextViewStyle"
         android:text="Play Games"
+        android:id="@+id/btn_play"
         app:layout_constraintStart_toEndOf="@id/img_gamepad"
         app:layout_constraintTop_toTopOf="@id/img_gamepad" />
 
