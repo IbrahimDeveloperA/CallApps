@@ -6,5 +6,6 @@ data class Contact(
     val imgProfile: Int,
     val name: String? = null,
     val number: String? = null,
-    val imgOk: Int
+    val imgOk: Int,
+    val rate:String? = null
 ):Serializable

@@ -27,13 +27,13 @@ class ContactAdapter : Adapter<ContactAdapter.ContactViewHolder>() {
             R.drawable.img,
             "Character 1",
             "+8404581223",
-            R.drawable.vector
+            R.drawable.vector,"0/2"
         ),
         Contact(
             R.drawable.img,
             "Character 1",
             "+8404581223",
-            R.drawable.vector
+            R.drawable.vector,"1/4"
         ),
     )
 
