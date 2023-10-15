@@ -8,6 +8,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.SeekBar
 import androidx.viewbinding.ViewBinding
 
 fun <T : ViewBinding> Context.createDialog(

@@ -21,7 +21,7 @@
             android:id="@+id/img_logo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/logo" />
+            android:src="@drawable/ic_image_dog" />
 
     </androidx.cardview.widget.CardView>
 
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
-        android:text="Name"
+        android:text="Dog Fake\nVideo Call"
         android:textColor="@color/tv_color"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,6 +45,7 @@
         android:layout_marginBottom="100dp"
         android:gravity="center"
         android:padding="12dp"
+        android:visibility="invisible"
         android:id="@+id/btn_continue"
         android:text="CONTINUE"
         android:textSize="14sp"
@@ -56,6 +57,7 @@
     <TextView
         android:textColor="@color/tv_shadow"
         android:textSize="14sp"
+        android:visibility="invisible"
         android:id="@+id/tv_by"
         android:text="By click to “continue” you agree to Privacy"
         android:layout_marginBottom="24dp"
@@ -64,14 +66,30 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-<!--    <TextView-->
-<!--        android:textColor="@color/tv_shadow"-->
-<!--        android:text="Privacy"-->
-<!--        android:id="@+id/tv_shadow"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/tv_by"-->
-<!--        app:layout_constraintTop_toTopOf="@id/tv_by"-->
-<!--        app:layout_constraintStart_toEndOf="@id/tv_by"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"/>-->
+
+    <ProgressBar
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_marginHorizontal="40dp"
+        android:indeterminateDrawable="@drawable/progres_bar"
+        app:layout_constraintTop_toBottomOf="@id/tv_by"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:indeterminate="true"
+        android:id="@+id/progress_bar"
+        android:progressDrawable="@drawable/progres_bar"
+        android:layout_height="24dp"/>
+
+    <TextView
+        android:text="0"
+        android:textSize="12sp"
+        android:textColor="@color/white"
+        android:id="@+id/tv_procent"
+        app:layout_constraintBottom_toBottomOf="@id/progress_bar"
+        app:layout_constraintEnd_toEndOf="@id/progress_bar"
+        app:layout_constraintStart_toStartOf="@id/progress_bar"
+        app:layout_constraintTop_toTopOf="@id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

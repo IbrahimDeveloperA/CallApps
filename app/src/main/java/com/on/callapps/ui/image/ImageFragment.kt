@@ -1,4 +1,4 @@
-package com.on.callapps.ui
+package com.on.callapps.ui.image
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -26,6 +26,10 @@ class ImageFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnStart.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
+        }
+
+        binding.btnExit.setOnClickListener{
+            requireActivity().finish()
         }
     }
 }

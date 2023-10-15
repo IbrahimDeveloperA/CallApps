@@ -25,5 +25,9 @@ class PlayGameFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+
+        binding.btnExit.setOnClickListener {
+            requireActivity().finish()
+        }
     }
 }

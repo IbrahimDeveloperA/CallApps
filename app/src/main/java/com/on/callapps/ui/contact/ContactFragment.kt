@@ -7,13 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.on.callapps.R
+import com.on.callapps.databinding.DialogTargetBinding
 import com.on.callapps.databinding.FragmentContactBinding
 import com.on.callapps.ui.contact.adapter.ContactAdapter
+import com.on.callapps.utils.createDialog
 
 class ContactFragment : Fragment() {
 
     private lateinit var binding: FragmentContactBinding
-    private val adapter = ContactAdapter()
+    private val adapter = ContactAdapter(this::onClick)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,6 +31,17 @@ class ContactFragment : Fragment() {
         binding.recyclerView.adapter = adapter
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+    }
+
+    private fun onClick() {
+        val dialog = requireContext().createDialog(DialogTargetBinding::inflate)
+        dialog.first.tvTitle.text = "Watch the short video to unlock the character "
+        dialog.first.btnYes.setOnClickListener {
+            dialog.second.dismiss()
+        }
+        dialog.first.btnNo.setOnClickListener{
+            dialog.second.dismiss()
         }
     }
 }

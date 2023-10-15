@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/detailCallFragment">
+    app:startDestination="@id/logoFragment">
 
     <fragment
         android:id="@+id/logoFragment"
@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_logo" />
     <fragment
         android:id="@+id/imageFragment"
-        android:name="com.on.callapps.ui.ImageFragment"
+        android:name="com.on.callapps.ui.image.ImageFragment"
         android:label="fragment_image"
         tools:layout="@layout/fragment_image" />
     <fragment
@@ -40,4 +40,9 @@
         android:name="com.on.callapps.ui.detailCall.DetailCallFragment"
         android:label="fragment_detail_call"
         tools:layout="@layout/fragment_detail_call" />
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.on.callapps.ui.message.MessageFragment"
+        android:label="fragment_message"
+        tools:layout="@layout/fragment_message" />
 </navigation>

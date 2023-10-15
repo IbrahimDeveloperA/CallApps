@@ -17,15 +17,22 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.tvChat.setOnClickListener {
+            findNavController().navigate(R.id.messageFragment)
+        }
         binding.imgSettings.setOnClickListener {
             findNavController().navigate(R.id.settingsFragment)
+        }
+
+        binding.btnBack.setOnClickListener {
+            findNavController().navigateUp()
         }
 
         binding.tvCharecters.setOnClickListener {

@@ -8,32 +8,32 @@ import com.on.callapps.R
 import com.on.callapps.data.Contact
 import com.on.callapps.databinding.ItemContactBinding
 
-class ContactAdapter : Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter(val onClick:()->Unit) : Adapter<ContactAdapter.ContactViewHolder>() {
 
     private var list = mutableListOf<Contact>(
         Contact(
             R.drawable.img,
             "Character 1",
             "+8404581223",
-            R.drawable.vector
+            R.drawable.ic_empty_circle
         ),
         Contact(
             R.drawable.img,
             "Character 1",
             "+8404581223",
-            R.drawable.vector
+            R.drawable.ic_empty_circle
         ),
         Contact(
             R.drawable.img,
             "Character 1",
             "+8404581223",
-            R.drawable.vector,"0/2"
+            R.drawable.ic_empty_circle,"0/2"
         ),
         Contact(
             R.drawable.img,
             "Character 1",
             "+8404581223",
-            R.drawable.vector,"1/4"
+            R.drawable.ic_empty_circle,"1/4"
         ),
     )
 
@@ -60,6 +60,12 @@ class ContactAdapter : Adapter<ContactAdapter.ContactViewHolder>() {
             binding.tvNumber.text = contact.number
             binding.imgOk.setImageResource(contact.imgOk)
             binding.imgView.setImageResource(contact.imgProfile)
+            binding.imgOk.setOnClickListener {
+                binding.imgOk.setImageResource(R.drawable.vector)
+            }
+            itemView.setOnClickListener {
+                onClick()
+            }
         }
 
     }
