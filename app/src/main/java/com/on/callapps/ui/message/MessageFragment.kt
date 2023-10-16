@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.drakeet.multitype.MultiTypeAdapter
+import com.on.callapps.R
 import com.on.callapps.databinding.FragmentMessageBinding
 import com.on.callapps.ui.message.adapter.MessageAdapter
 import com.on.callapps.ui.message.adapter.adapersss.AdapterFriend
@@ -41,7 +42,7 @@ class MessageFragment : Fragment() {
                 // Здесь, после завершения асинхронной задачи, установите tvStatus обратно в "online"
                 Handler(Looper.getMainLooper()).postDelayed({
                     binding.tvStatus.text = "online"
-                }, 1000) // 1000 миллисекунд (1 секунда) после завершения задачи
+                }, 900) // 1000 миллисекунд (1 секунда) после завершения задачи
             }, 2000)
         }
     }
@@ -67,12 +68,15 @@ class MessageFragment : Fragment() {
         multiAdapter.items = items
         adapter.notifyDataSetChanged()
 
+        binding.btnGift.setOnClickListener {
+            findNavController().navigate(R.id.contactFragment)
+        }
+
         binding.recyclerManager.adapter = multiAdapter
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
 
-        //binding.recyclerManager.adapter = adapterCorrespondence
     }
 }
