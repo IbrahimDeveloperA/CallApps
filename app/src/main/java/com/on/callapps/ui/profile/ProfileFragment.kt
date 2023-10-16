@@ -1,4 +1,4 @@
-package com.on.callapps.ui.profile
+package com.on.callapps.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -37,6 +37,9 @@ class ProfileFragment : Fragment() {
 
         binding.tvCharecters.setOnClickListener {
             findNavController().navigate(R.id.contactFragment)
+        }
+        binding.tvCall.setOnClickListener {
+            findNavController().navigate(R.id.callFragment)
         }
 
         binding.tvPlay.setOnClickListener{

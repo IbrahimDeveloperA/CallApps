@@ -45,4 +45,13 @@
         android:name="com.on.callapps.ui.message.MessageFragment"
         android:label="fragment_message"
         tools:layout="@layout/fragment_message" />
+    <fragment
+        android:id="@+id/callFragment"
+        android:name="com.on.callapps.ui.call.CallFragment"
+        android:label="fragment_call"
+        tools:layout="@layout/fragment_call" />
+    <fragment
+        android:id="@+id/videoCallFragment"
+        android:name="com.on.callapps.ui.call.VideoCallFragment"
+        android:label="VideoCallFragment" />
 </navigation>
