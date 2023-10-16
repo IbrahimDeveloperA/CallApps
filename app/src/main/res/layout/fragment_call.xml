@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_call"
+    tools:context=".ui.call.CallFragment">
+
+    <LinearLayout
+        android:id="@+id/ll_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/ll_time"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/stroke_timer"
+            android:layout_width="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingVertical="4dp"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_timer"
+                android:text="12:05"
+                android:fontFamily="@font/ff_montserrat_alternates_regular"
+                android:textSize="16sp"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="300dp">
+
+            <ImageView
+                android:layout_width="138dp"
+                android:layout_height="138dp"
+                android:src="@color/black" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
+            android:text="Alex Davids"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
+            android:text="+7 999 192 99 12"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/ll_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_header">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_phone_call" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
+            android:text="Ringe call dialing..."
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:id="@+id/cl_accept_reset"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="118dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_center">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:id="@+id/ib_reset"
+            android:src="@drawable/ic_call_reset"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:id="@+id/ib_accept"
+            android:src="@drawable/ic_call_accept"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="172dp"
+        android:id="@+id/cl_btn"
+        android:layout_marginHorizontal="36dp"
+        app:layout_constraintTop_toBottomOf="@id/ll_header"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <TextView
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Characters"
+            android:drawablePadding="16dp"
+            android:id="@+id/tv_characters"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableTopCompat="@drawable/ic_characters" />
+
+        <TextView
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Video Call"
+            android:drawablePadding="20dp"
+            android:id="@+id/tv_video_call"
+            app:layout_constraintEnd_toStartOf="@id/tv_chat"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_characters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableTopCompat="@drawable/ic_video_call" />
+
+        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
+            android:textSize="18sp"
+            android:paddingHorizontal="12dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Chat"
+            android:drawablePadding="16dp"
+            android:id="@+id/tv_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableTopCompat="@drawable/ic_chat" />
+
+        <TextView
+            android:id="@+id/tv_microphone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:text="Microphone"
+            android:drawablePadding="24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableTopCompat="@drawable/ic_microphone" />
+
+        <ImageButton
+            app:layout_constraintEnd_toStartOf="@id/tv_audio_level"
+            app:layout_constraintStart_toEndOf="@id/tv_microphone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@null"
+            android:id="@+id/ib_reset_call_red"
+            android:layout_marginStart="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_call_reset_red" />
+
+        <TextView
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:id="@+id/tv_audio_level"
+            android:textColor="@color/white"
+            android:text="Audio Level"
+            android:drawablePadding="20dp"
+            android:layout_gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:drawableTopCompat="@drawable/ic_audio_full" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

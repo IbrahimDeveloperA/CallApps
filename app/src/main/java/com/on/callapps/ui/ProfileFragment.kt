@@ -31,5 +31,8 @@ class ProfileFragment : Fragment() {
         binding.tvCharecters.setOnClickListener {
             findNavController().navigate(R.id.contactFragment)
         }
+        binding.tvCall.setOnClickListener {
+            findNavController().navigate(R.id.callFragment)
+        }
     }
 }
