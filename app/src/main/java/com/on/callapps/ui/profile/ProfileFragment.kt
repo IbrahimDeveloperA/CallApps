@@ -1,4 +1,4 @@
-package com.on.callapps.ui
+package com.on.callapps.ui.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

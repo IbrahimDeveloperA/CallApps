@@ -1,5 +1,12 @@
 package com.on.callapps.utils
 
+import android.app.Dialog
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.SeekBar
