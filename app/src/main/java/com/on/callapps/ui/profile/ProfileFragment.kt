@@ -45,5 +45,9 @@ class ProfileFragment : Fragment() {
         binding.tvPlay.setOnClickListener{
             findNavController().navigate(R.id.playGameFragment)
         }
+
+        binding.tvLive.setOnClickListener {
+            findNavController().navigate(R.id.liveFragment)
+        }
     }
 }
