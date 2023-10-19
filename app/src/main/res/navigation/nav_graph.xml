@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/logoFragment">
+    app:startDestination="@id/liveFragment">
 
     <fragment
         android:id="@+id/logoFragment"
@@ -54,4 +54,14 @@
         android:id="@+id/videoCallFragment"
         android:name="com.on.callapps.ui.call.VideoCallFragment"
         android:label="VideoCallFragment" />
+    <fragment
+        android:id="@+id/detailVideoCallFragment"
+        android:name="com.on.callapps.ui.call.DetailVideoCallFragment"
+        android:label="fragment_detail_video_call"
+        tools:layout="@layout/fragment_detail_video_call" />
+    <fragment
+        android:id="@+id/liveFragment"
+        android:name="com.on.callapps.ui.live.LiveFragment"
+        android:label="fragment_live"
+        tools:layout="@layout/fragment_live" />
 </navigation>
