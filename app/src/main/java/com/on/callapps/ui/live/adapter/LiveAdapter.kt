@@ -12,84 +12,45 @@ import com.on.callapps.ui.live.adapter.models.LiveModel
 
 class LiveAdapter() : Adapter<LiveAdapter.LiveViewHolder>() {
 
-    private var list = mutableListOf<LiveModel>()
+    private val list =  mutableListOf<LiveModel>()
 
-    fun addData() {
-        list.add(LiveModel(text = "Hello", image = R.drawable.frame_new4))
-        notifyDataSetChanged()
-        Handler().postDelayed({
+    private fun addData() {
+        list.add(LiveModel(text = "Hi", image = R.drawable.frame_new4))
+        handler("Cool that I found this!", (100..10000).random())
+        handler("Hope to see you again soon!", (100..10000).random())
+        handler("How are you?", (100..10000).random())
+        handler("I've heard so much about you", (100..10000).random())
+        handler("What's up?", (100..10000).random())
+        handler("Thanks for having me", (100..10000).random())
+        handler("How is everything?", (100..10000).random())
+    }
+
+    fun addDataWithDelay() {
+        addData()
+        scheduleDataUpdate()
+    }
+
+    private fun scheduleDataUpdate() {
+        val handler = Handler(Looper.getMainLooper())
+        val delayMillis = (2000..5000).random()
+
+        handler.postDelayed({
+            addData()
+            notifyDataSetChanged()
+            scheduleDataUpdate()
+        }, delayMillis.toLong())
+    }
+
+    private fun handler(text: String, delay: Int) {
+        Handler(Looper.getMainLooper()).postDelayed({
             list.add(
                 LiveModel(
-                    text = "Второй данный",
+                    text = text,
                     image = R.drawable.frame_new4
                 )
             )
             notifyDataSetChanged()
-        }, 2000)
-        Handler().postDelayed({
-            list.add(
-                LiveModel(
-                    text = "Второй данный",
-                    image = R.drawable.frame_new4
-                )
-            )
-            notifyDataSetChanged()
-        }, 6000)
-        Handler().postDelayed({
-            list.add(
-                LiveModel(
-                    text = "Второй данный",
-                    image = R.drawable.frame_new4
-                )
-            )
-            notifyDataSetChanged()
-        }, 8000)
-        Handler().postDelayed({
-            list.add(
-                LiveModel(
-                    text = "Второй данный",
-                    image = R.drawable.frame_new4
-                )
-            )
-            notifyDataSetChanged()
-        }, 10000)
-        Handler().postDelayed({
-            list.add(
-                LiveModel(
-                    text = "Второй данный",
-                    image = R.drawable.frame_new4
-                )
-            )
-            notifyDataSetChanged()
-        }, 12000)
-        Handler().postDelayed({
-            list.add(
-                LiveModel(
-                    text = "Второй данный",
-                    image = R.drawable.frame_new4
-                )
-            )
-            notifyDataSetChanged()
-        }, 14000)
-        Handler().postDelayed({
-            list.add(
-                LiveModel(
-                    text = "Второй данный",
-                    image = R.drawable.frame_new4
-                )
-            )
-            notifyDataSetChanged()
-        }, 16000)
-        Handler().postDelayed({
-            list.add(
-                LiveModel(
-                    text = "Второй данный",
-                    image = R.drawable.frame_new4
-                )
-            )
-            notifyDataSetChanged()
-        }, 18000)
-        notifyDataSetChanged()
+        }, delay.toLong())
     }
 
     class LiveViewHolder(private val binding: ItemLiveBinding) : ViewHolder(binding.root) {
