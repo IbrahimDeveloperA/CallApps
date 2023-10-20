@@ -4,10 +4,10 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.on.callapps.R
 import com.on.callapps.databinding.FragmentCallBinding
@@ -15,7 +15,7 @@ import com.on.callapps.utils.format
 
 class CallFragment : Fragment() {
 
-    private lateinit var binding : FragmentCallBinding
+    private lateinit var binding: FragmentCallBinding
     private var isCall = false
     private lateinit var mediaPlayer: MediaPlayer
     private var millisseconds = 0
@@ -79,6 +79,7 @@ class CallFragment : Fragment() {
         super.onDestroyView()
         mediaPlayer.stop()
     }
+
     private fun updateTimer() {
         millisseconds += 10
         val minutes = (millisseconds % 3600000) / 60000

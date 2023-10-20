@@ -1,5 +1,6 @@
 package com.on.callapps.ui.call
 
+
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Build
@@ -11,12 +12,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.camera.video.Recorder
-import androidx.camera.video.Recording
-import androidx.camera.video.VideoCapture
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -24,6 +21,7 @@ import com.on.callapps.R
 import com.on.callapps.databinding.FragmentVideoCallBinding
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 class VideoCallFragment : Fragment() {
 
@@ -49,6 +47,7 @@ class VideoCallFragment : Fragment() {
                 startCamera()
             }
         }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
