@@ -1,5 +1,6 @@
 package com.on.callapps.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -8,13 +9,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.on.callapps.R
+import com.on.callapps.WebViewActivity
 import com.on.callapps.databinding.FragmentLogoBinding
 
 class LogoFragment : Fragment() {
     private lateinit var binding: FragmentLogoBinding
 
-    var isStarted = false
-    var primaryProgressStatus = 0
+    private var isStarted = false
+    private var primaryProgressStatus = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +34,7 @@ class LogoFragment : Fragment() {
         val animationDuration = 7000
         val progressIncrement = maxProgress / (animationDuration / 200)
 
-        handler = Handler(Handler.Callback {
+        handler = Handler {
             if (isStarted) {
                 primaryProgressStatus += progressIncrement
                 if (primaryProgressStatus > maxProgress) {
@@ -44,28 +46,30 @@ class LogoFragment : Fragment() {
             handler?.sendEmptyMessageDelayed(0, 100)
 
             true
-        })
+        }
 
         updateProgress(primaryProgressStatus)
 
         if (!isStarted) {
             isStarted = true
-            handler?.sendEmptyMessage(0)
+            handler.sendEmptyMessage(0)
         } else {
             isStarted = false
-            handler?.removeMessages(0)
+            handler.removeMessages(0)
             binding.progressBar.visibility = View.GONE
             binding.tvProcent.visibility = View.GONE
             binding.btnContinue.visibility = View.VISIBLE
-            binding.tvBy.visibility = View.VISIBLE
+            binding.clBy.visibility = View.VISIBLE
         }
-
 
         binding.btnContinue.setOnClickListener {
             findNavController().navigate(R.id.imageFragment)
         }
-
-
+        binding.clPrivacy.setOnClickListener {
+            val intent = Intent(requireContext(), WebViewActivity::class.java)
+            intent.putExtra("url", getString(R.string.privacy_url))
+            startActivity(intent)
+        }
     }
 
     private fun updateProgress(progress: Int) {
@@ -75,7 +79,7 @@ class LogoFragment : Fragment() {
             binding.progressBar.visibility = View.GONE
             binding.tvProcent.visibility = View.GONE
             binding.btnContinue.visibility = View.VISIBLE
-            binding.tvBy.visibility = View.VISIBLE
+            binding.clBy.visibility = View.VISIBLE
         }
     }
 }

@@ -13,12 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.databinding.FragmentLiveBinding
 import com.on.callapps.ui.live.adapter.LiveAdapter
@@ -42,7 +40,7 @@ class LiveFragment : Fragment() {
     private var favorite = false
     private var emoji = false
     private var like = false
-    private lateinit var cameraExecutor: ExecutorService
+  /*  private lateinit var cameraExecutor: ExecutorService
     private val activityResultLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
@@ -62,7 +60,7 @@ class LiveFragment : Fragment() {
             } else {
                 startCamera()
             }
-        }
+        }*/
 
 
     override fun onCreateView(
@@ -75,17 +73,20 @@ class LiveFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
         binding.recyclerView.adapter = adapter
         adapter.addDataWithDelay()
         binding.tvPeople.text = people.toString()
         scheduleDataUpdate()
         handler.postDelayed(runnable, 1)
-        if (allPermissionsGranted()) {
+   /*     if (allPermissionsGranted()) {
             startCamera()
         } else {
             requestPermissions()
         }
-        cameraExecutor = Executors.newSingleThreadExecutor()
+        cameraExecutor = Executors.newSingleThreadExecutor()*/
         initListener()
     }
 
@@ -142,11 +143,11 @@ class LiveFragment : Fragment() {
         }, delayMillis.toLong())
     }
 
-    private fun requestPermissions() {
+ /*   private fun requestPermissions() {
         activityResultLauncher.launch(REQUIRED_PERMISSIONS)
     }
-
-    private fun startCamera() {
+*/
+/*    private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener({
@@ -172,7 +173,7 @@ class LiveFragment : Fragment() {
             }
 
         }, ContextCompat.getMainExecutor(requireContext()))
-    }
+    }*/
 
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
@@ -181,10 +182,10 @@ class LiveFragment : Fragment() {
         ) == PackageManager.PERMISSION_GRANTED
     }
 
-    override fun onDestroy() {
+  /*  override fun onDestroy() {
         super.onDestroy()
         cameraExecutor.shutdown()
-    }
+    }*/
 
     companion object {
         private const val TAG = "CameraXApp"

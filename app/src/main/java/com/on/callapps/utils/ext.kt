@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.SeekBar
 import androidx.viewbinding.ViewBinding
+import com.google.android.gms.ads.AdRequest
 
 fun <T : ViewBinding> Context.createDialog(
     inflate: (LayoutInflater, ViewGroup?, Boolean) -> T,

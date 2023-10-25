@@ -12,10 +12,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.databinding.FragmentDetailVideoCallBinding
 import java.util.concurrent.ExecutorService
@@ -26,7 +24,7 @@ class DetailVideoCallFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailVideoCallBinding
     private lateinit var cameraExecutor: ExecutorService
-    private val activityResultLauncher =
+  /*  private val activityResultLauncher =
         registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         )
@@ -45,7 +43,7 @@ class DetailVideoCallFragment : Fragment() {
             } else {
                 startCamera()
             }
-        }
+        }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,24 +56,27 @@ class DetailVideoCallFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (allPermissionsGranted()) {
+/*        if (allPermissionsGranted()) {
             startCamera()
         } else {
             requestPermissions()
         }
-        cameraExecutor = Executors.newSingleThreadExecutor()
+        cameraExecutor = Executors.newSingleThreadExecutor()*/
 
         binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character1}"))
         if (!binding.videoView.isPlaying) {
             binding.videoView.start()
         }
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
     }
 
-    private fun requestPermissions() {
+   /* private fun requestPermissions() {
         activityResultLauncher.launch(REQUIRED_PERMISSIONS)
-    }
+    }*/
 
-    private fun startCamera() {
+ /*   private fun startCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
 
         cameraProviderFuture.addListener({
@@ -101,7 +102,7 @@ class DetailVideoCallFragment : Fragment() {
             }
 
         }, ContextCompat.getMainExecutor(requireContext()))
-    }
+    }*/
 
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
