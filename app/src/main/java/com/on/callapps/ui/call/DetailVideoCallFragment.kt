@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
@@ -43,6 +44,9 @@ class DetailVideoCallFragment : Fragment() {
         if (!binding.videoView.isPlaying) {
             binding.videoView.start()
         }
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+
 
         binding.ibResetCallRed.setOnClickListener {
             findNavController().popBackStack()

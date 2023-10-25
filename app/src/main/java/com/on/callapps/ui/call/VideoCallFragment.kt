@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
@@ -40,12 +41,15 @@ class VideoCallFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupControls()
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
         binding.ibAccept.setOnClickListener {
             findNavController().popBackStack()
             findNavController().navigate(R.id.detailVideoCallFragment)
         }
 
     }
+
 
     private fun setupControls() {
         barcodeDetector =
@@ -56,7 +60,6 @@ class VideoCallFragment : Fragment() {
             .setAutoFocusEnabled(true)
             .setFacing(CameraSource.CAMERA_FACING_FRONT)
             .build()
-
         binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
             @SuppressLint("MissingPermission")
             override fun surfaceCreated(holder: SurfaceHolder) {
@@ -67,7 +70,6 @@ class VideoCallFragment : Fragment() {
                     e.printStackTrace()
                 }
             }
-
             @SuppressLint("MissingPermission")
             override fun surfaceChanged(
                 holder: SurfaceHolder,
@@ -81,7 +83,6 @@ class VideoCallFragment : Fragment() {
                     e.printStackTrace()
                 }
             }
-
             override fun surfaceDestroyed(holder: SurfaceHolder) {
                 cameraSource.stop()
             }
@@ -103,7 +104,6 @@ class VideoCallFragment : Fragment() {
                 }
             }
         })
-    }
 
     override fun onDestroy() {
         super.onDestroy()

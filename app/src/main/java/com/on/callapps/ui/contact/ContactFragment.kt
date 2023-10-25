@@ -15,7 +15,7 @@ import com.on.callapps.utils.createDialog
 class ContactFragment : Fragment() {
 
     private lateinit var binding: FragmentContactBinding
-   // private val adapter = ContactAdapter(this::onClick)
+    private val adapter = ContactAdapter(this::onClick)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,22 +28,24 @@ class ContactFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //binding.recyclerView.adapter = adapter
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+
+        binding.recyclerView.adapter = adapter
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
-
-
     }
 
-//    private fun onClick() {
-//        val dialog = requireContext().createDialog(DialogTargetBinding::inflate)
-//        dialog.first.tvTitle.text = "Watch the short video to unlock the character "
-//        dialog.first.btnYes.setOnClickListener {
-//            dialog.second.dismiss()
-//        }
-//        dialog.first.btnNo.setOnClickListener{
-//            dialog.second.dismiss()
-//        }
-//    }
+    private fun onClick() {
+        val dialog = requireContext().createDialog(DialogTargetBinding::inflate)
+        dialog.first.tvTitle.text = "Watch the short video to unlock the character "
+        dialog.first.btnYes.setOnClickListener {
+            dialog.second.dismiss()
+        }
+        dialog.first.btnNo.setOnClickListener{
+            dialog.second.dismiss()
+        }
+    }
 }

@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.google.android.gms.ads.AdRequest
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.vision.CameraSource
@@ -67,6 +68,9 @@ class LiveFragment : Fragment() {
         binding.tvPeople.text = people.toString()
         scheduleDataUpdate()
         handler.postDelayed(runnable, 1)
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
 
         initListener()
 

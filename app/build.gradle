@@ -37,7 +37,7 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.10.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
@@ -59,6 +59,8 @@ dependencies {
     //
     implementation 'com.drakeet.multitype:multitype:4.3.0'
 
-    //Advertisement
+    //AdMob
     implementation 'com.google.android.gms:play-services-ads:22.4.0'
+
+    implementation ("androidx.webkit:webkit:1.8.0")
 }

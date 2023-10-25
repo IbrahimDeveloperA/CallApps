@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.drakeet.multitype.MultiTypeAdapter
+import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.databinding.FragmentMessageBinding
 import com.on.callapps.ui.message.adapter.MessageAdapter
@@ -86,6 +87,10 @@ class MessageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+
         binding.recyclerView.adapter = adapter
         items = ArrayList()
         multiAdapter = MultiTypeAdapter()

@@ -1,7 +1,5 @@
 package com.on.callapps.ui.profile
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,7 +8,9 @@ import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
+import com.on.callapps.WebViewActivity
 import com.on.callapps.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -29,6 +29,10 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+
         binding.tvChat.setOnClickListener {
             findNavController().navigate(R.id.messageFragment)
         }
@@ -47,8 +51,10 @@ class ProfileFragment : Fragment() {
            findNavController().navigate(R.id.action_profile_call)
         }
 
-        binding.tvPlay.setOnClickListener{
-            findNavController().navigate(R.id.playGameFragment)
+        binding.tvPlay.setOnClickListener {
+            val intent = Intent(requireContext(), WebViewActivity::class.java)
+            intent.putExtra("url", "https://www.gamezop.com/?id=3178")
+            startActivity(intent)
         }
 
         binding.tvLive.setOnClickListener {
