@@ -1,10 +1,14 @@
 package com.on.callapps.ui.profile
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.on.callapps.R
 import com.on.callapps.databinding.FragmentProfileBinding
@@ -12,6 +16,7 @@ import com.on.callapps.databinding.FragmentProfileBinding
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+    private val requestCodeCameraPermission = 1001
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +44,7 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.contactFragment)
         }
         binding.tvCall.setOnClickListener {
-            findNavController().navigate(R.id.callFragment)
+           findNavController().navigate(R.id.action_profile_call)
         }
 
         binding.tvPlay.setOnClickListener{
@@ -47,7 +52,30 @@ class ProfileFragment : Fragment() {
         }
 
         binding.tvLive.setOnClickListener {
-            findNavController().navigate(R.id.liveFragment)
+            navigateInLive()
         }
+    }
+
+    private fun navigateInLive() {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            askForCameraPermission()
+        } else {
+            showScanner()
+        }
+    }
+
+    private fun askForCameraPermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.CAMERA),
+            requestCodeCameraPermission
+        )
+    }
+
+    private fun showScanner() {
+        findNavController().navigate(R.id.liveFragment)
     }
 }

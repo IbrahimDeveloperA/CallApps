@@ -29,24 +29,51 @@ class MessageFragment : Fragment() {
     private val myAdapter = MyAdapter()
 
     private fun onClick(text: String) {
-        Toast.makeText(requireContext(), "${items.size}", Toast.LENGTH_SHORT).show()
         multiAdapter.notifyItemInserted(0)
         items.add(MyModel(text = text))
         multiAdapter.notifyDataSetChanged()
 
-        if (text == "Wow!") {
+        sendMessage(text,"What's your name?","I'm Max")
+        sendMessage(text,"How are you?","I'm fine, thank you")
+        sendMessage(text,"Nice to meet you","Me too")
+        sendMessage(text,"Where are you from?","I'm from United States")
+        sendMessage(text,"What kind of food do you like?","I love pizza!")
+        sendMessage(text,"Can I call you now?","Yes! I'm waiting for your call!!!")
+        sendMessage(text,"Can we have a video call with you now?","Yes, of course")
+        sendMessage(text,"What is you favourite cartoon?","My favourite cartoon is Lion King")
+        sendMessage(text,"What is your education?","I'm in high school in London")
+        sendMessage(text,"Is it possible to be friends?","Yes, of course. Let's become friends")
+        sendMessage(text,"Goodbye! See you!","See you again")
+        sendMessage(text,"Have a nice day!","Thank you for this chat, you too!")
+
+        message(text)
+    }
+
+
+   private fun sendMessage(text:String,reply:String,end:String){
+       if (text == reply) {
+           binding.tvStatus.text = "печатает..."
+           Handler(Looper.getMainLooper()).postDelayed({
+               items.add(FriendModel(end))
+               multiAdapter.notifyDataSetChanged()
+               Handler(Looper.getMainLooper()).postDelayed({
+                   binding.tvStatus.text = "online"
+               }, 900)
+           }, 2000)
+       }
+   }
+    private fun message(text: String) {
+        if (text == "Hi!") {
             binding.tvStatus.text = "печатает..."
             Handler(Looper.getMainLooper()).postDelayed({
-                items.add(FriendModel("You are a great boy"))
+                items.add(FriendModel("Hi! Welcome to my chat"))
                 multiAdapter.notifyDataSetChanged()
-                // Здесь, после завершения асинхронной задачи, установите tvStatus обратно в "online"
                 Handler(Looper.getMainLooper()).postDelayed({
                     binding.tvStatus.text = "online"
-                }, 900) // 1000 миллисекунд (1 секунда) после завершения задачи
+                }, 900)
             }, 2000)
         }
     }
-
 
 
     override fun onCreateView(
@@ -76,6 +103,14 @@ class MessageFragment : Fragment() {
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        binding.btnVideoCall.setOnClickListener {
+            findNavController().navigate(R.id.videoCallFragment)
+        }
+
+        binding.imgCall.setOnClickListener {
+            findNavController().navigate(R.id.callFragment)
         }
 
     }

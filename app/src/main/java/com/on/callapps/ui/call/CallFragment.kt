@@ -1,5 +1,7 @@
 package com.on.callapps.ui.call
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
@@ -7,6 +9,8 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.on.callapps.R
@@ -26,6 +30,7 @@ class CallFragment : Fragment() {
             handler.postDelayed(this, 1)
         }
     }
+    private val requestCodeCameraPermission = 1001
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,11 +54,39 @@ class CallFragment : Fragment() {
 
         }
         binding.tvVideoCall.setOnClickListener {
-            findNavController().navigate(R.id.videoCallFragment)
+            navigateInCall()
             mediaPlayer.stop()
         }
         trueOrFalse()
 
+        binding.ibResetCallRed.setOnClickListener {
+            findNavController().navigate(R.id.progressFragment)
+        }
+
+    }
+
+    private fun navigateInCall() {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            askForCameraPermission()
+        } else {
+            showScanner()
+        }
+    }
+
+    private fun askForCameraPermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.CAMERA),
+            requestCodeCameraPermission
+        )
+    }
+
+    private fun showScanner() {
+        findNavController().popBackStack()
+        findNavController().navigate(R.id.videoCallFragment)
     }
 
     private fun trueOrFalse() {

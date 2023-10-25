@@ -1,6 +1,7 @@
 package com.on.callapps.ui.live
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.os.Bundle
 
 import android.content.pm.PackageManager
@@ -9,22 +10,25 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.SurfaceHolder
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.google.android.gms.vision.CameraSource
+import com.google.android.gms.vision.Detector
+import com.google.android.gms.vision.barcode.Barcode
+import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.on.callapps.R
 import com.on.callapps.databinding.FragmentLiveBinding
 import com.on.callapps.ui.live.adapter.LiveAdapter
 import com.on.callapps.utils.format
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.io.IOException
 
 class LiveFragment : Fragment() {
 
@@ -42,27 +46,9 @@ class LiveFragment : Fragment() {
     private var favorite = false
     private var emoji = false
     private var like = false
-    private lateinit var cameraExecutor: ExecutorService
-    private val activityResultLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        )
-        { permissions ->
-            var permissionGranted = true
-            permissions.entries.forEach {
-                if (it.key in REQUIRED_PERMISSIONS && !it.value)
-                    permissionGranted = false
-            }
-            if (!permissionGranted) {
-                Toast.makeText(
-                    requireActivity().baseContext,
-                    "Permission request denied",
-                    Toast.LENGTH_SHORT
-                ).show()
-            } else {
-                startCamera()
-            }
-        }
+    private lateinit var cameraSource: CameraSource
+    private lateinit var barcodeDetector: BarcodeDetector
+    private var scannedValue = ""
 
 
     override fun onCreateView(
@@ -75,18 +61,19 @@ class LiveFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupControls()
         binding.recyclerView.adapter = adapter
         adapter.addDataWithDelay()
         binding.tvPeople.text = people.toString()
         scheduleDataUpdate()
         handler.postDelayed(runnable, 1)
-        if (allPermissionsGranted()) {
-            startCamera()
-        } else {
-            requestPermissions()
-        }
-        cameraExecutor = Executors.newSingleThreadExecutor()
+
         initListener()
+
+        binding.ibEndStream.setOnClickListener {
+            findNavController().popBackStack()
+            findNavController().navigate(R.id.progressFragment)
+        }
     }
 
     private fun initListener() {
@@ -142,60 +129,66 @@ class LiveFragment : Fragment() {
         }, delayMillis.toLong())
     }
 
-    private fun requestPermissions() {
-        activityResultLauncher.launch(REQUIRED_PERMISSIONS)
-    }
+    private fun setupControls() {
+        barcodeDetector =
+            BarcodeDetector.Builder(requireContext()).setBarcodeFormats(Barcode.ALL_FORMATS).build()
 
-    private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+        cameraSource = CameraSource.Builder(requireContext(), barcodeDetector)
+            .setRequestedPreviewSize(1920, 1080)
+            .setAutoFocusEnabled(true)
+            .setFacing(CameraSource.CAMERA_FACING_FRONT)
+            .build()
 
-        cameraProviderFuture.addListener({
-            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
-
-            val preview = Preview.Builder()
-                .build()
-                .also {
-                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+        binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
+            @SuppressLint("MissingPermission")
+            override fun surfaceCreated(holder: SurfaceHolder) {
+                try {
+                    //Start preview after 1s delay
+                    cameraSource.start(holder)
+                } catch (e: IOException) {
+                    e.printStackTrace()
                 }
-
-            val cameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
-
-            try {
-                cameraProvider.unbindAll()
-
-                cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview
-                )
-
-            } catch (exc: Exception) {
-                Log.e(TAG, "Use case binding failed", exc)
             }
 
-        }, ContextCompat.getMainExecutor(requireContext()))
-    }
+            @SuppressLint("MissingPermission")
+            override fun surfaceChanged(
+                holder: SurfaceHolder,
+                format: Int,
+                width: Int,
+                height: Int
+            ) {
+                try {
+                    cameraSource.start(holder)
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+            }
+
+            override fun surfaceDestroyed(holder: SurfaceHolder) {
+                cameraSource.stop()
+            }
+        })
 
 
-    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(
-            requireActivity().baseContext, it
-        ) == PackageManager.PERMISSION_GRANTED
+        barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
+            override fun release() {
+                Toast.makeText(requireContext(), "OPLOLOL", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun receiveDetections(detections: Detector.Detections<Barcode>) {
+                val barcodes = detections.detectedItems
+                if (barcodes.size() == 1) {
+                    scannedValue = barcodes.valueAt(0).rawValue
+                    viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+                        cameraSource.stop()
+                    }
+                }
+            }
+        })
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        cameraExecutor.shutdown()
-    }
-
-    companion object {
-        private const val TAG = "CameraXApp"
-        private val REQUIRED_PERMISSIONS =
-            mutableListOf(
-                Manifest.permission.CAMERA,
-                Manifest.permission.RECORD_AUDIO
-            ).apply {
-                if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                    add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                }
-            }.toTypedArray()
+        cameraSource.stop()
     }
 }

@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/contactFragment">
+    app:startDestination="@id/logoFragment">
 
     <fragment
         android:id="@+id/logoFragment"
         android:name="com.on.callapps.ui.LogoFragment"
         android:label="fragment_logo"
-        tools:layout="@layout/fragment_logo" />
+        tools:layout="@layout/fragment_logo" >
+    </fragment>
     <fragment
         android:id="@+id/imageFragment"
         android:name="com.on.callapps.ui.image.ImageFragment"
@@ -19,7 +20,12 @@
         android:id="@+id/profileFragment"
         android:name="com.on.callapps.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_call"
+            app:destination="@id/callFragment"
+            />
+    </fragment>
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.on.callapps.ui.settings.SettingsFragment"
@@ -39,7 +45,8 @@
         android:id="@+id/detailCallFragment"
         android:name="com.on.callapps.ui.detailCall.DetailCallFragment"
         android:label="fragment_detail_call"
-        tools:layout="@layout/fragment_detail_call" />
+        tools:layout="@layout/fragment_detail_call" >
+    </fragment>
     <fragment
         android:id="@+id/messageFragment"
         android:name="com.on.callapps.ui.message.MessageFragment"
@@ -64,4 +71,9 @@
         android:name="com.on.callapps.ui.live.LiveFragment"
         android:label="fragment_live"
         tools:layout="@layout/fragment_live" />
+    <fragment
+        android:id="@+id/progressFragment"
+        android:name="com.on.callapps.ui.progress.ProgressFragment"
+        android:label="fragment_progress"
+        tools:layout="@layout/fragment_progress" />
 </navigation>

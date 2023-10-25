@@ -22,9 +22,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     
-    <androidx.camera.view.PreviewView
+    <SurfaceView
         android:layout_width="132dp"
-        android:id="@+id/viewFinder"
+        android:id="@+id/cameraSurfaceView"
         android:layout_marginEnd="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/ib_reset_call_red"

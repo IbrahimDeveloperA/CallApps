@@ -10,12 +10,21 @@ class MessageAdapter(private val onClick: (String) -> Unit) :
     Adapter<MessageAdapter.MessageViewHolder>() {
 
     private val list =
-        mutableListOf<String>(
-            "Wow!",
-            "What are your plans for the evening?",
-            "Cool!",
-            "Hello world!",
-            "What's your name?"
+        mutableListOf(
+            "Hi!",
+            "What's your name?",
+            "How are you?",
+            "How old are you?",
+            "Nice to meet you",
+            "Where are you from?",
+            "What kind of food do you like?",
+            "Can I call you now?",
+            "Can we have a video call with you now?",
+            "What is you favourite cartoon?",
+            "What is your education?",
+            "Is it possible to be friends?",
+            "Goodbye! See you!",
+            "Have a nice day!"
         )
 
     inner class MessageViewHolder(private val binding: ItemMessageBinding) :
