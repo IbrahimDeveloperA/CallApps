@@ -48,6 +48,10 @@ class VideoCallFragment : Fragment() {
             findNavController().navigate(R.id.detailVideoCallFragment)
         }
 
+        binding.ibResetCallRed.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
     }
 
 
@@ -70,6 +74,7 @@ class VideoCallFragment : Fragment() {
                     e.printStackTrace()
                 }
             }
+
             @SuppressLint("MissingPermission")
             override fun surfaceChanged(
                 holder: SurfaceHolder,
@@ -83,6 +88,7 @@ class VideoCallFragment : Fragment() {
                     e.printStackTrace()
                 }
             }
+
             override fun surfaceDestroyed(holder: SurfaceHolder) {
                 cameraSource.stop()
             }
@@ -105,9 +111,9 @@ class VideoCallFragment : Fragment() {
             }
         })
 
+    }
     override fun onDestroy() {
         super.onDestroy()
         cameraSource.stop()
     }
-
 }

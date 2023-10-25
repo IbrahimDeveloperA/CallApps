@@ -31,7 +31,31 @@ class DetailCallFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.constCall.setOnClickListener {
             val dialog = requireContext().createDialog(DialogChooseBinding::inflate)
-            dialog.first.tvChoose.text = "Choose "
+            dialog.first.tvChoose.text =
+                "                                 Choose:                                "
+            dialog.first.btnChat.setOnClickListener {
+                findNavController().popBackStack()
+                findNavController().navigate(R.id.messageFragment)
+                dialog.second.dismiss()
+            }
+
+            dialog.first.btnCall.setOnClickListener {
+                findNavController().popBackStack()
+                findNavController().navigate(R.id.callFragment)
+                dialog.second.dismiss()
+            }
+
+            dialog.first.btnLive.setOnClickListener {
+                findNavController().popBackStack()
+                findNavController().navigate(R.id.liveFragment)
+                dialog.second.dismiss()
+            }
+
+            dialog.first.btnVideoCall.setOnClickListener {
+                findNavController().popBackStack()
+                findNavController().navigate(R.id.videoCallFragment)
+                dialog.second.dismiss()
+            }
         }
 
         val adRequest = AdRequest.Builder().build()
@@ -59,12 +83,11 @@ class DetailCallFragment : Fragment() {
         }
 
         binding.tvShare.setOnClickListener {
-            val dialog = requireContext().createDialog(DialogChooseBinding::inflate)
-            dialog.first.tvChoose.text = "Choose "
-            dialog.first.btnChat.setOnClickListener {
-                dialog.second.dismiss()
-            }
-            dialog.first.btnChat.setOnClickListener{
+            val dialog = requireContext().createDialog(DialogTargetBinding::inflate)
+            dialog.first.tvTitle.text =
+                "          Watch the short video to unlock           \nthe character "
+
+            dialog.first.btnNo.setOnClickListener {
                 dialog.second.dismiss()
             }
         }

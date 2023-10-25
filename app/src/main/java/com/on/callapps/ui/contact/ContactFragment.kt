@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.databinding.DialogTargetBinding
 import com.on.callapps.databinding.FragmentContactBinding
@@ -15,7 +16,6 @@ import com.on.callapps.utils.createDialog
 class ContactFragment : Fragment() {
 
     private lateinit var binding: FragmentContactBinding
-    private val adapter = ContactAdapter(this::onClick)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +32,6 @@ class ContactFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
-        binding.recyclerView.adapter = adapter
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }

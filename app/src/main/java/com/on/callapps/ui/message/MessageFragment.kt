@@ -1,5 +1,7 @@
 package com.on.callapps.ui.message
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -7,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.drakeet.multitype.MultiTypeAdapter
@@ -28,12 +32,12 @@ class MessageFragment : Fragment() {
     private lateinit var multiAdapter: MultiTypeAdapter
     private val adapterFriend = AdapterFriend()
     private val myAdapter = MyAdapter()
+    private val requestCodeCameraPermission = 1001
 
     private fun onClick(text: String) {
         multiAdapter.notifyItemInserted(0)
         items.add(MyModel(text = text))
         multiAdapter.notifyDataSetChanged()
-
         sendMessage(text,"What's your name?","I'm Max")
         sendMessage(text,"How are you?","I'm fine, thank you")
         sendMessage(text,"Nice to meet you","Me too")
@@ -111,12 +115,36 @@ class MessageFragment : Fragment() {
         }
 
         binding.btnVideoCall.setOnClickListener {
-            findNavController().navigate(R.id.videoCallFragment)
+            navigateInCall()
         }
 
         binding.imgCall.setOnClickListener {
+            findNavController().popBackStack()
             findNavController().navigate(R.id.callFragment)
         }
+    }
 
+    private fun navigateInCall() {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            askForCameraPermission()
+        } else {
+            showScanner()
+        }
+    }
+
+    private fun askForCameraPermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.CAMERA),
+            requestCodeCameraPermission
+        )
+    }
+
+    private fun showScanner() {
+        findNavController().popBackStack()
+        findNavController().navigate(R.id.videoCallFragment)
     }
 }

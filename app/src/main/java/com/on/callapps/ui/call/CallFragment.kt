@@ -54,9 +54,6 @@ class CallFragment : Fragment() {
         binding.ibReset.setOnClickListener {
             findNavController().navigateUp()
         }
-        binding.ibResetCallRed.setOnClickListener {
-
-        }
         binding.tvVideoCall.setOnClickListener {
             navigateInCall()
             mediaPlayer.stop()
@@ -64,6 +61,7 @@ class CallFragment : Fragment() {
         trueOrFalse()
 
         binding.ibResetCallRed.setOnClickListener {
+            findNavController().popBackStack()
             findNavController().navigate(R.id.progressFragment)
         }
 
