@@ -36,17 +36,15 @@ class ContactFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
-        // binding.tvRatingTwo.text = pref.getNameVolume(Key.KEY_ONE).toString() + "/4"
 
         val ratingText = pref.getNameVolume(Key.KEY_ONE)
-        val rating = ratingText
         binding.tvRatingTwo.text = "$ratingText/4"
+
 
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
 
-        binding.tvRatingTwo.text = "$ratingText/4" // Оставьте эту строку без изменений
 
         binding.contactFour.setOnClickListener {
             onClick(ratingText?.toInt() ?: 3, Key.KEY_ONE) // Используйте ratingText вместо преобразования его в Int
@@ -54,7 +52,7 @@ class ContactFragment : Fragment() {
 
 
         binding.contactFive.setOnClickListener {
-            // onClick(binding.tvRatingThree.text.toString(), Key.KEY_TWO)
+             onClick(binding.tvRatingThree.text.toString().toInt(), Key.KEY_TWO)
         }
 
         binding.contactSix.setOnClickListener {
