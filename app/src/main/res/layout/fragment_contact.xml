@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -40,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/btn_back">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -76,9 +78,9 @@
                     android:id="@+id/tv_character"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
+                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:text="Character 1"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@id/card"
@@ -89,8 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:text="+8404581223"
                     android:textColor="@color/tv_shadow"
                     android:textSize="14sp"
@@ -115,171 +117,171 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/contact_two"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/contact_one">-->
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/contact_two"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/contact_one">-->
 
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginHorizontal="12dp"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            app:cardCornerRadius="12dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
+    <!--        <androidx.cardview.widget.CardView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginHorizontal="12dp"-->
+    <!--            android:layout_marginTop="12dp"-->
+    <!--            app:cardCornerRadius="12dp"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent">-->
 
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_margin="12dp">-->
+    <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:layout_margin="12dp">-->
 
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:id="@+id/card_"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    app:cardCornerRadius="200dp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent">-->
+    <!--                <androidx.cardview.widget.CardView-->
+    <!--                    android:id="@+id/card_"-->
+    <!--                    android:layout_width="50dp"-->
+    <!--                    android:layout_height="50dp"-->
+    <!--                    app:cardCornerRadius="200dp"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent">-->
 
-<!--                    <ImageView-->
-<!--                        android:id="@+id/img_view_"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:background="@color/white"-->
-<!--                        android:scaleType="centerCrop"-->
-<!--                        android:src="@drawable/c2" />-->
-<!--                </androidx.cardview.widget.CardView>-->
+    <!--                    <ImageView-->
+    <!--                        android:id="@+id/img_view_"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="match_parent"-->
+    <!--                        android:background="@color/white"-->
+    <!--                        android:scaleType="centerCrop"-->
+    <!--                        android:src="@drawable/c2" />-->
+    <!--                </androidx.cardview.widget.CardView>-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_character_"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginTop="12dp"-->
-<!--                    android:text="Character 2"-->
-<!--                    android:fontFamily="@font/ff_montserrat_alternates_regular"-->
-<!--                    android:textSize="16sp"-->
-<!--                    app:layout_constraintStart_toEndOf="@id/card_"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+    <!--                <TextView-->
+    <!--                    android:id="@+id/tv_character_"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginStart="16dp"-->
+    <!--                    android:layout_marginTop="12dp"-->
+    <!--                    android:text="Character 2"-->
+    <!--                    android:fontFamily="@font/ff_montserrat_alternates_regular"-->
+    <!--                    android:textSize="16sp"-->
+    <!--                    app:layout_constraintStart_toEndOf="@id/card_"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_number_"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:fontFamily="@font/ff_montserrat_alternates_regular"-->
-<!--                    android:text="+8404581223"-->
-<!--                    android:textColor="@color/tv_shadow"-->
-<!--                    android:textSize="14sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toEndOf="@id/card_"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tv_character_" />-->
+    <!--                <TextView-->
+    <!--                    android:id="@+id/tv_number_"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginStart="16dp"-->
+    <!--                    android:layout_marginTop="8dp"-->
+    <!--                    android:fontFamily="@font/ff_montserrat_alternates_regular"-->
+    <!--                    android:text="+8404581223"-->
+    <!--                    android:textColor="@color/tv_shadow"-->
+    <!--                    android:textSize="14sp"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintStart_toEndOf="@id/card_"-->
+    <!--                    app:layout_constraintTop_toBottomOf="@id/tv_character_" />-->
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/img_ok_"-->
-<!--                    android:layout_width="30sp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:src="@drawable/ic_empty_circle"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/img_ok_"-->
+    <!--                    android:layout_width="30sp"-->
+    <!--                    android:layout_height="30dp"-->
+    <!--                    android:src="@drawable/ic_empty_circle"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-<!--        </androidx.cardview.widget.CardView>-->
-
-
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--        android:id="@+id/contact_three"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/contact_one">-->
-
-<!--        <androidx.cardview.widget.CardView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginHorizontal="12dp"-->
-<!--            android:layout_marginTop="12dp"-->
-<!--            app:cardCornerRadius="12dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
-
-<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:layout_margin="12dp">-->
-
-<!--                <androidx.cardview.widget.CardView-->
-<!--                    android:id="@+id/card__"-->
-<!--                    android:layout_width="50dp"-->
-<!--                    android:layout_height="50dp"-->
-<!--                    app:cardCornerRadius="200dp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/img_view__"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="match_parent"-->
-<!--                        android:background="@color/white"-->
-<!--                        android:scaleType="centerCrop"-->
-<!--                        android:src="@drawable/person_contact_tree" />-->
-<!--                </androidx.cardview.widget.CardView>-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_character__"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginTop="12dp"-->
-<!--                    android:fontFamily="@font/ff_montserrat_alternates_regular"-->
-<!--                    android:text="Character 3"-->
-<!--                    android:textSize="16sp"-->
-<!--                    app:layout_constraintStart_toEndOf="@id/card__"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--                <TextView-->
-<!--                    android:id="@+id/tv_number__"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="16dp"-->
-<!--                    android:layout_marginTop="8dp"-->
-<!--                    android:fontFamily="@font/ff_montserrat_alternates_regular"-->
-<!--                    android:text="+8404581223"-->
-<!--                    android:textColor="@color/tv_shadow"-->
-<!--                    android:textSize="14sp"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toEndOf="@id/card__"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tv_character__" />-->
-
-<!--                <ImageView-->
-<!--                    android:id="@+id/img_ok__"-->
-<!--                    android:layout_width="30sp"-->
-<!--                    android:layout_height="30dp"-->
-<!--                    android:src="@drawable/ic_empty_circle"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toTopOf="parent" />-->
-
-<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-<!--        </androidx.cardview.widget.CardView>-->
+    <!--        </androidx.cardview.widget.CardView>-->
 
 
-<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--        android:id="@+id/contact_three"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/contact_one">-->
+
+    <!--        <androidx.cardview.widget.CardView-->
+    <!--            android:layout_width="match_parent"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:layout_marginHorizontal="12dp"-->
+    <!--            android:layout_marginTop="12dp"-->
+    <!--            app:cardCornerRadius="12dp"-->
+    <!--            app:layout_constraintEnd_toEndOf="parent"-->
+    <!--            app:layout_constraintStart_toStartOf="parent"-->
+    <!--            app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="match_parent"-->
+    <!--                android:layout_margin="12dp">-->
+
+    <!--                <androidx.cardview.widget.CardView-->
+    <!--                    android:id="@+id/card__"-->
+    <!--                    android:layout_width="50dp"-->
+    <!--                    android:layout_height="50dp"-->
+    <!--                    app:cardCornerRadius="200dp"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintStart_toStartOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent">-->
+
+    <!--                    <ImageView-->
+    <!--                        android:id="@+id/img_view__"-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="match_parent"-->
+    <!--                        android:background="@color/white"-->
+    <!--                        android:scaleType="centerCrop"-->
+    <!--                        android:src="@drawable/person_contact_tree" />-->
+    <!--                </androidx.cardview.widget.CardView>-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/tv_character__"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginStart="16dp"-->
+    <!--                    android:layout_marginTop="12dp"-->
+    <!--                    android:fontFamily="@font/ff_montserrat_alternates_regular"-->
+    <!--                    android:text="Character 3"-->
+    <!--                    android:textSize="16sp"-->
+    <!--                    app:layout_constraintStart_toEndOf="@id/card__"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--                <TextView-->
+    <!--                    android:id="@+id/tv_number__"-->
+    <!--                    android:layout_width="wrap_content"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:layout_marginStart="16dp"-->
+    <!--                    android:layout_marginTop="8dp"-->
+    <!--                    android:fontFamily="@font/ff_montserrat_alternates_regular"-->
+    <!--                    android:text="+8404581223"-->
+    <!--                    android:textColor="@color/tv_shadow"-->
+    <!--                    android:textSize="14sp"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintStart_toEndOf="@id/card__"-->
+    <!--                    app:layout_constraintTop_toBottomOf="@id/tv_character__" />-->
+
+    <!--                <ImageView-->
+    <!--                    android:id="@+id/img_ok__"-->
+    <!--                    android:layout_width="30sp"-->
+    <!--                    android:layout_height="30dp"-->
+    <!--                    android:src="@drawable/ic_empty_circle"-->
+    <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+    <!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+    <!--        </androidx.cardview.widget.CardView>-->
+
+
+    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/contact_four"
@@ -290,6 +292,7 @@
         app:layout_constraintTop_toBottomOf="@id/contact_one">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -337,10 +340,10 @@
                 <TextView
                     android:id="@+id/tv_number__two"
                     android:layout_width="wrap_content"
-                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:text="+8404581223"
                     android:textColor="@color/tv_shadow"
                     android:textSize="14sp"
@@ -349,7 +352,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_character__two" />
 
                 <ImageView
-                    android:id="@+id/img_ok__two"
+                    android:id="@+id/img_ok_two_two"
                     android:layout_width="30sp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_block"
@@ -361,13 +364,13 @@
                     android:id="@+id/tv_rating_two"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:layout_margin="2dp"
+                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:text="0/4"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/img_ok__two"
-                    app:layout_constraintTop_toBottomOf="@id/img_ok__two" />
+                    app:layout_constraintStart_toStartOf="@id/img_ok_two_two"
+                    app:layout_constraintTop_toBottomOf="@id/img_ok_two_two" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -385,6 +388,7 @@
         app:layout_constraintTop_toBottomOf="@id/contact_four">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -423,8 +427,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
-                    android:text="Character 3"
                     android:fontFamily="@font/ff_montserrat_alternates_regular"
+                    android:text="Character 3"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@id/card__two_"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -435,8 +439,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:text="+8404581223"
                     android:fontFamily="@font/ff_montserrat_alternates_regular"
+                    android:text="+8404581223"
                     android:textColor="@color/tv_shadow"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -444,7 +448,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_character__two_" />
 
                 <ImageView
-                    android:id="@+id/img_ok__two_"
+                    android:id="@+id/img_ok_two_three"
                     android:layout_width="30sp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_block"
@@ -458,11 +462,11 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:fontFamily="@font/ff_montserrat_alternates_regular"
-                    android:text="0/4"
+                    android:text="4/4"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/img_ok__two_"
-                    app:layout_constraintTop_toBottomOf="@id/img_ok__two_" />
+                    app:layout_constraintStart_toStartOf="@id/img_ok_two_three"
+                    app:layout_constraintTop_toBottomOf="@id/img_ok_two_three" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -480,6 +484,7 @@
         app:layout_constraintTop_toBottomOf="@id/contact_five">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -515,10 +520,10 @@
                 <TextView
                     android:id="@+id/tv_character__two__"
                     android:layout_width="wrap_content"
-                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
+                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:text="Character 4"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@id/card__two__"
@@ -530,16 +535,16 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:text="+8404581223"
                     android:textColor="@color/tv_shadow"
                     android:textSize="14sp"
-                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@id/card__two__"
                     app:layout_constraintTop_toBottomOf="@id/tv_character__two__" />
 
                 <ImageView
-                    android:id="@+id/img_ok__two__"
+                    android:id="@+id/img_ok_two_four"
                     android:layout_width="30sp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_block"
@@ -552,12 +557,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
+                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:text="0/4"
                     android:textSize="14sp"
-                    android:fontFamily="@font/ff_montserrat_alternates_regular"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/img_ok__two__"
-                    app:layout_constraintTop_toBottomOf="@id/img_ok__two__" />
+                    app:layout_constraintStart_toStartOf="@id/img_ok_two_four"
+                    app:layout_constraintTop_toBottomOf="@id/img_ok_two_four" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -578,14 +583,12 @@
     <!--        app:layout_constraintStart_toStartOf="parent"-->
     <!--        app:layout_constraintTop_toBottomOf="@id/btn_back" />-->z
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ads:layout_constraintBottom_toBottomOf="parent"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:layout_constraintBottom_toBottomOf="parent"></com.google.android.gms.ads.AdView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
