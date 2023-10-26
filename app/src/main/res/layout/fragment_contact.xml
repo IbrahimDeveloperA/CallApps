@@ -462,7 +462,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"
                     android:fontFamily="@font/ff_montserrat_alternates_regular"
-                    android:text="4/4"
+                    android:text="0/4"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/img_ok_two_three"

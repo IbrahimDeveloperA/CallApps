@@ -27,6 +27,10 @@ class ContactFragment : Fragment() {
     private val pref by lazy { Pref(requireContext()) }
     private var rewardedAd: RewardedAd? = null
     private var bool = false
+    private var boolFour = false
+    private var boolTwo= false
+    private var boolOne = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -45,39 +49,77 @@ class ContactFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
-        val ratingText = pref.getNameVolume(Key.KEY_ONE)
-        binding.tvRatingTwo.text = "$ratingText/4"
+        one()
 
-        if (binding.tvRatingTwo.text == "4/4") {
-            binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
-        }
-        binding.contactFour.setOnClickListener {
-            if (binding.tvRatingTwo.text == "4/4") {
-                binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
-            } else {
-                onClick(ratingText ?: 0, Key.KEY_ONE)
-            }
-        }
+        two()
 
         three()
 
-        val rating4 = pref.getNameVolume(Key.KEY_THREE)
-        if (binding.tvRateTwo.text.toString() == "4/4") {
-            binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
-        }
-        binding.contactSix.setOnClickListener {
-            if (binding.tvRateTwo.text.toString() == "4/4") {
-                binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
-                bool == true
+        four()
+    }
+
+    private fun one() {
+        binding.imgOk.setOnClickListener {
+            boolOne = if (!boolOne) {
+                binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
+                true
             } else {
-                onClick(rating4 ?: 0, Key.KEY_THREE)
+                binding.imgOk.setImageResource(R.drawable.img_ok)
+                false
+            }
+        }
+    }
+
+    private fun two() {
+        val ratingText = pref.getNameVolume(Key.KEY_ONE)
+        binding.tvRatingTwo.text = "$ratingText/4"
+
+        binding.imgOkTwoTwo.setOnClickListener {
+            boolTwo = if (!boolTwo) {
+                binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
+                true
+            } else {
+                binding.imgOkTwoTwo.setImageResource(R.drawable.img_ok)
+                false
+            }
+        }
+
+        if (binding.tvRatingTwo.text == "4/4") {
+            binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
+            boolTwo = true
+        } else {
+            binding.contactFour.setOnClickListener {
+                ratingText?.let { it1 -> onClick(it1, Key.KEY_ONE) }
+            }
+        }
+    }
+
+    private fun four() {
+        val rating4 = pref.getNameVolume(Key.KEY_THREE)
+        binding.tvRateTwo.text = "4/4"
+        binding.imgOkTwoFour.setOnClickListener {
+            boolFour = if (!boolFour) {
+                binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
+                true
+            } else {
+                binding.imgOkTwoFour.setImageResource(R.drawable.img_ok)
+                false
+            }
+        }
+
+        if (binding.tvRateTwo.text == "4/4") {
+            binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
+            boolFour = true
+        } else {
+            binding.contactSix.setOnClickListener {
+                rating4?.let { it1 -> onClick(it1, Key.KEY_THREE) }
             }
         }
     }
 
     private fun three() {
         val rating3 = pref.getNameVolume(Key.KEY_TWO)
-        binding.tvRatingThree.text = "$rating3/4"
+        binding.tvRatingThree.text = "4/4"
         binding.imgOkTwoThree.setOnClickListener {
             bool = if (!bool) {
                 binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
