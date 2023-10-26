@@ -1,6 +1,7 @@
 package com.on.callapps.ui.detailCall
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -72,6 +73,16 @@ class DetailCallFragment : Fragment() {
         }
         binding.imageView.setOnClickListener {
             findNavController().navigateUp()
+        }
+        binding.tvRate.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp"))
+            startActivity(intent)
+        }
+        binding.tvShare.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp")
+            startActivity(Intent.createChooser(intent, "Share"))
         }
 
         binding.imgSettingsDetail.setOnClickListener {

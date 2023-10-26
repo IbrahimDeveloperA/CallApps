@@ -19,14 +19,14 @@ class WebViewActivity : AppCompatActivity() {
 
         webView.settings.javaScriptEnabled = true
 
-       /* webView.webViewClient = object : WebViewClient() {
+        webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 if (url != null) {
                     view?.loadUrl(url)
                 }
                 return true
             }
-        }*/
+        }
 
         if (url != null) {
             webView.loadUrl(url)

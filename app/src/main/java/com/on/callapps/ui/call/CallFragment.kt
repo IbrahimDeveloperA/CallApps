@@ -32,6 +32,8 @@ class CallFragment : Fragment() {
         }
     }
     private val requestCodeCameraPermission = 1001
+    private var microphone = true
+    private var audioLevel = 100
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +60,38 @@ class CallFragment : Fragment() {
             navigateInCall()
             mediaPlayer.stop()
         }
+        binding.tvMicrophone.setOnClickListener {
+            microphone = if (!microphone) {
+                binding.tvMicrophone.setImageResource(R.drawable.microphone)
+                true
+            } else {
+                binding.tvMicrophone.setImageResource(R.drawable.microphone_off)
+                false
+            }
+        }
+        binding.tvCharacters.setOnClickListener{
+            findNavController().navigate(R.id.contactFragment)
+        }
+        binding.tvChat.setOnClickListener {
+            findNavController().navigate(R.id.messageFragment)
+        }
+        binding.tvAudioLevel.setOnClickListener {
+            when (audioLevel) {
+                100 -> {
+                    binding.tvAudioLevel.setImageResource(R.drawable.audio_level_50)
+                    audioLevel = 50
+                }
+                50 -> {
+                    binding.tvAudioLevel.setImageResource(R.drawable.audio_level_0)
+                    audioLevel = 0
+                }
+                0 -> {
+                    binding.tvAudioLevel.setImageResource(R.drawable.audio_level_100)
+                    audioLevel = 100
+                }
+            }
+        }
+
         trueOrFalse()
 
         binding.ibResetCallRed.setOnClickListener {

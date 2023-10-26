@@ -1,5 +1,7 @@
 package com.on.callapps.ui.image
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,6 +33,11 @@ class ImageFragment : Fragment() {
 
         binding.btnStart.setOnClickListener {
             findNavController().navigate(R.id.profileFragment)
+        }
+
+        binding.btnRate.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp"))
+            startActivity(intent)
         }
 
         binding.btnExit.setOnClickListener{

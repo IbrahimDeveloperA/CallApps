@@ -3,6 +3,7 @@ package com.on.callapps.ui.profile
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -46,6 +47,16 @@ class ProfileFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+        binding.tvRate.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp"))
+            startActivity(intent)
+        }
+        binding.tvShare.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp")
+            startActivity(Intent.createChooser(intent, "Share"))
+        }
 
         binding.tvCharecters.setOnClickListener {
             findNavController().navigate(R.id.contactFragment)
@@ -55,7 +66,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding.tvPlay.setOnClickListener {
-            val intent = Intent(requireContext(), WebViewActivity::class.java)
+            val intent = Intent(requireActivity(), WebViewActivity::class.java)
             intent.putExtra("url", "https://www.gamezop.com/?id=3178")
             startActivity(intent)
         }
