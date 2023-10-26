@@ -129,96 +129,66 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_marginTop="172dp"
+        android:layout_marginBottom="16dp"
         android:id="@+id/cl_btn"
         android:layout_marginHorizontal="36dp"
         app:layout_constraintBottom_toTopOf="@id/adView"
         android:layout_width="match_parent"
         android:layout_height="200dp">
 
-        <TextView
-            android:fontFamily="@font/ff_montserrat_alternates_regular"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:text="Characters"
-            android:drawablePadding="16dp"
+        <ImageView
+            android:src="@drawable/characters"
             android:id="@+id/tv_characters"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:drawableTopCompat="@drawable/ic_characters" />
+            android:layout_height="wrap_content" />
 
-        <TextView
-            android:fontFamily="@font/ff_montserrat_alternates_regular"
-            android:textSize="18sp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:text="Video Call"
-            android:drawablePadding="20dp"
+        <ImageView
+            android:src="@drawable/video_call"
             android:id="@+id/tv_video_call"
             app:layout_constraintEnd_toStartOf="@id/tv_chat"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_characters"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:drawableTopCompat="@drawable/ic_video_call" />
+            android:layout_height="wrap_content" />
 
-        <TextView
+        <ImageView
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:fontFamily="@font/ff_montserrat_alternates_regular"
-            android:textSize="18sp"
-            android:paddingHorizontal="12dp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:text="Chat"
-            android:drawablePadding="16dp"
+            android:src="@drawable/chat"
             android:id="@+id/tv_chat"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:drawableTopCompat="@drawable/ic_chat" />
+            android:layout_height="wrap_content" />
 
-        <TextView
+        <ImageView
+            android:src="@drawable/microphone"
             android:id="@+id/tv_microphone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:fontFamily="@font/ff_montserrat_alternates_regular"
-            android:textSize="16sp"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:text="Microphone"
-            android:drawablePadding="24dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:drawableTopCompat="@drawable/ic_microphone" />
+            android:layout_height="wrap_content" />
 
         <ImageButton
             app:layout_constraintEnd_toStartOf="@id/tv_audio_level"
             app:layout_constraintStart_toEndOf="@id/tv_microphone"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_microphone"
+            app:layout_constraintBottom_toBottomOf="@id/tv_audio_level"
             android:background="@null"
             android:id="@+id/ib_reset_call_red"
-            android:layout_marginStart="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_call_reset_red" />
 
-        <TextView
+        <ImageView
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:fontFamily="@font/ff_montserrat_alternates_regular"
-            android:textSize="16sp"
-            android:gravity="center"
             android:id="@+id/tv_audio_level"
-            android:textColor="@color/white"
-            android:text="Audio Level"
-            android:drawablePadding="20dp"
+            android:src="@drawable/audio_level_100"
             android:layout_gravity="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:drawableTopCompat="@drawable/ic_audio_full" />
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -1,6 +1,7 @@
 package com.on.callapps.ui.settings
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -44,6 +45,26 @@ class SettingsFragment : Fragment() {
             val intent = Intent(requireContext(), WebViewActivity::class.java)
             intent.putExtra("url", "https://www.gamezop.com/?id=3178")
             startActivity(intent)
+        }
+
+        binding.tvLicence.setOnClickListener {
+            val intent = Intent(requireContext(), WebViewActivity::class.java)
+            intent.putExtra("url", "https://creativecommons.org/publicdomain/zero/1.0/")
+            startActivity(intent)
+        }
+        binding.tvRate.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp"))
+            startActivity(intent)
+        }
+        binding.tvMoreApp.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Fake+Call+Chat+Pranks+by+AMYMOT+Dev"))
+            startActivity(intent)
+        }
+        binding.tvShare.setOnClickListener {
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp")
+            startActivity(Intent.createChooser(intent, "Share"))
         }
 
         binding.btnPlay.setOnClickListener {

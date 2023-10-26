@@ -101,7 +101,7 @@
 
     <TextView
         style="@style/TextViewStyle"
-
+        android:id="@+id/tv_more_app"
         android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:text="More Apps"
         app:layout_constraintStart_toEndOf="@id/img_more"
