@@ -32,6 +32,7 @@
             android:layout_marginTop="24dp"
             android:textColor="#0C1A3F"
             android:textSize="16sp"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
             android:id="@+id/tv_title"
             android:layout_margin="16dp"
             android:textAlignment="center"
@@ -44,8 +45,10 @@
             android:text="2/3"
             android:textSize="20sp"
             android:layout_gravity="center"
+            android:id="@+id/tv_number"
             android:textColor="#5A77EF"
             android:layout_marginTop="8dp"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -55,6 +58,7 @@
             android:textSize="14sp"
             android:layout_marginTop="16dp"
             android:textColor="@color/white"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
             android:gravity="center"
             android:id="@+id/btn_yes"
             android:paddingVertical="10dp"

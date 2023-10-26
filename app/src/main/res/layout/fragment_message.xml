@@ -42,7 +42,7 @@
                 android:id="@+id/img_people"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/frame_new4" />
+                android:src="@drawable/ic_image_dog" />
 
         </androidx.cardview.widget.CardView>
 
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-
+android:fontFamily="@font/ff_montserrat_alternates_regular"
             android:layout_marginTop="8dp"
             android:text="Alex Davids"
             android:textColor="@color/black"
@@ -66,6 +66,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="8dp"
             android:text="online"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
             android:textColor="@color/tv_blue_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/card"

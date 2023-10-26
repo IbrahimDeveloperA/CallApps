@@ -51,19 +51,15 @@
         app:layout_constraintTop_toBottomOf="@id/content">
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@color/img_shadow" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/image" />
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_image_dog" />
 
 
     </androidx.cardview.widget.CardView>
 
     <TextView
+        android:fontFamily="@font/ff_montserrat_alternates_bold"
         android:id="@+id/tv_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -77,6 +73,7 @@
         app:layout_constraintTop_toBottomOf="@id/card" />
 
     <TextView
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:id="@+id/tv_charecters"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -106,6 +103,7 @@
         android:drawableStart="@drawable/ic_ph_chat"
         android:drawableEnd="@drawable/chevron_left"
         android:drawablePadding="10dp"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:gravity="center"
         android:paddingHorizontal="20dp"
         android:paddingVertical="10dp"
@@ -119,6 +117,7 @@
     <TextView
         android:id="@+id/tv_call"
         android:layout_width="match_parent"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
@@ -143,6 +142,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/btn_exit"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:drawableStart="@drawable/ic_video"
         android:drawableEnd="@drawable/chevron_left"
         android:drawablePadding="10dp"
@@ -159,6 +159,7 @@
     <TextView
         android:id="@+id/tv_live"
         android:layout_width="match_parent"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="8dp"
@@ -177,6 +178,7 @@
         app:layout_constraintTop_toBottomOf="@id/tv_call" />
 
     <TextView
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:id="@+id/tv_play"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -201,6 +203,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+
         android:layout_marginTop="8dp"
         android:background="@drawable/btn_record"
         app:layout_constraintEnd_toStartOf="@id/tv_rate"
@@ -217,6 +220,7 @@
             android:layout_height="wrap_content"/>
 
         <TextView
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
             android:paddingVertical="10dp"
             android:textColor="@color/white"
             android:text="Share"
@@ -261,6 +265,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -46,7 +46,7 @@
             <ImageView
                 android:layout_width="138dp"
                 android:layout_height="138dp"
-                android:src="@color/black" />
+                android:src="@drawable/ic_image_dog" />
 
         </androidx.cardview.widget.CardView>
 

@@ -21,6 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:text="Setting"
         android:textColor="@color/tv_blue_text"
         android:textSize="20sp"
@@ -38,6 +39,7 @@
     <TextView
         android:id="@+id/tv_licence"
         style="@style/TextViewStyle"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:text="Licence"
         app:layout_constraintStart_toEndOf="@id/img_table"
         app:layout_constraintTop_toTopOf="@id/img_table" />
@@ -52,6 +54,7 @@
     <TextView
         android:id="@+id/tv_privacy"
         style="@style/TextViewStyle"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:text="Privacy Policy"
         app:layout_constraintStart_toEndOf="@id/img_share_blue"
         app:layout_constraintTop_toTopOf="@id/img_share_blue" />
@@ -68,6 +71,7 @@
     <TextView
         android:id="@+id/tv_rate"
         style="@style/TextViewStyle"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:text="Rate us"
         app:layout_constraintStart_toEndOf="@id/img_like"
         app:layout_constraintTop_toTopOf="@id/img_like" />
@@ -81,7 +85,9 @@
 
     <TextView
         android:id="@+id/tv_share"
+
         style="@style/TextViewStyle"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:text="Share it"
         app:layout_constraintStart_toEndOf="@id/img_blue"
         app:layout_constraintTop_toTopOf="@id/img_blue" />
@@ -95,6 +101,8 @@
 
     <TextView
         style="@style/TextViewStyle"
+
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:text="More Apps"
         app:layout_constraintStart_toEndOf="@id/img_more"
         app:layout_constraintTop_toTopOf="@id/img_more" />
@@ -107,21 +115,21 @@
         app:layout_constraintTop_toBottomOf="@id/img_more" />
 
     <TextView
-        style="@style/TextViewStyle"
-        android:text="Play Games"
         android:id="@+id/btn_play"
+
+        style="@style/TextViewStyle"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
+        android:text="Play Games"
         app:layout_constraintStart_toEndOf="@id/img_gamepad"
         app:layout_constraintTop_toTopOf="@id/img_gamepad" />
 
-    <com.google.android.gms.ads.AdView
-        xmlns:ads="http://schemas.android.com/apk/res-auto"
+    <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ads:layout_constraintBottom_toBottomOf="parent"
         ads:adSize="BANNER"
-        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111"
+        ads:layout_constraintBottom_toBottomOf="parent"></com.google.android.gms.ads.AdView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

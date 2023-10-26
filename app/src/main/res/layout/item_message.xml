@@ -8,6 +8,7 @@
         android:paddingVertical="8dp"
         android:paddingHorizontal="16dp"
         android:id="@+id/tv_message"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:layout_width="wrap_content"
         android:layout_margin="8dp"
         android:layout_height="wrap_content"

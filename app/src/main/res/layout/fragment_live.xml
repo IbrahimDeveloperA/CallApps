@@ -29,6 +29,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/tv_life_record"
             android:backgroundTint="#BB2929"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
             android:paddingHorizontal="12dp"
             android:paddingVertical="6dp"
             android:text="LIVE 00:24"
@@ -44,6 +45,7 @@
             android:backgroundTint="#CC000000"
             android:drawablePadding="6dp"
             android:paddingHorizontal="12dp"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
             android:paddingVertical="6dp"
             android:text="326"
             android:textColor="@color/white"
@@ -84,6 +86,7 @@
             android:background="@drawable/ic_bg"
             android:gravity="center"
             android:text="😆"
+            android:fontFamily="@font/ff_montserrat_alternates_regular"
             android:textSize="24sp" />
 
     </LinearLayout>
@@ -96,6 +99,7 @@
         android:layout_marginEnd="20dp"
         android:background="@drawable/btn_end_stream"
         android:text="End Stream"
+        android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:gravity="center"
         android:paddingVertical="6dp"
         android:paddingHorizontal="12dp"

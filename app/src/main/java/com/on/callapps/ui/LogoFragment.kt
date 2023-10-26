@@ -31,7 +31,7 @@ class LogoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var handler = Handler()
         val maxProgress = 100
-        val animationDuration = 7000
+        val animationDuration = 700
         val progressIncrement = maxProgress / (animationDuration / 200)
 
         handler = Handler {
