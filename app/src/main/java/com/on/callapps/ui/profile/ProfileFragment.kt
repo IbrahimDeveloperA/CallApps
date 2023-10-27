@@ -15,12 +15,14 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.WebViewActivity
+import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
     private val requestCodeCameraPermission = 1001
+    private val pref by lazy { Pref(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,13 +50,19 @@ class ProfileFragment : Fragment() {
             findNavController().navigateUp()
         }
         binding.tvRate.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp"))
+            val intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp")
+            )
             startActivity(intent)
         }
         binding.tvShare.setOnClickListener {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp")
+            intent.putExtra(
+                Intent.EXTRA_TEXT,
+                "https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp"
+            )
             startActivity(Intent.createChooser(intent, "Share"))
         }
 
@@ -62,7 +70,13 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.contactFragment)
         }
         binding.tvCall.setOnClickListener {
-           findNavController().navigate(R.id.action_profile_call)
+            findNavController().navigate(R.id.action_profile_call)
+        }
+        when (pref.saveContact) {
+            1 -> binding.tvName.text = "Max"
+            2 -> binding.tvName.text = "Rocky"
+            4 -> binding.tvName.text = "Charlie"
+            4 -> binding.tvName.text = "Milo"
         }
 
         binding.tvPlay.setOnClickListener {

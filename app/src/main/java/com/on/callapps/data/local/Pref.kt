@@ -5,19 +5,22 @@ import android.content.Context.MODE_PRIVATE
 
 class Pref(context: Context) {
 
-    private var pref = context.getSharedPreferences("", MODE_PRIVATE)
+    private var pref = context.getSharedPreferences(SHARE_PREF, MODE_PRIVATE)
 
-    fun saveNumVolume(key: String,volume:Int) {
+    fun saveNumVolume(key: String, volume: Int) {
         pref.edit().putInt(key, volume).apply()
     }
 
     fun getNameVolume(key: String): Int? {
-        return pref.getInt(key,0)
+        return pref.getInt(key, 4)
     }
 
-    fun saveBool(){
+    fun saveBool() {
 
     }
+    var saveContact: Int
+        set(value) = pref.edit().putInt("contact", value).apply()
+        get() = pref.getInt("contact", 0)
 
 
     companion object {

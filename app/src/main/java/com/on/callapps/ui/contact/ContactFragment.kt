@@ -28,7 +28,7 @@ class ContactFragment : Fragment() {
     private var rewardedAd: RewardedAd? = null
     private var bool = false
     private var boolFour = false
-    private var boolTwo= false
+    private var boolTwo = false
     private var boolOne = false
 
 
@@ -48,6 +48,8 @@ class ContactFragment : Fragment() {
 
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
+        pref.saveContact
+        whenChangeContact()
 
         one()
 
@@ -58,13 +60,46 @@ class ContactFragment : Fragment() {
         four()
     }
 
-    private fun one() {
-        binding.imgOk.setOnClickListener {
-            boolOne = if (!boolOne) {
+    private fun whenChangeContact() {
+        when (pref.saveContact) {
+            1 -> {
+                binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOk.setImageResource(R.drawable.img_ok)
+            }
+
+            2 -> {
+                binding.imgOkTwoTwo.setImageResource(R.drawable.img_ok)
                 binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
+            }
+
+            3 -> {
+                binding.imgOkTwoThree.setImageResource(R.drawable.img_ok)
+                binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
+            }
+
+            4 -> {
+                binding.imgOkTwoFour.setImageResource(R.drawable.img_ok)
+                binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
+            }
+        }
+    }
+
+    private fun one() {
+        binding.contactOne.setOnClickListener {
+            boolOne = if (!boolOne) {
                 true
             } else {
                 binding.imgOk.setImageResource(R.drawable.img_ok)
+                pref.saveContact = 1
+                whenChangeContact()
                 false
             }
         }
@@ -74,24 +109,26 @@ class ContactFragment : Fragment() {
         val ratingText = pref.getNameVolume(Key.KEY_ONE)
         binding.tvRatingTwo.text = "$ratingText/4"
 
-        binding.imgOkTwoTwo.setOnClickListener {
-            boolTwo = if (!boolTwo) {
-                binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
-                true
-            } else {
-                binding.imgOkTwoTwo.setImageResource(R.drawable.img_ok)
-                false
-            }
-        }
 
-        if (binding.tvRatingTwo.text == "4/4") {
-            binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
-            boolTwo = true
+        if (pref.getNameVolume(Key.KEY_ONE) == 4) {
+
+            binding.contactFour.setOnClickListener {
+                boolTwo = if (!boolTwo) {
+                    binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
+                    true
+                } else {
+                    binding.imgOkTwoTwo.setImageResource(R.drawable.img_ok)
+                    pref.saveContact = 2
+                    whenChangeContact()
+                    false
+                }
+            }
         } else {
             binding.contactFour.setOnClickListener {
                 ratingText?.let { it1 -> onClick(it1, Key.KEY_ONE) }
             }
         }
+
     }
 
     private fun four() {
@@ -103,6 +140,8 @@ class ContactFragment : Fragment() {
                 true
             } else {
                 binding.imgOkTwoFour.setImageResource(R.drawable.img_ok)
+                pref.saveContact = 4
+                whenChangeContact()
                 false
             }
         }
@@ -126,6 +165,8 @@ class ContactFragment : Fragment() {
                 true
             } else {
                 binding.imgOkTwoThree.setImageResource(R.drawable.img_ok)
+                pref.saveContact = 3
+                whenChangeContact()
                 false
             }
         }
