@@ -11,8 +11,12 @@ class Pref(context: Context) {
         pref.edit().putInt(key, volume).apply()
     }
 
-    fun getNameVolume(key: String,): Int? {
+    fun getNameVolume(key: String): Int? {
         return pref.getInt(key,0)
+    }
+
+    fun saveBool(){
+
     }
 
 

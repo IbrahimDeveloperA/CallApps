@@ -18,6 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -40,6 +41,7 @@
         app:layout_constraintTop_toBottomOf="@id/btn_back">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -290,6 +292,7 @@
         app:layout_constraintTop_toBottomOf="@id/contact_one">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -349,7 +352,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_character__two" />
 
                 <ImageView
-                    android:id="@+id/img_ok__two"
+                    android:id="@+id/img_ok_two_two"
                     android:layout_width="30sp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_block"
@@ -366,8 +369,8 @@
                     android:text="0/4"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/img_ok__two"
-                    app:layout_constraintTop_toBottomOf="@id/img_ok__two" />
+                    app:layout_constraintStart_toStartOf="@id/img_ok_two_two"
+                    app:layout_constraintTop_toBottomOf="@id/img_ok_two_two" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -385,6 +388,7 @@
         app:layout_constraintTop_toBottomOf="@id/contact_four">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -444,7 +448,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_character__two_" />
 
                 <ImageView
-                    android:id="@+id/img_ok__two_"
+                    android:id="@+id/img_ok_two_three"
                     android:layout_width="30sp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_block"
@@ -461,8 +465,8 @@
                     android:text="0/4"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/img_ok__two_"
-                    app:layout_constraintTop_toBottomOf="@id/img_ok__two_" />
+                    app:layout_constraintStart_toStartOf="@id/img_ok_two_three"
+                    app:layout_constraintTop_toBottomOf="@id/img_ok_two_three" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -480,6 +484,7 @@
         app:layout_constraintTop_toBottomOf="@id/contact_five">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
@@ -539,7 +544,7 @@
                     app:layout_constraintTop_toBottomOf="@id/tv_character__two__" />
 
                 <ImageView
-                    android:id="@+id/img_ok__two__"
+                    android:id="@+id/img_ok_two_four"
                     android:layout_width="30sp"
                     android:layout_height="30dp"
                     android:src="@drawable/ic_block"
@@ -556,8 +561,8 @@
                     android:textSize="14sp"
                     android:fontFamily="@font/ff_montserrat_alternates_regular"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/img_ok__two__"
-                    app:layout_constraintTop_toBottomOf="@id/img_ok__two__" />
+                    app:layout_constraintStart_toStartOf="@id/img_ok_two_four"
+                    app:layout_constraintTop_toBottomOf="@id/img_ok_two_four" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
