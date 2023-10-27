@@ -11,6 +11,7 @@ import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.WebViewActivity
 import com.on.callapps.databinding.FragmentPlayGameBinding
+import kotlin.system.exitProcess
 
 class PlayGameFragment : Fragment() {
 
@@ -32,14 +33,15 @@ class PlayGameFragment : Fragment() {
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
+        binding.btnExit.setOnClickListener {
+            requireActivity().finishAffinity()
+            exitProcess(0)
+        }
 
         binding.btnPlay.setOnClickListener {
                 val intent = Intent(requireContext(), WebViewActivity::class.java)
                 intent.putExtra("url", "https://www.gamezop.com/?id=3178")
                 startActivity(intent)
-        }
-        binding.btnExit.setOnClickListener {
-            requireActivity().finish()
         }
     }
 }

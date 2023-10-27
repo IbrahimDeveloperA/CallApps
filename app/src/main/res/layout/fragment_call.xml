@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/ff_montserrat_alternates_regular"
-            android:text="Alex Davids"
+            android:text="Max"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/ff_montserrat_alternates_regular"
-            android:text="+7 999 192 99 12"
+            android:text="+8 404 58 12 23"
             android:textColor="@color/white"
             android:textSize="24sp" />
 

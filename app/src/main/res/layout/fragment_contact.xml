@@ -79,7 +79,7 @@
                     android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
-                    android:text="Character 1"
+                    android:text="Max"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@id/card"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -329,7 +329,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
                     android:fontFamily="@font/ff_montserrat_alternates_regular"
-                    android:text="Character 2"
+                    android:text="Rocky"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@id/card__two"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -423,7 +423,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
-                    android:text="Character 3"
+                    android:text="Charlie"
                     android:fontFamily="@font/ff_montserrat_alternates_regular"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@id/card__two_"
@@ -519,7 +519,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="12dp"
-                    android:text="Character 4"
+                    android:text="Milo"
                     android:textSize="16sp"
                     app:layout_constraintStart_toEndOf="@id/card__two__"
                     app:layout_constraintTop_toTopOf="parent" />

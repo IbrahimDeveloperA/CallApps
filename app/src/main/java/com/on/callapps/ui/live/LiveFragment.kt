@@ -111,6 +111,7 @@ class LiveFragment : Fragment() {
         binding.btnPlay.setOnClickListener {
             binding.motionLl.isVisible = false
             binding.ibEndStream.isVisible = true
+            binding.btnPlay.isVisible = false
         }
     }
 

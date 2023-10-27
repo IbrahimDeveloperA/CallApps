@@ -15,14 +15,14 @@ class LiveAdapter() : Adapter<LiveAdapter.LiveViewHolder>() {
     private val list =  mutableListOf<LiveModel>()
 
     private fun addData() {
-        list.add(LiveModel(text = "Hi", image = R.drawable.frame_new4))
-        handler("Cool that I found this!", (100..10000).random())
-        handler("Hope to see you again soon!", (100..10000).random())
-        handler("How are you?", (100..10000).random())
-        handler("I've heard so much about you", (100..10000).random())
-        handler("What's up?", (100..10000).random())
-        handler("Thanks for having me", (100..10000).random())
-        handler("How is everything?", (100..10000).random())
+        list.add(LiveModel(text = "Hi", image = R.drawable.ic_image_dog, title = "Max"))
+        handler(text = "Cool that I found this!", image = R.drawable.c2, title = "Rocky", (100..10000).random())
+        handler("Hope to see you again soon!", image = R.drawable.c3, title = "Charlie", (100..10000).random())
+        handler("How are you?", image = R.drawable.c4, title = "Milo",(100..10000).random())
+        handler("I've heard so much about you", image = R.drawable.ic_image_dog, title = "Max", (100..10000).random())
+        handler("What's up?", image = R.drawable.c2, title = "Rocky", (100..10000).random())
+        handler("Thanks for having me", image = R.drawable.c3, title = "Charlie", (100..10000).random())
+        handler("How is everything?", image = R.drawable.c4, title = "Milo", (100..10000).random())
     }
 
     fun addDataWithDelay() {
@@ -41,12 +41,13 @@ class LiveAdapter() : Adapter<LiveAdapter.LiveViewHolder>() {
         }, delayMillis.toLong())
     }
 
-    private fun handler(text: String, delay: Int) {
+    private fun handler(text: String,image : Int, title : String, delay: Int) {
         Handler(Looper.getMainLooper()).postDelayed({
             list.add(
                 LiveModel(
                     text = text,
-                    image = R.drawable.frame_new4
+                    image = image,
+                    title = title
                 )
             )
             notifyDataSetChanged()

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.databinding.FragmentImageBinding
+import kotlin.system.exitProcess
 
 class ImageFragment : Fragment() {
 
@@ -41,7 +42,8 @@ class ImageFragment : Fragment() {
         }
 
         binding.btnExit.setOnClickListener{
-            requireActivity().finish()
+            requireActivity().finishAffinity()
+            exitProcess(0)
         }
     }
 }
