@@ -109,7 +109,6 @@ class ContactFragment : Fragment() {
         val ratingText = pref.getNameVolume(Key.KEY_ONE)
         binding.tvRatingTwo.text = "$ratingText/4"
 
-
         if (pref.getNameVolume(Key.KEY_ONE) == 4) {
 
             binding.contactFour.setOnClickListener {
@@ -133,50 +132,45 @@ class ContactFragment : Fragment() {
 
     private fun four() {
         val rating4 = pref.getNameVolume(Key.KEY_THREE)
-        binding.tvRateTwo.text = "4/4"
-        binding.imgOkTwoFour.setOnClickListener {
-            boolFour = if (!boolFour) {
-                binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
-                true
-            } else {
-                binding.imgOkTwoFour.setImageResource(R.drawable.img_ok)
-                pref.saveContact = 4
-                whenChangeContact()
-                false
-            }
-        }
+        binding.tvRateTwo.text = "$rating4/4"
 
-        if (binding.tvRateTwo.text == "4/4") {
-            binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
-            boolFour = true
+        if (pref.getNameVolume(Key.KEY_ONE) ==4 ){
+             binding.contactSix.setOnClickListener {
+                 boolFour = if (!boolFour){
+                     binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
+                         true
+                 } else {
+                     binding.imgOkTwoFour.setImageResource(R.drawable.img_ok)
+                     pref.saveContact = 4
+                     whenChangeContact()
+                     false
+                 }
+             }
         } else {
-            binding.contactSix.setOnClickListener {
-                rating4?.let { it1 -> onClick(it1, Key.KEY_THREE) }
+            binding.contactSix.setOnClickListener{
+                rating4?.let { it2 -> onClick(it2,Key.KEY_THREE)  }
             }
         }
     }
 
     private fun three() {
         val rating3 = pref.getNameVolume(Key.KEY_TWO)
-        binding.tvRatingThree.text = "4/4"
-        binding.imgOkTwoThree.setOnClickListener {
-            bool = if (!bool) {
-                binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
-                true
-            } else {
-                binding.imgOkTwoThree.setImageResource(R.drawable.img_ok)
-                pref.saveContact = 3
-                whenChangeContact()
-                false
-            }
-        }
+        binding.tvRatingThree.text = "$rating3/4"
 
-        if (binding.tvRatingThree.text == "4/4") {
-            binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
-            bool = true
-        } else {
+        if (pref.getNameVolume(Key.KEY_TWO)==4){
             binding.contactFive.setOnClickListener {
-                rating3?.let { it1 -> onClick(it1, Key.KEY_TWO) }
+                bool = if (!bool){
+                    binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
+                    true
+                } else {
+                    binding.imgOkTwoThree.setImageResource(R.drawable.img_ok)
+                    pref.saveContact = 3
+                    false
+                }
+            }
+        } else {
+            binding.contactFive.setOnClickListener{
+                rating3?.let { onClick(it,Key.KEY_TWO) }
             }
         }
     }
