@@ -17,6 +17,7 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.on.callapps.R
+import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.FragmentDetailVideoCallBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,6 +29,7 @@ class DetailVideoCallFragment : Fragment() {
     private lateinit var cameraSource: CameraSource
     private lateinit var barcodeDetector: BarcodeDetector
     private var scannedValue = ""
+    private val pref by lazy { Pref(requireContext()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +42,26 @@ class DetailVideoCallFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupControls()
 
-        binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character1}"))
+        when (pref.saveContact) {
+            1 -> {
+                binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character1}"))
+            }
+
+            2 -> {
+                binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character_2}"))
+            }
+
+            3 -> {
+                binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character_3}"))
+            }
+
+            4 -> {
+                binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character_4}"))
+            }
+        }
+        binding.videoView.setOnCompletionListener { mp ->
+            mp.start()
+        }
         if (!binding.videoView.isPlaying) {
             binding.videoView.start()
         }

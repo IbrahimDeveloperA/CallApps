@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
+import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.FragmentCallBinding
 import com.on.callapps.utils.format
 
@@ -23,6 +24,7 @@ class CallFragment : Fragment() {
     private lateinit var binding: FragmentCallBinding
     private var isCall = false
     private lateinit var mediaPlayer: MediaPlayer
+    private lateinit var mediaPlayer2: MediaPlayer
     private var millisseconds = 0
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = object : Runnable {
@@ -31,6 +33,7 @@ class CallFragment : Fragment() {
             handler.postDelayed(this, 1)
         }
     }
+    private val pref by lazy { Pref(requireContext()) }
     private val requestCodeCameraPermission = 1001
     private var microphone = true
     private var audioLevel = 100
@@ -91,6 +94,27 @@ class CallFragment : Fragment() {
                 }
             }
         }
+        when (pref.saveContact) {
+            1 -> {
+                binding.tvName.text = "Max"
+                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
+            }
+
+            2 -> {
+                binding.tvName.text = "Rocky"
+                binding.ivLogo.setImageResource(R.drawable.c2)
+            }
+
+            3 -> {
+                binding.tvName.text = "Charlie"
+                binding.ivLogo.setImageResource(R.drawable.c3)
+            }
+
+            4 -> {
+                binding.tvName.text = "Milo"
+                binding.ivLogo.setImageResource(R.drawable.c4)
+            }
+        }
 
         trueOrFalse()
 
@@ -127,14 +151,32 @@ class CallFragment : Fragment() {
 
     private fun trueOrFalse() {
         if (!isCall) {
-            mediaPlayer = MediaPlayer.create(requireContext(), R.raw.audio_call_bell_v3)
-            mediaPlayer.start()
+            mediaPlayer2 = MediaPlayer.create(requireContext(), R.raw.audio_call_bell_v3)
+            mediaPlayer2.isLooping = true
+            mediaPlayer2.start()
             binding.llTime.visibility = View.GONE
             binding.clBtn.visibility = View.GONE
             binding.llCenter.visibility = View.VISIBLE
             binding.clAcceptReset.visibility = View.VISIBLE
         } else {
-            mediaPlayer = MediaPlayer.create(requireContext(), R.raw.voice_call_character_1)
+            mediaPlayer2.stop()
+            when (pref.saveContact) {
+                1 -> {
+                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.voice_call_character_1)
+                }
+                2 -> {
+                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.voice_call_character_2)
+                }
+
+                3 -> {
+                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.voice_call_character_3)
+                }
+
+                4 -> {
+                    mediaPlayer = MediaPlayer.create(requireContext(), R.raw.voice_call_character_4)
+                }
+            }
+            mediaPlayer.isLooping = true
             mediaPlayer.start()
             binding.llTime.visibility = View.VISIBLE
             binding.clBtn.visibility = View.VISIBLE

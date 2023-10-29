@@ -12,15 +12,11 @@ class Pref(context: Context) {
     }
 
     fun getNameVolume(key: String): Int? {
-        return pref.getInt(key, 4)
-    }
-
-    fun saveBool() {
-
+        return pref.getInt(key, 0)
     }
     var saveContact: Int
         set(value) = pref.edit().putInt("contact", value).apply()
-        get() = pref.getInt("contact", 0)
+        get() = pref.getInt("contact", 1)
 
 
     companion object {

@@ -2,6 +2,7 @@ package com.on.callapps.ui.call
 
 
 import android.annotation.SuppressLint
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.SurfaceHolder
@@ -17,6 +18,7 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.on.callapps.R
+import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.FragmentVideoCallBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,7 +30,9 @@ class VideoCallFragment : Fragment() {
     private lateinit var binding: FragmentVideoCallBinding
     private lateinit var cameraSource: CameraSource
     private lateinit var barcodeDetector: BarcodeDetector
+    private lateinit var mediaPlayer2: MediaPlayer
     private var scannedValue = ""
+    private val pref by lazy { Pref(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,8 +52,33 @@ class VideoCallFragment : Fragment() {
             findNavController().navigate(R.id.detailVideoCallFragment)
         }
 
+        mediaPlayer2 = MediaPlayer.create(requireContext(), R.raw.audio_call_bell_v3)
+        mediaPlayer2.isLooping = true
+        mediaPlayer2.start()
+
         binding.ibResetCallRed.setOnClickListener {
             findNavController().navigateUp()
+        }
+        when (pref.saveContact) {
+            1 -> {
+                binding.tvName.text = "Max"
+                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
+            }
+
+            2 -> {
+                binding.tvName.text = "Rocky"
+                binding.ivLogo.setImageResource(R.drawable.c2)
+            }
+
+            3 -> {
+                binding.tvName.text = "Charlie"
+                binding.ivLogo.setImageResource(R.drawable.c3)
+            }
+
+            4 -> {
+                binding.tvName.text = "Milo"
+                binding.ivLogo.setImageResource(R.drawable.c4)
+            }
         }
 
     }
@@ -111,6 +140,11 @@ class VideoCallFragment : Fragment() {
             }
         })
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mediaPlayer2.stop()
     }
     override fun onDestroy() {
         super.onDestroy()

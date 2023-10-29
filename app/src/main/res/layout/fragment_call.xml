@@ -44,6 +44,7 @@
             app:cardCornerRadius="300dp">
 
             <ImageView
+                android:id="@+id/iv_logo"
                 android:layout_width="138dp"
                 android:layout_height="138dp"
                 android:src="@drawable/ic_image_dog" />
@@ -56,10 +57,12 @@
             android:layout_marginTop="24dp"
             android:fontFamily="@font/ff_montserrat_alternates_regular"
             android:text="Max"
+            android:id="@+id/tv_name"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
         <TextView
+            android:id="@+id/tv_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

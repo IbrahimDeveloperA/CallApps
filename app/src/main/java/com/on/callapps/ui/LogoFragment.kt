@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.on.callapps.R
 import com.on.callapps.WebViewActivity
+import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.FragmentLogoBinding
 
 class LogoFragment : Fragment() {
     private lateinit var binding: FragmentLogoBinding
+    private val pref by lazy { Pref(requireContext()) }
 
     private var isStarted = false
     private var primaryProgressStatus = 0
@@ -31,7 +33,7 @@ class LogoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         var handler = Handler()
         val maxProgress = 100
-        val animationDuration = 700
+        val animationDuration = 7000
         val progressIncrement = maxProgress / (animationDuration / 200)
 
         handler = Handler {
@@ -46,6 +48,22 @@ class LogoFragment : Fragment() {
             handler?.sendEmptyMessageDelayed(0, 100)
 
             true
+        }
+
+        when (pref.saveContact) {
+            1 -> {
+                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
+            }
+            2 -> {
+                binding.ivLogo.setImageResource(R.drawable.c2)
+            }
+
+            3 -> {
+                binding.ivLogo.setImageResource(R.drawable.c3)
+            }
+            4 -> {
+                binding.ivLogo.setImageResource(R.drawable.c4)
+            }
         }
 
         updateProgress(primaryProgressStatus)

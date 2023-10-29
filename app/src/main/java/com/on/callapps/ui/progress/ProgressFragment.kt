@@ -29,7 +29,7 @@ class ProgressFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val maxProgress = 100
-        val animationDuration = 700
+        val animationDuration = 1500
         val progressIncrement = maxProgress / (animationDuration / 200)
 
         handler = Handler(Looper.getMainLooper()) {

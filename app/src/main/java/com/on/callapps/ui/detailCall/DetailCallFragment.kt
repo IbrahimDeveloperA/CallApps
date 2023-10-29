@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.WebViewActivity
+import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.DialogChooseBinding
 import com.on.callapps.databinding.DialogTargetBinding
 import com.on.callapps.databinding.FragmentDetailCallBinding
@@ -20,6 +21,7 @@ import com.on.callapps.utils.createDialog
 class DetailCallFragment : Fragment() {
 
     private lateinit var binding: FragmentDetailCallBinding
+    private val pref by lazy { Pref(requireContext()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -91,6 +93,22 @@ class DetailCallFragment : Fragment() {
 
         binding.imageView.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        when (pref.saveContact) {
+            1 -> {
+                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
+            }
+            2 -> {
+                binding.ivLogo.setImageResource(R.drawable.c2)
+            }
+
+            3 -> {
+                binding.ivLogo.setImageResource(R.drawable.c3)
+            }
+            4 -> {
+                binding.ivLogo.setImageResource(R.drawable.c4)
+            }
         }
 
         binding.tvShare.setOnClickListener {

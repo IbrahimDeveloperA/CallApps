@@ -1,5 +1,6 @@
 package com.on.callapps.ui.contact
 
+import android.app.Dialog
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -49,7 +50,15 @@ class ContactFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
         pref.saveContact
-        whenChangeContact()
+        if (pref.getNameVolume(Key.KEY_ONE) == 2) {
+            whenTwo()
+        }
+        if (pref.getNameVolume(Key.KEY_THREE) == 4) {
+            whenFour()
+        }
+        if (pref.getNameVolume(Key.KEY_TWO) == 3) {
+            whenThree()
+        }
 
         one()
 
@@ -58,6 +67,20 @@ class ContactFragment : Fragment() {
         three()
 
         four()
+    }
+
+    private fun whenFour() {
+        when (pref.saveContact) {
+            1 -> {
+                binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOk.setImageResource(R.drawable.img_ok)
+            }
+
+            4 -> {
+                binding.imgOkTwoFour.setImageResource(R.drawable.img_ok)
+                binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
+            }
+        }
     }
 
     private fun whenChangeContact() {
@@ -99,17 +122,53 @@ class ContactFragment : Fragment() {
             } else {
                 binding.imgOk.setImageResource(R.drawable.img_ok)
                 pref.saveContact = 1
-                whenChangeContact()
+                if (pref.getNameVolume(Key.KEY_ONE) == 2) {
+                    whenTwo()
+                }
+                if (pref.getNameVolume(Key.KEY_THREE) == 4) {
+                    whenFour()
+                }
+                if (pref.getNameVolume(Key.KEY_TWO) == 3) {
+                    whenThree()
+                }
                 false
+            }
+        }
+    }
+
+    private fun whenTwo() {
+        when (pref.saveContact) {
+            1 -> {
+                binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOk.setImageResource(R.drawable.img_ok)
+            }
+
+            2 -> {
+                binding.imgOkTwoTwo.setImageResource(R.drawable.img_ok)
+                binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
+            }
+        }
+    }
+
+    private fun whenThree() {
+        when (pref.saveContact) {
+            1 -> {
+                binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
+                binding.imgOk.setImageResource(R.drawable.img_ok)
+            }
+
+            3 -> {
+                binding.imgOkTwoThree.setImageResource(R.drawable.img_ok)
+                binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
             }
         }
     }
 
     private fun two() {
         val ratingText = pref.getNameVolume(Key.KEY_ONE)
-        binding.tvRatingTwo.text = "$ratingText/4"
+        binding.tvRatingTwo.text = "$ratingText/2"
 
-        if (pref.getNameVolume(Key.KEY_ONE) == 4) {
+        if (pref.getNameVolume(Key.KEY_ONE) == 2) {
 
             binding.contactFour.setOnClickListener {
                 boolTwo = if (!boolTwo) {
@@ -118,7 +177,7 @@ class ContactFragment : Fragment() {
                 } else {
                     binding.imgOkTwoTwo.setImageResource(R.drawable.img_ok)
                     pref.saveContact = 2
-                    whenChangeContact()
+                    whenTwo()
                     false
                 }
             }
@@ -134,43 +193,44 @@ class ContactFragment : Fragment() {
         val rating4 = pref.getNameVolume(Key.KEY_THREE)
         binding.tvRateTwo.text = "$rating4/4"
 
-        if (pref.getNameVolume(Key.KEY_ONE) ==4 ){
-             binding.contactSix.setOnClickListener {
-                 boolFour = if (!boolFour){
-                     binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
-                         true
-                 } else {
-                     binding.imgOkTwoFour.setImageResource(R.drawable.img_ok)
-                     pref.saveContact = 4
-                     whenChangeContact()
-                     false
-                 }
-             }
+        if (pref.getNameVolume(Key.KEY_ONE) == 4) {
+            binding.contactSix.setOnClickListener {
+                boolFour = if (!boolFour) {
+                    binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
+                    true
+                } else {
+                    binding.imgOkTwoFour.setImageResource(R.drawable.img_ok)
+                    pref.saveContact = 4
+                    whenFour()
+                    false
+                }
+            }
         } else {
-            binding.contactSix.setOnClickListener{
-                rating4?.let { it2 -> onClick(it2,Key.KEY_THREE)  }
+            binding.contactSix.setOnClickListener {
+                rating4?.let { it2 -> onClick(it2, Key.KEY_THREE) }
             }
         }
     }
 
     private fun three() {
         val rating3 = pref.getNameVolume(Key.KEY_TWO)
-        binding.tvRatingThree.text = "$rating3/4"
+        binding.tvRatingThree.text = "$rating3/3"
 
-        if (pref.getNameVolume(Key.KEY_TWO)==4){
+        if (pref.getNameVolume(Key.KEY_TWO) == 3) {
             binding.contactFive.setOnClickListener {
-                bool = if (!bool){
+                bool = if (!bool) {
                     binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
                     true
                 } else {
                     binding.imgOkTwoThree.setImageResource(R.drawable.img_ok)
                     pref.saveContact = 3
+                    whenThree()
                     false
                 }
             }
         } else {
-            binding.contactFive.setOnClickListener{
-                rating3?.let { onClick(it,Key.KEY_TWO) }
+            binding.contactFive.setOnClickListener {
+                rating3?.let { onClick(it, Key.KEY_TWO) }
             }
         }
     }
@@ -178,36 +238,106 @@ class ContactFragment : Fragment() {
     private fun onClick(text: Int, key: String) {
         val dialog = requireContext().createDialog(DialogTargetBinding::inflate)
         dialog.first.tvTitle.text = "Watch the short video to unlock the character "
-        dialog.first.tvNumber.text = "$text/4"
+        when (key) {
+            Key.KEY_ONE -> {
+                dialog.first.tvNumber.text = "$text/2"
+            }
+
+            Key.KEY_TWO -> {
+                dialog.first.tvNumber.text = "$text/3"
+            }
+
+            Key.KEY_THREE -> {
+                dialog.first.tvNumber.text = "$text/4"
+            }
+        }
+        loadAd(text, key, dialog)
         dialog.first.btnYes.setOnClickListener {
-
-            val adRequest = AdRequest.Builder().build()
-            RewardedAd.load(requireContext(),
-                "ca-app-pub-3940256099942544/5224354917",
-                adRequest,
-                object : RewardedAdLoadCallback() {
-                    override fun onAdFailedToLoad(adError: LoadAdError) {
-                        adError.toString().let { it1 -> Log.d("ololoFailed", it1) }
-                        rewardedAd = null
-                    }
-
-                    override fun onAdLoaded(ad: RewardedAd) {
-                        Log.d("ololoLoaded", "Ad was loaded.")
-                        rewardedAd = ad
-                    }
-                })
-            rewardedAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
-                override fun onAdDismissedFullScreenContent() {
-                    val newText = text + 1
-                    pref.saveNumVolume(key, newText)
-                    dialog.first.tvNumber.text = newText.toString()
-                    rewardedAd = null
-                }
+            rewardedAd?.show(requireActivity()) {
+                updateRewarded(key, dialog, text)
             }
             dialog.second.dismiss()
         }
         dialog.first.btnNo.setOnClickListener {
             dialog.second.dismiss()
+            rewardedAd = null
         }
+    }
+
+    private fun updateRewarded(
+        key: String,
+        dialog: Pair<DialogTargetBinding, Dialog>,
+        text: Int
+    ) {
+        if (pref.getNameVolume(Key.KEY_ONE) == 2) {
+            whenTwo()
+        }
+        if (pref.getNameVolume(Key.KEY_THREE) == 4) {
+            whenFour()
+        }
+        if (pref.getNameVolume(Key.KEY_TWO) == 3) {
+            whenThree()
+        }
+        when (key) {
+            Key.KEY_ONE -> {
+                dialog.first.tvNumber.text = "$text/2"
+            }
+
+            Key.KEY_TWO -> {
+                dialog.first.tvNumber.text = "$text/3"
+            }
+
+            Key.KEY_THREE -> {
+                dialog.first.tvNumber.text = "$text/4"
+            }
+        }
+    }
+
+    private fun adListener(
+        text: Int,
+        key: String,
+        dialog: Pair<DialogTargetBinding, Dialog>
+    ) = object : FullScreenContentCallback() {
+        override fun onAdDismissedFullScreenContent() {
+            rewardedAd = null
+            loadAd(text, key, dialog)
+            val newText = text + 1
+            pref.saveNumVolume(key, newText)
+            dialog.first.tvNumber.text = newText.toString()
+            binding.tvRatingTwo.text = "${pref.getNameVolume(Key.KEY_ONE)}/2"
+            binding.tvRatingThree.text = "${pref.getNameVolume(Key.KEY_TWO)}/3"
+            binding.tvRateTwo.text = "${pref.getNameVolume(Key.KEY_THREE)}/4"
+            updateRewarded(key, dialog, text)
+        }
+
+        override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+            super.onAdFailedToShowFullScreenContent(p0)
+            rewardedAd = null
+            loadAd(text, key, dialog)
+        }
+    }
+
+
+    private fun loadAd(
+        text: Int,
+        key: String,
+        dialog: Pair<DialogTargetBinding, Dialog>
+    ) {
+        val adRequest = AdRequest.Builder().build()
+        RewardedAd.load(requireContext(),
+            "ca-app-pub-3940256099942544/5224354917",
+            adRequest,
+            object : RewardedAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    adError.toString().let { it1 -> Log.d("ololoFailed", it1) }
+                    rewardedAd = null
+                }
+
+                override fun onAdLoaded(ad: RewardedAd) {
+                    Log.d("ololoLoaded", "Ad was loaded.")
+                    rewardedAd = ad
+                    rewardedAd?.fullScreenContentCallback = adListener(text, key, dialog)
+                }
+            })
     }
 }

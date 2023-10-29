@@ -45,7 +45,9 @@ class ProfileFragment : Fragment() {
         binding.imgSettings.setOnClickListener {
             findNavController().navigate(R.id.settingsFragment)
         }
-
+        binding.tvVideoCall.setOnClickListener {
+            findNavController().navigate(R.id.videoCallFragment)
+        }
         binding.btnBack.setOnClickListener {
             findNavController().navigateUp()
         }
@@ -73,10 +75,25 @@ class ProfileFragment : Fragment() {
             findNavController().navigate(R.id.action_profile_call)
         }
         when (pref.saveContact) {
-            1 -> binding.tvName.text = "Max"
-            2 -> binding.tvName.text = "Rocky"
-            4 -> binding.tvName.text = "Charlie"
-            4 -> binding.tvName.text = "Milo"
+            1 -> {
+                binding.tvName.text = "Max"
+                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
+            }
+
+            2 -> {
+                binding.tvName.text = "Rocky"
+                binding.ivLogo.setImageResource(R.drawable.c2)
+            }
+
+            3 -> {
+                binding.tvName.text = "Charlie"
+                binding.ivLogo.setImageResource(R.drawable.c3)
+            }
+
+            4 -> {
+                binding.tvName.text = "Milo"
+                binding.ivLogo.setImageResource(R.drawable.c4)
+            }
         }
 
         binding.tvPlay.setOnClickListener {

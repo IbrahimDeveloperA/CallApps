@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import com.drakeet.multitype.MultiTypeAdapter
 import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
+import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.FragmentMessageBinding
 import com.on.callapps.ui.message.adapter.MessageAdapter
 import com.on.callapps.ui.message.adapter.adapersss.AdapterFriend
@@ -33,6 +34,7 @@ class MessageFragment : Fragment() {
     private val adapterFriend = AdapterFriend()
     private val myAdapter = MyAdapter()
     private val requestCodeCameraPermission = 1001
+    private val pref by lazy { Pref(requireContext()) }
 
     private fun onClick(text: String) {
         multiAdapter.notifyItemInserted(0)
@@ -57,7 +59,7 @@ class MessageFragment : Fragment() {
 
    private fun sendMessage(text:String,reply:String,end:String){
        if (text == reply) {
-           binding.tvStatus.text = "печатает..."
+           binding.tvStatus.text = "typing..."
            Handler(Looper.getMainLooper()).postDelayed({
                items.add(FriendModel(end))
                multiAdapter.notifyDataSetChanged()
@@ -69,7 +71,7 @@ class MessageFragment : Fragment() {
    }
     private fun message(text: String) {
         if (text == "Hi!") {
-            binding.tvStatus.text = "печатает..."
+            binding.tvStatus.text = "typing..."
             Handler(Looper.getMainLooper()).postDelayed({
                 items.add(FriendModel("Hi! Welcome to my chat"))
                 multiAdapter.notifyDataSetChanged()
@@ -121,6 +123,27 @@ class MessageFragment : Fragment() {
         binding.imgCall.setOnClickListener {
             findNavController().popBackStack()
             findNavController().navigate(R.id.callFragment)
+        }
+        when (pref.saveContact) {
+            1 -> {
+                binding.tvName.text = "Max"
+                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
+            }
+
+            2 -> {
+                binding.tvName.text = "Rocky"
+                binding.ivLogo.setImageResource(R.drawable.c2)
+            }
+
+            3 -> {
+                binding.tvName.text = "Charlie"
+                binding.ivLogo.setImageResource(R.drawable.c3)
+            }
+
+            4 -> {
+                binding.tvName.text = "Milo"
+                binding.ivLogo.setImageResource(R.drawable.c4)
+            }
         }
     }
 

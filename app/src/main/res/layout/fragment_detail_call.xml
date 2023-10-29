@@ -49,6 +49,7 @@
         app:layout_constraintTop_toBottomOf="@id/content_private">
 
         <ImageView
+            android:id="@+id/iv_logo"
             android:layout_width="138dp"
             android:layout_height="138dp"
             android:src="@drawable/ic_image_dog" />
