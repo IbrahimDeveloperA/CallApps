@@ -52,6 +52,7 @@ class MessageFragment : Fragment() {
         sendMessage(text,"Is it possible to be friends?","Yes, of course. Let's become friends")
         sendMessage(text,"Goodbye! See you!","See you again")
         sendMessage(text,"Have a nice day!","Thank you for this chat, you too!")
+        sendMessage(text,"How old are you?","I'm 25 years old")
 
         message(text)
     }
@@ -86,7 +87,7 @@ class MessageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentMessageBinding.inflate(inflater, container, false)
         return binding.root
     }

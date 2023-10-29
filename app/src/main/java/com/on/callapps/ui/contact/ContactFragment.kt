@@ -83,38 +83,6 @@ class ContactFragment : Fragment() {
         }
     }
 
-    private fun whenChangeContact() {
-        when (pref.saveContact) {
-            1 -> {
-                binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
-                binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
-                binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
-                binding.imgOk.setImageResource(R.drawable.img_ok)
-            }
-
-            2 -> {
-                binding.imgOkTwoTwo.setImageResource(R.drawable.img_ok)
-                binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
-                binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
-                binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
-            }
-
-            3 -> {
-                binding.imgOkTwoThree.setImageResource(R.drawable.img_ok)
-                binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
-                binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
-                binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
-            }
-
-            4 -> {
-                binding.imgOkTwoFour.setImageResource(R.drawable.img_ok)
-                binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
-                binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
-                binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
-            }
-        }
-    }
-
     private fun one() {
         binding.contactOne.setOnClickListener {
             boolOne = if (!boolOne) {

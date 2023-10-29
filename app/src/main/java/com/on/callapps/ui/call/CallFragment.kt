@@ -57,7 +57,8 @@ class CallFragment : Fragment() {
             trueOrFalse()
         }
         binding.ibReset.setOnClickListener {
-            findNavController().navigateUp()
+            findNavController().popBackStack()
+            findNavController().navigate(R.id.contactFragment)
         }
         binding.tvVideoCall.setOnClickListener {
             navigateInCall()
@@ -188,7 +189,7 @@ class CallFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        mediaPlayer.stop()
+        mediaPlayer2.stop()
     }
 
     private fun updateTimer() {

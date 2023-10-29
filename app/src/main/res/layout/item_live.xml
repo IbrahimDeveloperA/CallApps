@@ -31,6 +31,7 @@
         android:layout_marginStart="12dp"
         android:text="Character"
         android:textSize="16sp"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@id/card"
         app:layout_constraintTop_toTopOf="@id/card" />
 
@@ -40,6 +41,7 @@
         android:layout_marginStart="12dp"
         android:fontFamily="@font/ff_montserrat_alternates_regular"
         android:text="Hello"
+        android:textColor="@color/white"
         android:textSize="14sp"
         android:id="@+id/tv_text"
         app:layout_constraintStart_toEndOf="@id/card"

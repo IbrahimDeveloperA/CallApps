@@ -56,8 +56,9 @@ class VideoCallFragment : Fragment() {
         mediaPlayer2.isLooping = true
         mediaPlayer2.start()
 
-        binding.ibResetCallRed.setOnClickListener {
-            findNavController().navigateUp()
+        binding.ibResetCall.setOnClickListener {
+            findNavController().popBackStack()
+            findNavController().navigate(R.id.contactFragment)
         }
         when (pref.saveContact) {
             1 -> {

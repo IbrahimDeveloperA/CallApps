@@ -10,9 +10,15 @@ import com.on.callapps.R
 import com.on.callapps.databinding.ItemLiveBinding
 import com.on.callapps.ui.live.adapter.models.LiveModel
 
+
 class LiveAdapter() : Adapter<LiveAdapter.LiveViewHolder>() {
 
     private val list =  mutableListOf<LiveModel>()
+    private var scrollToBottomListener: ScrollToBottomListener? = null
+
+    fun setScrollToBottomListener(listener: ScrollToBottomListener) {
+        scrollToBottomListener = listener
+    }
 
     private fun addData() {
         list.add(LiveModel(text = "Hi", image = R.drawable.ic_image_dog, title = "Max"))
@@ -51,7 +57,12 @@ class LiveAdapter() : Adapter<LiveAdapter.LiveViewHolder>() {
                 )
             )
             notifyDataSetChanged()
+            scrollRecyclerViewToBottom()
         }, delay.toLong())
+    }
+
+    private fun scrollRecyclerViewToBottom() {
+        scrollToBottomListener?.scrollToBottom()
     }
 
     class LiveViewHolder(private val binding: ItemLiveBinding) : ViewHolder(binding.root) {

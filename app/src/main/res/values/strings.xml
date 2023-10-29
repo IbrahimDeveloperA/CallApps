@@ -14,5 +14,11 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
+
+
+
     <string name="privacy_url">https://sites.google.com/view/dog-fake-video-call/</string>
+    <string name="gamezop">https://www.gamezop.com/?id=3178</string>
+    <string name="share_url">https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp</string>
+    <string name="rate_url">https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp</string>
 </resources>

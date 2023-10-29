@@ -2,6 +2,7 @@ package com.on.callapps.ui.live
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 
 import android.content.pm.PackageManager
@@ -24,14 +25,16 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.on.callapps.R
+import com.on.callapps.WebViewActivity
 import com.on.callapps.databinding.FragmentLiveBinding
 import com.on.callapps.ui.live.adapter.LiveAdapter
+import com.on.callapps.ui.live.adapter.ScrollToBottomListener
 import com.on.callapps.utils.format
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
 
-class LiveFragment : Fragment() {
+class LiveFragment : Fragment(), ScrollToBottomListener {
 
     private lateinit var binding: FragmentLiveBinding
     private val adapter by lazy { LiveAdapter() }
@@ -68,13 +71,14 @@ class LiveFragment : Fragment() {
         binding.tvPeople.text = people.toString()
         scheduleDataUpdate()
         handler.postDelayed(runnable, 1)
+        adapter.setScrollToBottomListener(this)
 
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
         initListener()
 
-        binding.ibEndStream.setOnClickListener {
+        binding.btnEnd.setOnClickListener {
             findNavController().popBackStack()
             findNavController().navigate(R.id.progressFragment)
         }
@@ -109,9 +113,9 @@ class LiveFragment : Fragment() {
             }
         }
         binding.btnPlay.setOnClickListener {
-            binding.motionLl.isVisible = false
-            binding.ibEndStream.isVisible = true
-            binding.btnPlay.isVisible = false
+            val intent = Intent(requireActivity(), WebViewActivity::class.java)
+            intent.putExtra("url", getString(R.string.gamezop))
+            startActivity(intent)
         }
     }
 
@@ -144,7 +148,7 @@ class LiveFragment : Fragment() {
             .setFacing(CameraSource.CAMERA_FACING_FRONT)
             .build()
 
-        binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
+        binding.cameraSurfaceView.holder.addCallback(object : SurfaceHolder.Callback {
             @SuppressLint("MissingPermission")
             override fun surfaceCreated(holder: SurfaceHolder) {
                 try {
@@ -195,5 +199,9 @@ class LiveFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         cameraSource.stop()
+    }
+
+    override fun scrollToBottom() {
+        binding.recyclerView.smoothScrollToPosition(adapter.itemCount - 1)
     }
 }
