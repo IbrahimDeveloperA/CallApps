@@ -1,6 +1,7 @@
 package com.on.callapps.ui.call
 
 
+import android.animation.AnimatorInflater
 import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -20,6 +21,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.on.callapps.R
 import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.FragmentVideoCallBinding
+import com.on.callapps.utils.InterAd
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -33,6 +35,7 @@ class VideoCallFragment : Fragment() {
     private lateinit var mediaPlayer2: MediaPlayer
     private var scannedValue = ""
     private val pref by lazy { Pref(requireContext()) }
+    private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,9 +48,19 @@ class VideoCallFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupControls()
+        interAd.loadAd()
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
+        binding.ibAccept.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.ibResetCall.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
         binding.ibAccept.setOnClickListener {
+            interAd.showInter()
             findNavController().popBackStack()
             findNavController().navigate(R.id.detailVideoCallFragment)
         }
@@ -57,6 +70,7 @@ class VideoCallFragment : Fragment() {
         mediaPlayer2.start()
 
         binding.ibResetCall.setOnClickListener {
+            interAd.showInter()
             findNavController().popBackStack()
             findNavController().navigate(R.id.contactFragment)
         }

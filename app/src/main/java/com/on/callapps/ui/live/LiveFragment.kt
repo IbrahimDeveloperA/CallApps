@@ -1,6 +1,7 @@
 package com.on.callapps.ui.live
 
 import android.Manifest
+import android.animation.AnimatorInflater
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
@@ -29,6 +30,7 @@ import com.on.callapps.WebViewActivity
 import com.on.callapps.databinding.FragmentLiveBinding
 import com.on.callapps.ui.live.adapter.LiveAdapter
 import com.on.callapps.ui.live.adapter.ScrollToBottomListener
+import com.on.callapps.utils.InterAd
 import com.on.callapps.utils.format
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,6 +42,7 @@ class LiveFragment : Fragment(), ScrollToBottomListener {
     private val adapter by lazy { LiveAdapter() }
     private var people = 10
     private var millisseconds = 0
+    private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = object : Runnable {
         override fun run() {
@@ -66,6 +69,7 @@ class LiveFragment : Fragment(), ScrollToBottomListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupControls()
+        interAd.loadAd()
         binding.recyclerView.adapter = adapter
         adapter.addDataWithDelay()
         binding.tvPeople.text = people.toString()
@@ -79,13 +83,39 @@ class LiveFragment : Fragment(), ScrollToBottomListener {
         initListener()
 
         binding.btnEnd.setOnClickListener {
+            interAd.showInter()
             findNavController().popBackStack()
             findNavController().navigate(R.id.progressFragment)
         }
     }
 
     private fun initListener() {
+        binding.ibFavorite.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvEmoji.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.ibLike.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.btnPlay.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.btnEnd.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.ibEndStream.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
         binding.ibFavorite.setOnClickListener {
+            interAd.showInter()
             favorite = if (favorite) {
                 binding.ibFavorite.setImageResource(R.drawable.ic_heart_life)
                 false
@@ -95,6 +125,7 @@ class LiveFragment : Fragment(), ScrollToBottomListener {
             }
         }
         binding.tvEmoji.setOnClickListener {
+            interAd.showInter()
             emoji = if (emoji) {
                 binding.tvEmoji.setBackgroundResource(R.drawable.ic_bg)
                 false
@@ -104,6 +135,7 @@ class LiveFragment : Fragment(), ScrollToBottomListener {
             }
         }
         binding.ibLike.setOnClickListener {
+            interAd.showInter()
             like = if (like) {
                 binding.ibLike.setImageResource(R.drawable.ic_like_life)
                 false
@@ -113,6 +145,7 @@ class LiveFragment : Fragment(), ScrollToBottomListener {
             }
         }
         binding.btnPlay.setOnClickListener {
+            interAd.showInter()
             val intent = Intent(requireActivity(), WebViewActivity::class.java)
             intent.putExtra("url", getString(R.string.gamezop))
             startActivity(intent)

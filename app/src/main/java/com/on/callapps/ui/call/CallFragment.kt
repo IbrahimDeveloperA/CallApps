@@ -1,6 +1,7 @@
 package com.on.callapps.ui.call
 
 import android.Manifest
+import android.animation.AnimatorInflater
 import android.content.pm.PackageManager
 import android.media.MediaPlayer
 import android.os.Bundle
@@ -17,6 +18,7 @@ import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.FragmentCallBinding
+import com.on.callapps.utils.InterAd
 import com.on.callapps.utils.format
 
 class CallFragment : Fragment() {
@@ -26,6 +28,7 @@ class CallFragment : Fragment() {
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var mediaPlayer2: MediaPlayer
     private var millisseconds = 0
+    private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = object : Runnable {
         override fun run() {
@@ -49,18 +52,53 @@ class CallFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        interAd.loadAd()
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
-
+        binding.ibAccept.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.ibReset.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvVideoCall.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvMicrophone.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvAudioLevel.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvChat.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvCharacters.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.ibResetCallRed.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
         binding.ibAccept.setOnClickListener {
+            interAd.showInter()
             isCall = true
             trueOrFalse()
         }
         binding.ibReset.setOnClickListener {
+            interAd.showInter()
             findNavController().popBackStack()
             findNavController().navigate(R.id.contactFragment)
         }
         binding.tvVideoCall.setOnClickListener {
+            interAd.showInter()
             navigateInCall()
             mediaPlayer.stop()
         }
@@ -74,9 +112,11 @@ class CallFragment : Fragment() {
             }
         }
         binding.tvCharacters.setOnClickListener{
+            interAd.showInter()
             findNavController().navigate(R.id.contactFragment)
         }
         binding.tvChat.setOnClickListener {
+            interAd.showInter()
             findNavController().navigate(R.id.messageFragment)
         }
         binding.tvAudioLevel.setOnClickListener {
@@ -120,6 +160,8 @@ class CallFragment : Fragment() {
         trueOrFalse()
 
         binding.ibResetCallRed.setOnClickListener {
+            interAd.showInter()
+            mediaPlayer.stop()
             findNavController().popBackStack()
             findNavController().navigate(R.id.progressFragment)
         }

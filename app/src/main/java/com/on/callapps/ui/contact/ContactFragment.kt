@@ -1,12 +1,16 @@
 package com.on.callapps.ui.contact
 
+import android.animation.AnimatorInflater
 import android.app.Dialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
@@ -19,6 +23,7 @@ import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.DialogTargetBinding
 import com.on.callapps.databinding.FragmentContactBinding
 import com.on.callapps.ui.contact.adapter.ContactAdapter
+import com.on.callapps.utils.InterAd
 import com.on.callapps.utils.Key
 import com.on.callapps.utils.createDialog
 
@@ -31,6 +36,7 @@ class ContactFragment : Fragment() {
     private var boolFour = false
     private var boolTwo = false
     private var boolOne = false
+    private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
 
 
     override fun onCreateView(
@@ -43,7 +49,9 @@ class ContactFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        interAd.loadAd()
         binding.btnBack.setOnClickListener {
+            interAd.showInter()
             findNavController().navigateUp()
         }
 
@@ -59,6 +67,26 @@ class ContactFragment : Fragment() {
         if (pref.getNameVolume(Key.KEY_TWO) == 3) {
             whenThree()
         }
+        binding.btnBack.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.cardView.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.cardView2.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.cardView3.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.cardView4.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
 
         one()
 
@@ -85,6 +113,7 @@ class ContactFragment : Fragment() {
 
     private fun one() {
         binding.contactOne.setOnClickListener {
+            interAd.showInter()
             boolOne = if (!boolOne) {
                 true
             } else {
@@ -139,6 +168,7 @@ class ContactFragment : Fragment() {
         if (pref.getNameVolume(Key.KEY_ONE) == 2) {
 
             binding.contactFour.setOnClickListener {
+                interAd.showInter()
                 boolTwo = if (!boolTwo) {
                     binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
                     true
@@ -163,6 +193,7 @@ class ContactFragment : Fragment() {
 
         if (pref.getNameVolume(Key.KEY_ONE) == 4) {
             binding.contactSix.setOnClickListener {
+                interAd.showInter()
                 boolFour = if (!boolFour) {
                     binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
                     true
@@ -186,6 +217,7 @@ class ContactFragment : Fragment() {
 
         if (pref.getNameVolume(Key.KEY_TWO) == 3) {
             binding.contactFive.setOnClickListener {
+                interAd.showInter()
                 bool = if (!bool) {
                     binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
                     true
@@ -206,20 +238,17 @@ class ContactFragment : Fragment() {
     private fun onClick(text: Int, key: String) {
         val dialog = requireContext().createDialog(DialogTargetBinding::inflate)
         dialog.first.tvTitle.text = "Watch the short video to unlock the character "
-        when (key) {
-            Key.KEY_ONE -> {
-                dialog.first.tvNumber.text = "$text/2"
-            }
-
-            Key.KEY_TWO -> {
-                dialog.first.tvNumber.text = "$text/3"
-            }
-
-            Key.KEY_THREE -> {
-                dialog.first.tvNumber.text = "$text/4"
-            }
-        }
+        updateRewarded(key, dialog, text)
+        dialog.first.progressBar.isVisible = true
+        dialog.first.btnYes.isEnabled = false
         loadAd(text, key, dialog)
+        Handler(Looper.getMainLooper()).postDelayed(
+            {
+                dialog.first.progressBar.isVisible = false
+                dialog.first.btnYes.isEnabled = true
+            },
+            3000L
+        )
         dialog.first.btnYes.setOnClickListener {
             rewardedAd?.show(requireActivity()) {
                 updateRewarded(key, dialog, text)
@@ -268,7 +297,6 @@ class ContactFragment : Fragment() {
     ) = object : FullScreenContentCallback() {
         override fun onAdDismissedFullScreenContent() {
             rewardedAd = null
-            loadAd(text, key, dialog)
             val newText = text + 1
             pref.saveNumVolume(key, newText)
             dialog.first.tvNumber.text = newText.toString()
@@ -281,7 +309,6 @@ class ContactFragment : Fragment() {
         override fun onAdFailedToShowFullScreenContent(p0: AdError) {
             super.onAdFailedToShowFullScreenContent(p0)
             rewardedAd = null
-            loadAd(text, key, dialog)
         }
     }
 
@@ -293,7 +320,7 @@ class ContactFragment : Fragment() {
     ) {
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(requireContext(),
-            "ca-app-pub-3940256099942544/5224354917",
+            getString(R.string.reward_key),
             adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {

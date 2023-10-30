@@ -1,5 +1,6 @@
 package com.on.callapps.ui.call
 
+import android.animation.AnimatorInflater
 import android.annotation.SuppressLint
 import android.net.Uri
 import android.os.Bundle
@@ -19,6 +20,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.on.callapps.R
 import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.FragmentDetailVideoCallBinding
+import com.on.callapps.utils.InterAd
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.IOException
@@ -30,6 +32,7 @@ class DetailVideoCallFragment : Fragment() {
     private lateinit var barcodeDetector: BarcodeDetector
     private var scannedValue = ""
     private val pref by lazy { Pref(requireContext()) }
+    private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,7 +44,7 @@ class DetailVideoCallFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupControls()
-
+        interAd.loadAd()
         when (pref.saveContact) {
             1 -> {
                 binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character1}"))
@@ -68,8 +71,13 @@ class DetailVideoCallFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
+        binding.ibResetCallRed.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
 
         binding.ibResetCallRed.setOnClickListener {
+            interAd.showInter()
             findNavController().popBackStack()
             findNavController().navigate(R.id.progressFragment)
         }

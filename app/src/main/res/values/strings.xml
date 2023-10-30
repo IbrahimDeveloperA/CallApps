@@ -21,4 +21,9 @@
     <string name="gamezop">https://www.gamezop.com/?id=3178</string>
     <string name="share_url">https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp</string>
     <string name="rate_url">https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp</string>
+    <string name="license_url">https://creativecommons.org/publicdomain/zero/1.0/</string>
+    <string name="more_app_url">"https://play.google.com/store/apps/developer?id=Fake+Call+Chat+Pranks+by+AMYMOT+Dev"</string>
+    <string name="inter_key">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="reward_key">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="banner_key">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

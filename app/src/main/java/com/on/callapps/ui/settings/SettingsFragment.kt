@@ -1,5 +1,6 @@
 package com.on.callapps.ui.settings
 
+import android.animation.AnimatorInflater
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,16 +13,18 @@ import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.WebViewActivity
 import com.on.callapps.databinding.FragmentSettingsBinding
+import com.on.callapps.utils.InterAd
 
 class SettingsFragment : Fragment() {
 
     private lateinit var binding: FragmentSettingsBinding
 
+    private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSettingsBinding.inflate(inflater,container,false)
         return binding.root
     }
@@ -29,45 +32,82 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        interAd.loadAd()
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
+        binding.btnBack.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvPrivacy.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.btnPlay.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvLicence.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvRate.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvShare.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvMoreApp.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
         binding.btnBack.setOnClickListener {
+            interAd.showInter()
             findNavController().navigateUp()
         }
 
         binding.tvPrivacy.setOnClickListener {
+            interAd.showInter()
             val intent = Intent(requireContext(), WebViewActivity::class.java)
-            intent.putExtra("url", "https://sites.google.com/view/dog-fake-video-call/")
+            intent.putExtra("url", getString(R.string.privacy_url))
             startActivity(intent)
         }
         binding.btnPlay.setOnClickListener {
+            interAd.showInter()
             val intent = Intent(requireContext(), WebViewActivity::class.java)
-            intent.putExtra("url", "https://www.gamezop.com/?id=3178")
+            intent.putExtra("url", getString(R.string.gamezop))
             startActivity(intent)
         }
 
         binding.tvLicence.setOnClickListener {
+            interAd.showInter()
             val intent = Intent(requireContext(), WebViewActivity::class.java)
-            intent.putExtra("url", "https://creativecommons.org/publicdomain/zero/1.0/")
+            intent.putExtra("url", getString(R.string.license_url))
             startActivity(intent)
         }
         binding.tvRate.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp"))
+            interAd.showInter()
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.rate_url)))
             startActivity(intent)
         }
         binding.tvMoreApp.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Fake+Call+Chat+Pranks+by+AMYMOT+Dev"))
+            interAd.showInter()
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.more_app_url)))
             startActivity(intent)
         }
         binding.tvShare.setOnClickListener {
+            interAd.showInter()
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
-            intent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp")
+            intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_url))
             startActivity(Intent.createChooser(intent, "Share"))
         }
 
         binding.btnPlay.setOnClickListener {
+            interAd.showInter()
             findNavController().navigate(R.id.playGameFragment)
         }
     }

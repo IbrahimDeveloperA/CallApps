@@ -18,6 +18,10 @@ class Pref(context: Context) {
         set(value) = pref.edit().putInt("contact", value).apply()
         get() = pref.getInt("contact", 1)
 
+    var interAd: Int
+        set(value) = pref.edit().putInt("inter", value).apply()
+        get() = pref.getInt("inter", 0)
+
 
     companion object {
         const val SHARE_PREF = "pref"

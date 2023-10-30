@@ -1,12 +1,15 @@
 package com.on.callapps.ui.message.adapter
 
+import android.animation.AnimatorInflater
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.on.callapps.R
 import com.on.callapps.databinding.ItemMessageBinding
 
-class MessageAdapter(private val onClick: (String) -> Unit) :
+class MessageAdapter(private val onClick: (String) -> Unit, private val context: Context) :
     Adapter<MessageAdapter.MessageViewHolder>() {
 
     private val list =
@@ -31,6 +34,10 @@ class MessageAdapter(private val onClick: (String) -> Unit) :
         ViewHolder(binding.root) {
         fun onBind(text: String) {
             binding.tvMessage.text = text
+            binding.tvMessage.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+                context,
+                R.animator.button_click_animation
+            )
             binding.tvMessage.setOnClickListener {
                 onClick(text)
             }

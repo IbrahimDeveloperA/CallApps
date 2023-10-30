@@ -1,5 +1,6 @@
 package com.on.callapps.ui
 
+import android.animation.AnimatorInflater
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -12,6 +13,7 @@ import com.on.callapps.R
 import com.on.callapps.WebViewActivity
 import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.FragmentLogoBinding
+import com.on.callapps.utils.InterAd
 
 class LogoFragment : Fragment() {
     private lateinit var binding: FragmentLogoBinding
@@ -19,7 +21,7 @@ class LogoFragment : Fragment() {
 
     private var isStarted = false
     private var primaryProgressStatus = 0
-
+    private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -35,6 +37,7 @@ class LogoFragment : Fragment() {
         val maxProgress = 100
         val animationDuration = 7000
         val progressIncrement = maxProgress / (animationDuration / 200)
+        interAd.loadAd()
 
         handler = Handler {
             if (isStarted) {
@@ -80,10 +83,21 @@ class LogoFragment : Fragment() {
             binding.clBy.visibility = View.VISIBLE
         }
 
+        binding.btnContinue.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.clPrivacy.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+
         binding.btnContinue.setOnClickListener {
+            interAd.showInter()
             findNavController().navigate(R.id.imageFragment)
         }
         binding.clPrivacy.setOnClickListener {
+            interAd.showInter()
             val intent = Intent(requireContext(), WebViewActivity::class.java)
             intent.putExtra("url", getString(R.string.privacy_url))
             startActivity(intent)

@@ -22,6 +22,7 @@ import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.DialogChooseBinding
 import com.on.callapps.databinding.DialogTargetBinding
 import com.on.callapps.databinding.FragmentDetailCallBinding
+import com.on.callapps.utils.InterAd
 import com.on.callapps.utils.Key
 import com.on.callapps.utils.createDialog
 
@@ -30,6 +31,7 @@ class DetailCallFragment : Fragment() {
     private lateinit var binding: FragmentDetailCallBinding
     private val pref by lazy { Pref(requireContext()) }
     private var rewardedAd: RewardedAd? = null
+    private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,29 +42,35 @@ class DetailCallFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        interAd.loadAd()
         binding.constCall.setOnClickListener {
+            interAd.showInter()
             val dialog = requireContext().createDialog(DialogChooseBinding::inflate)
             dialog.first.tvChoose.text =
                 "                                 Choose:                                "
             dialog.first.btnChat.setOnClickListener {
+                interAd.showInter()
                 findNavController().popBackStack()
                 findNavController().navigate(R.id.messageFragment)
                 dialog.second.dismiss()
             }
 
             dialog.first.btnCall.setOnClickListener {
+                interAd.showInter()
                 findNavController().popBackStack()
                 findNavController().navigate(R.id.callFragment)
                 dialog.second.dismiss()
             }
 
             dialog.first.btnLive.setOnClickListener {
+                interAd.showInter()
                 findNavController().popBackStack()
                 findNavController().navigate(R.id.liveFragment)
                 dialog.second.dismiss()
             }
 
             dialog.first.btnVideoCall.setOnClickListener {
+                interAd.showInter()
                 findNavController().popBackStack()
                 findNavController().navigate(R.id.videoCallFragment)
                 dialog.second.dismiss()
@@ -73,16 +81,19 @@ class DetailCallFragment : Fragment() {
         binding.adView.loadAd(adRequest)
 
         binding.constPlay.setOnClickListener {
+            interAd.showInter()
             val intent = Intent(requireContext(), WebViewActivity::class.java)
-            intent.putExtra("url", "https://www.gamezop.com/?id=3178")
+            intent.putExtra("url", getString(R.string.gamezop))
             startActivity(intent)
         }
 
         binding.contact1.setOnClickListener {
+            interAd.showInter()
             findNavController().navigate(R.id.contactFragment)
         }
         binding.contact2.setOnClickListener {
             if (pref.getNameVolume(Key.KEY_ONE) == 2) {
+                interAd.showInter()
                 findNavController().navigate(R.id.contactFragment)
             } else {
                 pref.getNameVolume(Key.KEY_ONE)?.let { it1 -> onClick(it1, Key.KEY_ONE) }
@@ -90,6 +101,7 @@ class DetailCallFragment : Fragment() {
         }
         binding.contact3.setOnClickListener {
             if (pref.getNameVolume(Key.KEY_TWO) == 2) {
+                interAd.showInter()
                 findNavController().navigate(R.id.contactFragment)
             } else {
                 pref.getNameVolume(Key.KEY_TWO)?.let { it1 -> onClick(it1, Key.KEY_TWO) }
@@ -97,6 +109,7 @@ class DetailCallFragment : Fragment() {
         }
         binding.contact4.setOnClickListener {
             if (pref.getNameVolume(Key.KEY_THREE) == 2) {
+                interAd.showInter()
                 findNavController().navigate(R.id.contactFragment)
             } else {
                 pref.getNameVolume(Key.KEY_THREE)?.let { it1 -> onClick(it1, Key.KEY_THREE) }
@@ -104,12 +117,15 @@ class DetailCallFragment : Fragment() {
         }
 
         binding.imgSettingsDetail.setOnClickListener {
+            interAd.showInter()
             findNavController().navigate(R.id.settingsFragment)
         }
         binding.imageView.setOnClickListener {
+            interAd.showInter()
             findNavController().navigateUp()
         }
         binding.tvRate.setOnClickListener {
+            interAd.showInter()
             val intent = Intent(
                 Intent.ACTION_VIEW,
                 Uri.parse(getString(R.string.rate_url))
@@ -117,6 +133,7 @@ class DetailCallFragment : Fragment() {
             startActivity(intent)
         }
         binding.tvShare.setOnClickListener {
+            interAd.showInter()
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
             intent.putExtra(
@@ -127,10 +144,12 @@ class DetailCallFragment : Fragment() {
         }
 
         binding.imgSettingsDetail.setOnClickListener {
+            interAd.showInter()
             findNavController().navigate(R.id.settingsFragment)
         }
 
         binding.imageView.setOnClickListener {
+            interAd.showInter()
             findNavController().navigateUp()
         }
 
@@ -231,7 +250,7 @@ class DetailCallFragment : Fragment() {
     ) {
         val adRequest = AdRequest.Builder().build()
         RewardedAd.load(requireContext(),
-            "ca-app-pub-3940256099942544/5224354917",
+            getString(R.string.reward_key),
             adRequest,
             object : RewardedAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
