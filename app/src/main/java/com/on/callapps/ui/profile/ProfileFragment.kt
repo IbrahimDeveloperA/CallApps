@@ -61,7 +61,7 @@ class ProfileFragment : Fragment() {
         }
         binding.tvVideoCall.setOnClickListener {
             interAd.showInter()
-            findNavController().navigate(R.id.videoCallFragment)
+            navigateInVideoCall()
         }
         binding.btnBack.setOnClickListener {
             interAd.showInter()
@@ -179,6 +179,17 @@ class ProfileFragment : Fragment() {
             askForCameraPermission()
         } else {
             showScanner()
+        }
+    }
+
+    private fun navigateInVideoCall() {
+        if (ContextCompat.checkSelfPermission(
+                requireActivity(), Manifest.permission.CAMERA
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            askForCameraPermission()
+        } else {
+            findNavController().navigate(R.id.videoCallFragment)
         }
     }
 

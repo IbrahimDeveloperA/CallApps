@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdError
@@ -54,7 +55,6 @@ class ContactFragment : Fragment() {
             interAd.showInter()
             findNavController().navigateUp()
         }
-
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
         pref.saveContact
@@ -95,6 +95,15 @@ class ContactFragment : Fragment() {
         three()
 
         four()
+    }
+
+    private fun newDialog(text: Int) {
+        val dialog = requireContext().createDialog(DialogTargetBinding::inflate)
+        dialog.first.tvTitle.text = "Watch the short video to unlock the character "
+
+        dialog.first.btnYes.setOnClickListener {
+            pref.saveNumVolume("ol", text)
+        }
     }
 
     private fun whenFour() {
@@ -166,7 +175,6 @@ class ContactFragment : Fragment() {
         binding.tvRatingTwo.text = "$ratingText/2"
 
         if (pref.getNameVolume(Key.KEY_ONE) == 2) {
-
             binding.contactFour.setOnClickListener {
                 interAd.showInter()
                 boolTwo = if (!boolTwo) {
@@ -181,11 +189,13 @@ class ContactFragment : Fragment() {
             }
         } else {
             binding.contactFour.setOnClickListener {
-                ratingText?.let { it1 -> onClick(it1, Key.KEY_ONE) }
+                pref.getNameVolume(Key.KEY_ONE)
+                    ?.let { it1 -> onClick(it1, Key.KEY_ONE) }
             }
         }
 
     }
+
 
     private fun four() {
         val rating4 = pref.getNameVolume(Key.KEY_THREE)
@@ -206,7 +216,12 @@ class ContactFragment : Fragment() {
             }
         } else {
             binding.contactSix.setOnClickListener {
-                rating4?.let { it2 -> onClick(it2, Key.KEY_THREE) }
+                pref.getNameVolume(Key.KEY_THREE)?.let { it2 ->
+                    onClick(
+                        it2,
+                        Key.KEY_THREE,
+                    )
+                }
             }
         }
     }
@@ -230,7 +245,12 @@ class ContactFragment : Fragment() {
             }
         } else {
             binding.contactFive.setOnClickListener {
-                rating3?.let { onClick(it, Key.KEY_TWO) }
+                pref.getNameVolume(Key.KEY_TWO)?.let { it1 ->
+                    onClick(
+                        it1,
+                        Key.KEY_TWO,
+                    )
+                }
             }
         }
     }
@@ -238,7 +258,19 @@ class ContactFragment : Fragment() {
     private fun onClick(text: Int, key: String) {
         val dialog = requireContext().createDialog(DialogTargetBinding::inflate)
         dialog.first.tvTitle.text = "Watch the short video to unlock the character "
-        updateRewarded(key, dialog, text)
+        when (key) {
+            Key.KEY_ONE -> {
+                dialog.first.tvNumber.text = "${pref.getNameVolume(Key.KEY_ONE)}/2"
+            }
+
+            Key.KEY_TWO -> {
+                dialog.first.tvNumber.text = "${pref.getNameVolume(Key.KEY_TWO)}/3"
+            }
+
+            Key.KEY_THREE -> {
+                dialog.first.tvNumber.text = "${pref.getNameVolume(Key.KEY_THREE)}/4"
+            }
+        }
         dialog.first.progressBar.isVisible = true
         dialog.first.btnYes.isEnabled = false
         loadAd(text, key, dialog)
@@ -247,46 +279,32 @@ class ContactFragment : Fragment() {
                 dialog.first.progressBar.isVisible = false
                 dialog.first.btnYes.isEnabled = true
             },
-            3000L
+            3500L
         )
         dialog.first.btnYes.setOnClickListener {
             rewardedAd?.show(requireActivity()) {
-                updateRewarded(key, dialog, text)
+                pref.saveNumVolume(key, text + 1)
+                if (pref.getNameVolume(Key.KEY_ONE) == 2) {
+                    whenTwo()
+                    two()
+                }
+                if (pref.getNameVolume(Key.KEY_THREE) == 4) {
+                    whenFour()
+                    four()
+                }
+                if (pref.getNameVolume(Key.KEY_TWO) == 3) {
+                    whenThree()
+                    three()
+                }
+                binding.tvRatingTwo.text = "${pref.getNameVolume(Key.KEY_ONE)}/2"
+                binding.tvRatingThree.text = "${pref.getNameVolume(Key.KEY_TWO)}/3"
+                binding.tvRateTwo.text = "${pref.getNameVolume(Key.KEY_THREE)}/4"
+                dialog.second.dismiss()
             }
-            dialog.second.dismiss()
         }
         dialog.first.btnNo.setOnClickListener {
             dialog.second.dismiss()
             rewardedAd = null
-        }
-    }
-
-    private fun updateRewarded(
-        key: String,
-        dialog: Pair<DialogTargetBinding, Dialog>,
-        text: Int
-    ) {
-        if (pref.getNameVolume(Key.KEY_ONE) == 2) {
-            whenTwo()
-        }
-        if (pref.getNameVolume(Key.KEY_THREE) == 4) {
-            whenFour()
-        }
-        if (pref.getNameVolume(Key.KEY_TWO) == 3) {
-            whenThree()
-        }
-        when (key) {
-            Key.KEY_ONE -> {
-                dialog.first.tvNumber.text = "$text/2"
-            }
-
-            Key.KEY_TWO -> {
-                dialog.first.tvNumber.text = "$text/3"
-            }
-
-            Key.KEY_THREE -> {
-                dialog.first.tvNumber.text = "$text/4"
-            }
         }
     }
 
@@ -297,13 +315,7 @@ class ContactFragment : Fragment() {
     ) = object : FullScreenContentCallback() {
         override fun onAdDismissedFullScreenContent() {
             rewardedAd = null
-            val newText = text + 1
-            pref.saveNumVolume(key, newText)
-            dialog.first.tvNumber.text = newText.toString()
-            binding.tvRatingTwo.text = "${pref.getNameVolume(Key.KEY_ONE)}/2"
-            binding.tvRatingThree.text = "${pref.getNameVolume(Key.KEY_TWO)}/3"
-            binding.tvRateTwo.text = "${pref.getNameVolume(Key.KEY_THREE)}/4"
-            updateRewarded(key, dialog, text)
+            loadAd(text, key, dialog)
         }
 
         override fun onAdFailedToShowFullScreenContent(p0: AdError) {
