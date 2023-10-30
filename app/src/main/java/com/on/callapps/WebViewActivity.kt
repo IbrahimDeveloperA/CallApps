@@ -17,7 +17,7 @@ class WebViewActivity : AppCompatActivity() {
         val url = intent.getStringExtra("url")
         val webView: WebView = findViewById(R.id.webView)
 
-        webView.settings.javaScriptEnabled = true
+        webView.settings.javaScriptEnabled = false
 
         webView.webViewClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {

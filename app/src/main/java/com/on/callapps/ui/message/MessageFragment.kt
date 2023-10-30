@@ -37,13 +37,14 @@ class MessageFragment : Fragment() {
     private val requestCodeCameraPermission = 1001
     private val pref by lazy { Pref(requireContext()) }
     private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
+    private var name = "Max"
 
     private fun onClick(text: String) {
         multiAdapter.notifyItemInserted(0)
         items.add(MyModel(text = text))
         multiAdapter.notifyDataSetChanged()
         binding.recyclerManager.smoothScrollToPosition(multiAdapter.itemCount - 1)
-        sendMessage(text, "What's your name?", "I'm Max")
+        sendMessage(text, "What's your name?", "I'm $name")
         sendMessage(text, "How are you?", "I'm fine, thank you")
         sendMessage(text, "Nice to meet you", "Me too")
         sendMessage(text, "Where are you from?", "I'm from United States")
@@ -159,21 +160,25 @@ class MessageFragment : Fragment() {
             1 -> {
                 binding.tvName.text = "Max"
                 binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
+                name = "Max"
             }
 
             2 -> {
                 binding.tvName.text = "Rocky"
                 binding.ivLogo.setImageResource(R.drawable.c2)
+                name = "Rocky"
             }
 
             3 -> {
                 binding.tvName.text = "Charlie"
                 binding.ivLogo.setImageResource(R.drawable.c3)
+                name = "Charlie"
             }
 
             4 -> {
                 binding.tvName.text = "Milo"
                 binding.ivLogo.setImageResource(R.drawable.c4)
+                name = "Milo"
             }
         }
     }
