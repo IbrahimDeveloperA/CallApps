@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/ff_montserrat_alternates_regular"
-            android:text="Max"
+            android:text="@string/max"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -54,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/ff_montserrat_alternates_regular"
-            android:text="+8 404 58 12 23"
+            android:text="@string/number_phone"
             android:textColor="@color/white"
             android:textSize="24sp" />
 
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/ff_montserrat_alternates_regular"
-            android:text="Incoming Video Call"
+            android:text="@string/incoming_video_call"
             android:textColor="@color/white"
             android:textSize="16sp" />
     </LinearLayout>

@@ -26,7 +26,7 @@ class ImageFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentImageBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,28 +38,8 @@ class ImageFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
-        binding.btnStart.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
-        binding.btnRate.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
-        binding.btnExit.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
-        binding.btnStart.setOnClickListener {
-            interAd.showInter()
-            findNavController().navigate(R.id.profileFragment)
-        }
-
-        binding.btnRate.setOnClickListener {
-            interAd.showInter()
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.rate_url)))
-            startActivity(intent)
-        }
+        animBtn()
+        initListener()
         when (pref.saveContact) {
             1 -> {
                 binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
@@ -79,11 +59,38 @@ class ImageFragment : Fragment() {
                 binding.ivLogo.setImageResource(R.drawable.c4)
             }
         }
+    }
 
+    private fun initListener() {
         binding.btnExit.setOnClickListener{
             interAd.showInter()
             requireActivity().finishAffinity()
             exitProcess(0)
         }
+        binding.btnStart.setOnClickListener {
+            interAd.showInter()
+            findNavController().navigate(R.id.profileFragment)
+        }
+
+        binding.btnRate.setOnClickListener {
+            interAd.showInter()
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.rate_url)))
+            startActivity(intent)
+        }
+    }
+
+    private fun animBtn() {
+        binding.btnStart.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.btnRate.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.btnExit.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
     }
 }

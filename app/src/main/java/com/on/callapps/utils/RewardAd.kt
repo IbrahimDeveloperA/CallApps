@@ -1,8 +1,9 @@
 package com.on.callapps.utils
 
+import android.app.Activity
 import android.app.Dialog
 import android.content.Context
-import android.util.Log
+import android.widget.TextView
 import androidx.core.view.isVisible
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
@@ -11,11 +12,17 @@ import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.on.callapps.R
+import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.DialogTargetBinding
 
-class RewardAd(private val context: Context) {
+class RewardAd(
+    private val context: Context,
+    private val activity: Activity
+) {
 
-    var rewardedAd: RewardedAd? = null
+    private var rewardedAd: RewardedAd? = null
+    private val pref: Pref = Pref(context)
+
     private fun adListener(
         text: Int,
         key: String,
@@ -32,7 +39,7 @@ class RewardAd(private val context: Context) {
         }
     }
 
-    fun loadAd(
+    private fun loadAd(
         text: Int,
         key: String,
         dialog: Pair<DialogTargetBinding, Dialog>
@@ -46,18 +53,92 @@ class RewardAd(private val context: Context) {
                 adRequest,
                 object : RewardedAdLoadCallback() {
                     override fun onAdFailedToLoad(adError: LoadAdError) {
-                        adError.toString().let { it1 -> Log.d("ololoFailed", it1) }
                         rewardedAd = null
                     }
 
                     override fun onAdLoaded(ad: RewardedAd) {
-                        Log.d("ololoLoaded", "Ad was loaded.")
                         rewardedAd = ad
                         dialog.first.progressBar.isVisible = false
                         dialog.first.btnYes.isEnabled = true
                         rewardedAd?.fullScreenContentCallback = adListener(text, key, dialog)
                     }
                 })
+        }
+    }
+
+    fun onClick(
+        text: Int,
+        key: String,
+        tvRatingTwo: TextView? = null,
+        tvRatingThree: TextView? = null,
+        tvRateTwo: TextView? = null,
+        whenTwo: (() -> Unit?)? = null,
+        two: (() -> Unit?)? = null,
+        whenFour: (() -> Unit?)? = null,
+        four: (() -> Unit?)? = null,
+        whenThree: (() -> Unit?)? = null,
+        three: (() -> Unit?)? = null,
+    ) {
+        val dialog = context.createDialog(DialogTargetBinding::inflate)
+        dialog.first.tvTitle.text =
+            context.getString(R.string.watch_the_short_video_to_unlock_the_character)
+        when (key) {
+            Key.KEY_TWO -> {
+                dialog.first.tvNumber.text =
+                    context.getString(R.string._2, pref.getNameVolume(Key.KEY_TWO))
+            }
+
+            Key.KEY_THREE -> {
+                dialog.first.tvNumber.text =
+                    context.getString(R.string._3, pref.getNameVolume(Key.KEY_THREE))
+            }
+
+            Key.KEY_FOUR -> {
+                dialog.first.tvNumber.text =
+                    context.getString(R.string._4, pref.getNameVolume(Key.KEY_FOUR))
+            }
+        }
+
+        loadAd(text, key, dialog)
+
+        dialog.first.btnYes.setOnClickListener {
+            rewardedAd?.show(activity) {
+                pref.saveNumVolume(key, text + 1)
+                if (pref.getNameVolume(Key.KEY_TWO) == 2) {
+                    if (whenTwo != null) {
+                        whenTwo()
+                    }
+                    if (two != null) {
+                        two()
+                    }
+                }
+                if (pref.getNameVolume(Key.KEY_FOUR) == 4) {
+                    if (whenFour != null) {
+                        whenFour()
+                    }
+                    if (four != null) {
+                        four()
+                    }
+                }
+                if (pref.getNameVolume(Key.KEY_THREE) == 3) {
+                    if (whenThree != null) {
+                        whenThree()
+                    }
+                    if (three != null) {
+                        three()
+                    }
+
+                }
+                tvRatingTwo?.text = context.getString(R.string._2, pref.getNameVolume(Key.KEY_TWO))
+                tvRatingThree?.text =
+                    context.getString(R.string._3, pref.getNameVolume(Key.KEY_THREE))
+                tvRateTwo?.text = context.getString(R.string._4, pref.getNameVolume(Key.KEY_FOUR))
+                dialog.second.dismiss()
+            }
+        }
+        dialog.first.btnNo.setOnClickListener {
+            dialog.second.dismiss()
+            rewardedAd = null
         }
     }
 }

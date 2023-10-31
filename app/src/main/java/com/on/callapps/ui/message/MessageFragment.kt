@@ -2,6 +2,7 @@ package com.on.callapps.ui.message
 
 import android.Manifest
 import android.animation.AnimatorInflater
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
@@ -26,6 +27,7 @@ import com.on.callapps.ui.message.adapter.adapersss.MyModel
 import com.on.callapps.utils.InterAd
 import java.util.ArrayList
 
+@SuppressLint("NotifyDataSetChanged")
 class MessageFragment : Fragment() {
 
     private lateinit var binding: FragmentMessageBinding
@@ -37,7 +39,7 @@ class MessageFragment : Fragment() {
     private val requestCodeCameraPermission = 1001
     private val pref by lazy { Pref(requireContext()) }
     private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
-    private var name = "Max"
+    private var name = ""
 
     private fun onClick(text: String) {
         multiAdapter.notifyItemInserted(0)
@@ -64,13 +66,13 @@ class MessageFragment : Fragment() {
 
     private fun sendMessage(text: String, reply: String, end: String) {
         if (text == reply) {
-            binding.tvStatus.text = "typing..."
+            binding.tvStatus.text = getString(R.string.typing)
             Handler(Looper.getMainLooper()).postDelayed({
                 items.add(FriendModel(end))
                 multiAdapter.notifyDataSetChanged()
                 binding.recyclerManager.smoothScrollToPosition(multiAdapter.itemCount - 1)
                 Handler(Looper.getMainLooper()).postDelayed({
-                    binding.tvStatus.text = "online"
+                    binding.tvStatus.text = getString(R.string.online)
                 }, 900)
             }, 2000)
         }
@@ -78,13 +80,13 @@ class MessageFragment : Fragment() {
 
     private fun message(text: String) {
         if (text == "Hi!") {
-            binding.tvStatus.text = "typing..."
+            binding.tvStatus.text = getString(R.string.typing)
             Handler(Looper.getMainLooper()).postDelayed({
                 items.add(FriendModel("Hi! Welcome to my chat"))
                 multiAdapter.notifyDataSetChanged()
                 binding.recyclerManager.smoothScrollToPosition(multiAdapter.itemCount - 1)
                 Handler(Looper.getMainLooper()).postDelayed({
-                    binding.tvStatus.text = "online"
+                    binding.tvStatus.text = getString(R.string.online)
                 }, 900)
             }, 2000)
         }
@@ -117,6 +119,39 @@ class MessageFragment : Fragment() {
 
         items.add(FriendModel("Hi! Welcome to my chat"))
 
+        animBtn()
+
+        binding.recyclerManager.adapter = multiAdapter
+
+        initListener()
+        when (pref.saveContact) {
+            1 -> {
+                binding.tvName.text = getString(R.string.max)
+                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
+                name = getString(R.string.max)
+            }
+
+            2 -> {
+                binding.tvName.text = getString(R.string.rocky)
+                binding.ivLogo.setImageResource(R.drawable.c2)
+                name = getString(R.string.rocky)
+            }
+
+            3 -> {
+                binding.tvName.text = getString(R.string.charlie)
+                binding.ivLogo.setImageResource(R.drawable.c3)
+                name = getString(R.string.charlie)
+            }
+
+            4 -> {
+                binding.tvName.text = getString(R.string.milo)
+                binding.ivLogo.setImageResource(R.drawable.c4)
+                name = getString(R.string.milo)
+            }
+        }
+    }
+
+    private fun animBtn() {
         binding.btnBack.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             requireContext(),
             R.animator.button_click_animation
@@ -133,14 +168,9 @@ class MessageFragment : Fragment() {
             requireContext(),
             R.animator.button_click_animation
         )
+    }
 
-        binding.btnGift.setOnClickListener {
-            interAd.showInter()
-            findNavController().navigate(R.id.contactFragment)
-        }
-
-        binding.recyclerManager.adapter = multiAdapter
-
+    private fun initListener() {
         binding.btnBack.setOnClickListener {
             interAd.showInter()
             findNavController().navigateUp()
@@ -150,36 +180,14 @@ class MessageFragment : Fragment() {
             interAd.showInter()
             navigateInCall()
         }
-
+        binding.btnGift.setOnClickListener {
+            interAd.showInter()
+            findNavController().navigate(R.id.contactFragment)
+        }
         binding.imgCall.setOnClickListener {
             interAd.showInter()
             findNavController().popBackStack()
             findNavController().navigate(R.id.callFragment)
-        }
-        when (pref.saveContact) {
-            1 -> {
-                binding.tvName.text = "Max"
-                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
-                name = "Max"
-            }
-
-            2 -> {
-                binding.tvName.text = "Rocky"
-                binding.ivLogo.setImageResource(R.drawable.c2)
-                name = "Rocky"
-            }
-
-            3 -> {
-                binding.tvName.text = "Charlie"
-                binding.ivLogo.setImageResource(R.drawable.c3)
-                name = "Charlie"
-            }
-
-            4 -> {
-                binding.tvName.text = "Milo"
-                binding.ivLogo.setImageResource(R.drawable.c4)
-                name = "Milo"
-            }
         }
     }
 

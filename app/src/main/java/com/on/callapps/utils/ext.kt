@@ -7,11 +7,7 @@ import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.Window
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.SeekBar
 import androidx.viewbinding.ViewBinding
-import com.google.android.gms.ads.AdRequest
 
 fun <T : ViewBinding> Context.createDialog(
     inflate: (LayoutInflater, ViewGroup?, Boolean) -> T,
@@ -27,4 +23,4 @@ fun <T : ViewBinding> Context.createDialog(
 }
 
 
-inline fun String.Companion.format(format: String, vararg args: Any?): String = java.lang.String.format(format, *args)
+fun String.Companion.format(format: String, vararg args: Any?): String = java.lang.String.format(format, *args)

@@ -34,10 +34,11 @@ class PlayGameFragment : Fragment() {
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
-        binding.btnBack.setOnClickListener {
-            interAd.showInter()
-            findNavController().navigateUp()
-        }
+        animBtn()
+        initListener()
+    }
+
+    private fun animBtn() {
         binding.btnExit.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             requireContext(),
             R.animator.button_click_animation
@@ -50,6 +51,13 @@ class PlayGameFragment : Fragment() {
             requireContext(),
             R.animator.button_click_animation
         )
+    }
+
+    private fun initListener() {
+        binding.btnBack.setOnClickListener {
+            interAd.showInter()
+            findNavController().navigateUp()
+        }
         binding.btnExit.setOnClickListener {
             interAd.showInter()
             requireActivity().finishAffinity()
@@ -58,9 +66,9 @@ class PlayGameFragment : Fragment() {
 
         binding.btnPlay.setOnClickListener {
             interAd.showInter()
-                val intent = Intent(requireContext(), WebViewActivity::class.java)
-                intent.putExtra("url", getString(R.string.gamezop))
-                startActivity(intent)
+            val intent = Intent(requireContext(), WebViewActivity::class.java)
+            intent.putExtra("url", getString(R.string.gamezop))
+            startActivity(intent)
         }
     }
 }

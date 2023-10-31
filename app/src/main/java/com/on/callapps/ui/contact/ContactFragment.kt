@@ -10,19 +10,17 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.gms.ads.AdRequest
 import com.on.callapps.R
 import com.on.callapps.data.local.Pref
-import com.on.callapps.databinding.DialogTargetBinding
 import com.on.callapps.databinding.FragmentContactBinding
 import com.on.callapps.utils.InterAd
 import com.on.callapps.utils.Key
 import com.on.callapps.utils.RewardAd
-import com.on.callapps.utils.createDialog
 
 class ContactFragment : Fragment() {
 
     private lateinit var binding: FragmentContactBinding
     private val pref by lazy { Pref(requireContext()) }
     private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
-    private val rewardAd by lazy { RewardAd(requireContext()) }
+    private val rewardAd by lazy { RewardAd(requireContext(), requireActivity()) }
 
 
     override fun onCreateView(
@@ -53,24 +51,19 @@ class ContactFragment : Fragment() {
 
     private fun animBtn() {
         binding.btnBack.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
+            requireContext(), R.animator.button_click_animation
         )
         binding.cardView.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
+            requireContext(), R.animator.button_click_animation
         )
         binding.cardView2.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
+            requireContext(), R.animator.button_click_animation
         )
         binding.cardView3.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
+            requireContext(), R.animator.button_click_animation
         )
         binding.cardView4.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
+            requireContext(), R.animator.button_click_animation
         )
     }
 
@@ -82,30 +75,35 @@ class ContactFragment : Fragment() {
     }
 
     private fun check() {
-        if (pref.getNameVolume(Key.KEY_ONE) == 2) {
+        if (pref.getNameVolume(Key.KEY_TWO) == 2) {
             whenTwo()
         }
-        if (pref.getNameVolume(Key.KEY_THREE) == 4) {
+        if (pref.getNameVolume(Key.KEY_FOUR) == 4) {
             whenFour()
         }
-        if (pref.getNameVolume(Key.KEY_TWO) == 3) {
+        if (pref.getNameVolume(Key.KEY_THREE) == 3) {
             whenThree()
         }
     }
 
     private fun two() {
-        val ratingText = pref.getNameVolume(Key.KEY_ONE)
-        binding.tvRatingTwo.text = "$ratingText/2"
+        val ratingText = pref.getNameVolume(Key.KEY_TWO)
+        binding.tvRatingTwo.text = getString(R.string._2, ratingText)
 
-        if (pref.getNameVolume(Key.KEY_ONE) == 2) {
+        if (pref.getNameVolume(Key.KEY_TWO) == 2) {
             binding.contactFour.setOnClickListener {
                 pref.saveContact = 2
                 whenTwo()
             }
         } else {
             binding.contactFour.setOnClickListener {
-                pref.getNameVolume(Key.KEY_ONE)
-                    ?.let { it1 -> onClick(it1, Key.KEY_ONE) }
+                rewardAd.onClick(
+                    pref.getNameVolume(Key.KEY_TWO),
+                    Key.KEY_TWO,
+                    two = { two() },
+                    whenTwo = { whenTwo() },
+                    tvRatingTwo = binding.tvRatingTwo
+                )
             }
         }
 
@@ -121,10 +119,10 @@ class ContactFragment : Fragment() {
             4 -> {
                 binding.imgOkTwoFour.setImageResource(R.drawable.img_ok)
                 binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
-                if (pref.getNameVolume(Key.KEY_TWO) == 3) {
+                if (pref.getNameVolume(Key.KEY_THREE) == 3) {
                     binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
                 }
-                if (pref.getNameVolume(Key.KEY_ONE) == 2) {
+                if (pref.getNameVolume(Key.KEY_TWO) == 2) {
                     binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
                 }
             }
@@ -141,10 +139,10 @@ class ContactFragment : Fragment() {
             2 -> {
                 binding.imgOkTwoTwo.setImageResource(R.drawable.img_ok)
                 binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
-                if (pref.getNameVolume(Key.KEY_THREE) == 4) {
+                if (pref.getNameVolume(Key.KEY_FOUR) == 4) {
                     binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
                 }
-                if (pref.getNameVolume(Key.KEY_TWO) == 3) {
+                if (pref.getNameVolume(Key.KEY_THREE) == 3) {
                     binding.imgOkTwoThree.setImageResource(R.drawable.ic_empty_circle)
                 }
             }
@@ -161,10 +159,10 @@ class ContactFragment : Fragment() {
             3 -> {
                 binding.imgOkTwoThree.setImageResource(R.drawable.img_ok)
                 binding.imgOk.setImageResource(R.drawable.ic_empty_circle)
-                if (pref.getNameVolume(Key.KEY_ONE) == 2) {
+                if (pref.getNameVolume(Key.KEY_TWO) == 2) {
                     binding.imgOkTwoTwo.setImageResource(R.drawable.ic_empty_circle)
                 }
-                if (pref.getNameVolume(Key.KEY_THREE) == 4) {
+                if (pref.getNameVolume(Key.KEY_FOUR) == 4) {
                     binding.imgOkTwoFour.setImageResource(R.drawable.ic_empty_circle)
                 }
             }
@@ -173,93 +171,46 @@ class ContactFragment : Fragment() {
 
 
     private fun four() {
-        val rating4 = pref.getNameVolume(Key.KEY_THREE)
-        binding.tvRateTwo.text = "$rating4/4"
+        val rating4 = pref.getNameVolume(Key.KEY_FOUR)
+        binding.tvRateTwo.text = getString(R.string._4, rating4)
 
-        if (pref.getNameVolume(Key.KEY_THREE) == 4) {
+        if (pref.getNameVolume(Key.KEY_FOUR) == 4) {
             binding.contactSix.setOnClickListener {
                 pref.saveContact = 4
                 whenFour()
             }
         } else {
             binding.contactSix.setOnClickListener {
-                pref.getNameVolume(Key.KEY_THREE)?.let { it2 ->
-                    onClick(
-                        it2,
-                        Key.KEY_THREE,
-                    )
-                }
+                rewardAd.onClick(
+                    pref.getNameVolume(Key.KEY_FOUR),
+                    Key.KEY_FOUR,
+                    tvRateTwo = binding.tvRateTwo,
+                    four = { four() },
+                    whenFour = { whenFour() }
+                )
             }
         }
     }
 
     private fun three() {
-        val rating3 = pref.getNameVolume(Key.KEY_TWO)
-        binding.tvRatingThree.text = "$rating3/3"
+        val rating3 = pref.getNameVolume(Key.KEY_THREE)
+        binding.tvRatingThree.text = getString(R.string._3, rating3)
 
-        if (pref.getNameVolume(Key.KEY_TWO) == 3) {
+        if (pref.getNameVolume(Key.KEY_THREE) == 3) {
             binding.contactFive.setOnClickListener {
                 pref.saveContact = 3
                 whenThree()
             }
         } else {
             binding.contactFive.setOnClickListener {
-                pref.getNameVolume(Key.KEY_TWO)?.let { it1 ->
-                    onClick(
-                        it1,
-                        Key.KEY_TWO,
-                    )
-                }
+                rewardAd.onClick(
+                    pref.getNameVolume(Key.KEY_THREE),
+                    Key.KEY_THREE,
+                    tvRatingThree = binding.tvRatingThree,
+                    whenThree = { whenThree() },
+                    three = { three() }
+                )
             }
         }
     }
-
-    private fun onClick(text: Int, key: String) {
-        val dialog = requireContext().createDialog(DialogTargetBinding::inflate)
-        dialog.first.tvTitle.text = "Watch the short video to unlock the character "
-        when (key) {
-            Key.KEY_ONE -> {
-                dialog.first.tvNumber.text = "${pref.getNameVolume(Key.KEY_ONE)}/2"
-            }
-
-            Key.KEY_TWO -> {
-                dialog.first.tvNumber.text = "${pref.getNameVolume(Key.KEY_TWO)}/3"
-            }
-
-            Key.KEY_THREE -> {
-                dialog.first.tvNumber.text = "${pref.getNameVolume(Key.KEY_THREE)}/4"
-            }
-        }
-
-        rewardAd.loadAd(text, key, dialog)
-
-        dialog.first.btnYes.setOnClickListener {
-            rewardAd.rewardedAd?.show(requireActivity()) {
-                pref.saveNumVolume(key, text + 1)
-                if (pref.getNameVolume(Key.KEY_ONE) == 2) {
-                    whenTwo()
-                    two()
-                }
-                if (pref.getNameVolume(Key.KEY_THREE) == 4) {
-                    whenFour()
-                    four()
-                }
-                if (pref.getNameVolume(Key.KEY_TWO) == 3) {
-                    whenThree()
-                    three()
-
-                }
-                binding.tvRatingTwo.text = "${pref.getNameVolume(Key.KEY_ONE)}/2"
-                binding.tvRatingThree.text = "${pref.getNameVolume(Key.KEY_TWO)}/3"
-                binding.tvRateTwo.text = "${pref.getNameVolume(Key.KEY_THREE)}/4"
-                dialog.second.dismiss()
-            }
-        }
-        dialog.first.btnNo.setOnClickListener {
-            dialog.second.dismiss()
-            rewardAd.rewardedAd = null
-        }
-    }
-
-
 }

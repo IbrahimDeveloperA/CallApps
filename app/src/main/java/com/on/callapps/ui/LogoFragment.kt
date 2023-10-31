@@ -4,6 +4,7 @@ import android.animation.AnimatorInflater
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +19,6 @@ import com.on.callapps.utils.InterAd
 class LogoFragment : Fragment() {
     private lateinit var binding: FragmentLogoBinding
     private val pref by lazy { Pref(requireContext()) }
-
     private var isStarted = false
     private var primaryProgressStatus = 0
     private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
@@ -26,20 +26,20 @@ class LogoFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLogoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var handler = Handler()
+        var handler = Handler(Looper.getMainLooper())
         val maxProgress = 100
         val animationDuration = 7000
         val progressIncrement = maxProgress / (animationDuration / 200)
         interAd.loadAd()
 
-        handler = Handler {
+        handler = Handler(Looper.getMainLooper()) {
             if (isStarted) {
                 primaryProgressStatus += progressIncrement
                 if (primaryProgressStatus > maxProgress) {
@@ -48,7 +48,7 @@ class LogoFragment : Fragment() {
             }
 
             updateProgress(primaryProgressStatus)
-            handler?.sendEmptyMessageDelayed(0, 100)
+            handler.sendEmptyMessageDelayed(0, 100)
 
             true
         }
@@ -83,15 +83,11 @@ class LogoFragment : Fragment() {
             binding.clBy.visibility = View.VISIBLE
         }
 
-        binding.btnContinue.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
-        binding.clPrivacy.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
+        animBtn()
+        initListener()
+    }
 
+    private fun initListener() {
         binding.btnContinue.setOnClickListener {
             interAd.showInter()
             findNavController().navigate(R.id.imageFragment)
@@ -102,6 +98,17 @@ class LogoFragment : Fragment() {
             intent.putExtra("url", getString(R.string.privacy_url))
             startActivity(intent)
         }
+    }
+
+    private fun animBtn() {
+        binding.btnContinue.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.clPrivacy.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
     }
 
     private fun updateProgress(progress: Int) {

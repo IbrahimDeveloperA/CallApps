@@ -23,7 +23,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/ff_montserrat_alternates_regular"
-        android:text="Setting"
+        android:text="@string/setting"
         android:textColor="@color/tv_blue_text"
         android:textSize="20sp"
         app:layout_constraintStart_toEndOf="@id/btn_back"
@@ -41,7 +41,7 @@
         android:id="@+id/tv_licence"
         style="@style/TextViewStyle"
         android:fontFamily="@font/ff_montserrat_alternates_regular"
-        android:text="Licence"
+        android:text="@string/licence"
         app:layout_constraintStart_toEndOf="@id/img_table"
         app:layout_constraintTop_toTopOf="@id/img_table" />
 
@@ -56,7 +56,7 @@
         android:id="@+id/tv_privacy"
         style="@style/TextViewStyle"
         android:fontFamily="@font/ff_montserrat_alternates_regular"
-        android:text="Privacy Policy"
+        android:text="@string/privacy_policy"
         app:layout_constraintStart_toEndOf="@id/img_share_blue"
         app:layout_constraintTop_toTopOf="@id/img_share_blue" />
 
@@ -73,7 +73,7 @@
         android:id="@+id/tv_rate"
         style="@style/TextViewStyle"
         android:fontFamily="@font/ff_montserrat_alternates_regular"
-        android:text="Rate us"
+        android:text="@string/rate_us"
         app:layout_constraintStart_toEndOf="@id/img_like"
         app:layout_constraintTop_toTopOf="@id/img_like" />
 
@@ -88,7 +88,7 @@
         android:id="@+id/tv_share"
         style="@style/TextViewStyle"
         android:fontFamily="@font/ff_montserrat_alternates_regular"
-        android:text="Share it"
+        android:text="@string/share_it"
         app:layout_constraintStart_toEndOf="@id/img_blue"
         app:layout_constraintTop_toTopOf="@id/img_blue" />
 
@@ -103,7 +103,7 @@
         style="@style/TextViewStyle"
         android:id="@+id/tv_more_app"
         android:fontFamily="@font/ff_montserrat_alternates_regular"
-        android:text="More Apps"
+        android:text="@string/more_apps"
         app:layout_constraintStart_toEndOf="@id/img_more"
         app:layout_constraintTop_toTopOf="@id/img_more" />
 
@@ -119,7 +119,7 @@
 
         style="@style/TextViewStyle"
         android:fontFamily="@font/ff_montserrat_alternates_regular"
-        android:text="Play Games"
+        android:text="@string/play_games"
         app:layout_constraintStart_toEndOf="@id/img_gamepad"
         app:layout_constraintTop_toTopOf="@id/img_gamepad" />
 

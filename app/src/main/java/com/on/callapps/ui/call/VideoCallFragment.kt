@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -76,22 +75,22 @@ class VideoCallFragment : Fragment() {
         }
         when (pref.saveContact) {
             1 -> {
-                binding.tvName.text = "Max"
+                binding.tvName.text = getString(R.string.max)
                 binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
             }
 
             2 -> {
-                binding.tvName.text = "Rocky"
+                binding.tvName.text = getString(R.string.rocky)
                 binding.ivLogo.setImageResource(R.drawable.c2)
             }
 
             3 -> {
-                binding.tvName.text = "Charlie"
+                binding.tvName.text = getString(R.string.charlie)
                 binding.ivLogo.setImageResource(R.drawable.c3)
             }
 
             4 -> {
-                binding.tvName.text = "Milo"
+                binding.tvName.text = getString(R.string.milo)
                 binding.ivLogo.setImageResource(R.drawable.c4)
             }
         }
@@ -108,7 +107,7 @@ class VideoCallFragment : Fragment() {
             .setAutoFocusEnabled(true)
             .setFacing(CameraSource.CAMERA_FACING_FRONT)
             .build()
-        binding.cameraSurfaceView.getHolder().addCallback(object : SurfaceHolder.Callback {
+        binding.cameraSurfaceView.holder.addCallback(object : SurfaceHolder.Callback {
             @SuppressLint("MissingPermission")
             override fun surfaceCreated(holder: SurfaceHolder) {
                 try {
@@ -141,7 +140,6 @@ class VideoCallFragment : Fragment() {
 
         barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
             override fun release() {
-                Toast.makeText(requireContext(), "OPLOLOL", Toast.LENGTH_SHORT).show()
             }
 
             override fun receiveDetections(detections: Detector.Detections<Barcode>) {
@@ -161,6 +159,7 @@ class VideoCallFragment : Fragment() {
         super.onDestroyView()
         mediaPlayer2.stop()
     }
+
     override fun onDestroy() {
         super.onDestroy()
         cameraSource.stop()

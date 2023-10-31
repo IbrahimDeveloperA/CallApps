@@ -35,7 +35,11 @@ class SettingsFragment : Fragment() {
         interAd.loadAd()
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
+        animBtn()
+        initListener()
+    }
 
+    private fun animBtn() {
         binding.btnBack.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             requireContext(),
             R.animator.button_click_animation
@@ -64,6 +68,9 @@ class SettingsFragment : Fragment() {
             requireContext(),
             R.animator.button_click_animation
         )
+    }
+
+    private fun initListener() {
         binding.btnBack.setOnClickListener {
             interAd.showInter()
             findNavController().navigateUp()
@@ -103,7 +110,7 @@ class SettingsFragment : Fragment() {
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
             intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_url))
-            startActivity(Intent.createChooser(intent, "Share"))
+            startActivity(Intent.createChooser(intent, getString(R.string.share)))
         }
 
         binding.btnPlay.setOnClickListener {

@@ -16,7 +16,7 @@ class ProgressFragment : Fragment() {
 
     private var isStarted = false
     private var primaryProgressStatus = 0
-    var handler = Handler(Looper.getMainLooper())
+    private var handler = Handler(Looper.getMainLooper())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +41,7 @@ class ProgressFragment : Fragment() {
             }
 
             updateProgress(primaryProgressStatus)
-            handler?.sendEmptyMessageDelayed(0, 100)
+            handler.sendEmptyMessageDelayed(0, 100)
 
             true
         }
@@ -50,10 +50,10 @@ class ProgressFragment : Fragment() {
 
         if (!isStarted) {
             isStarted = true
-            handler?.sendEmptyMessage(0)
+            handler.sendEmptyMessage(0)
         } else {
             isStarted = false
-            handler?.removeMessages(0)
+            handler.removeMessages(0)
             binding.progressBar.visibility = View.GONE
             binding.tvProcent.visibility = View.GONE
         }
@@ -64,8 +64,6 @@ class ProgressFragment : Fragment() {
         binding.progressBar.progress = progress
         binding.tvProcent.text = "$progress%"
         if (binding.tvProcent.text == "100%") {
-//            binding.progressBar.visibility = View.GONE
-//            binding.tvProcent.visibility = View.GON
             findNavController().popBackStack()
                    findNavController().navigate(R.id.detailCallFragment)
         }
@@ -80,7 +78,6 @@ class ProgressFragment : Fragment() {
 
     override fun onStop() {
         super.onStop()
-        // Уберите все сообщения из Handler
         handler.removeCallbacksAndMessages(null)
         handler.removeCallbacksAndMessages(null)
     }

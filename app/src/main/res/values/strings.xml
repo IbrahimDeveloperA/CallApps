@@ -16,14 +16,53 @@
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
 
 
-
+    <!--Url-->
     <string name="privacy_url">https://sites.google.com/view/dog-fake-video-call/</string>
     <string name="gamezop">https://www.gamezop.com/?id=3178</string>
     <string name="share_url">https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp</string>
     <string name="rate_url">https://play.google.com/store/apps/details?id=com.dolzhenko.dogfakecallapp</string>
     <string name="license_url">https://creativecommons.org/publicdomain/zero/1.0/</string>
     <string name="more_app_url">"https://play.google.com/store/apps/developer?id=Fake+Call+Chat+Pranks+by+AMYMOT+Dev"</string>
+
+    <!--Key in adMob-->
     <string name="inter_key">ca-app-pub-3940256099942544/1033173712</string>
     <string name="reward_key">ca-app-pub-3940256099942544/5224354917</string>
     <string name="banner_key">ca-app-pub-3940256099942544/6300978111</string>
+
+    <string name="max">Max</string>
+    <string name="rocky">Rocky</string>
+    <string name="charlie">Charlie</string>
+    <string name="milo">Milo</string>
+    <string name="number_phone">+8 404 58 12 23</string>
+    <string name="incoming_video_call">Incoming Video Call</string>
+    <string name="watch_the_short_video_to_unlock_the_character">"Watch the short video to unlock the character "</string>
+    <string name="contacts">Contacts</string>
+    <string name="choose">"                                 Choose:                                "</string>
+    <string name="thanks_for_you_calling">Thanks for you calling!</string>
+    <string name="more_characters">More characters</string>
+    <string name="call_again">CALL AGAIN</string>
+    <string name="play_games">Play Games</string>
+    <string name="share">Share</string>
+    <string name="rate_us">Rate us</string>
+    <string name="start">START</string>
+    <string name="exit">Exit</string>
+    <string name="typing">typing...</string>
+    <string name="online">online</string>
+    <string name="characters">Characters</string>
+    <string name="chat">CHAT</string>
+    <string name="call">CALL</string>
+    <string name="video_call">Video CALL</string>
+    <string name="live">live</string>
+    <string name="ending_the_call_is_in_progress">ENDING THE CALL IS IN PROGRESS</string>
+    <string name="setting">Setting</string>
+    <string name="licence">Licence</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="share_it">Share it</string>
+    <string name="more_apps">More Apps</string>
+    <string name="_2">%1$d/2</string>
+    <string name="_4">%1$d/4</string>
+    <string name="_3">%1$d/3</string>
+    <string name="live_time">LIVE %1$s</string>
+
+
 </resources>

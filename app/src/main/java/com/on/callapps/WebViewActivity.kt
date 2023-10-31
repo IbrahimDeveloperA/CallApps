@@ -18,6 +18,7 @@ class WebViewActivity : AppCompatActivity() {
         webView.settings.javaScriptEnabled = false
 
         webView.webViewClient = object : WebViewClient() {
+            @Deprecated("Deprecated in Java")
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 if (url != null) {
                     view?.loadUrl(url)

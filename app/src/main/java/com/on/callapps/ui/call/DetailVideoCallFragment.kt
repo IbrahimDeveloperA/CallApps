@@ -47,19 +47,26 @@ class DetailVideoCallFragment : Fragment() {
         interAd.loadAd()
         when (pref.saveContact) {
             1 -> {
-                binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character1}"))
+                binding.videoView.
+                setVideoURI(Uri.parse("android.resource://com.on.callapps/" +
+                        "${R.raw.video_call_character1}"))
             }
 
             2 -> {
-                binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character_2}"))
+                binding.videoView.
+                setVideoURI(Uri.parse("android.resource://com.on.callapps/" +
+                        "${R.raw.video_call_character_2}"))
             }
 
             3 -> {
-                binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character_3}"))
+                binding.videoView.
+                setVideoURI(Uri.parse("android.resource://com.on.callapps/" +
+                        "${R.raw.video_call_character_3}"))
             }
 
             4 -> {
-                binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/${R.raw.video_call_character_4}"))
+                binding.videoView.setVideoURI(Uri.parse("android.resource://com.on.callapps/" +
+                        "${R.raw.video_call_character_4}"))
             }
         }
         binding.videoView.setOnCompletionListener { mp ->
@@ -75,7 +82,6 @@ class DetailVideoCallFragment : Fragment() {
             requireContext(),
             R.animator.button_click_animation
         )
-
         binding.ibResetCallRed.setOnClickListener {
             interAd.showInter()
             findNavController().popBackStack()

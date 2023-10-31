@@ -27,7 +27,7 @@ class CallFragment : Fragment() {
     private var isCall = false
     private lateinit var mediaPlayer: MediaPlayer
     private lateinit var mediaPlayer2: MediaPlayer
-    private var millisseconds = 0
+    private var milliseconds = 0
     private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = object : Runnable {
@@ -55,6 +55,92 @@ class CallFragment : Fragment() {
         interAd.loadAd()
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
+        animBtn()
+        initListener()
+        when (pref.saveContact) {
+            1 -> {
+                binding.tvName.text = getString(R.string.max)
+                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
+            }
+
+            2 -> {
+                binding.tvName.text = getString(R.string.rocky)
+                binding.ivLogo.setImageResource(R.drawable.c2)
+            }
+
+            3 -> {
+                binding.tvName.text = getString(R.string.charlie)
+                binding.ivLogo.setImageResource(R.drawable.c3)
+            }
+
+            4 -> {
+                binding.tvName.text = getString(R.string.milo)
+                binding.ivLogo.setImageResource(R.drawable.c4)
+            }
+        }
+        trueOrFalse()
+    }
+
+    private fun initListener() {
+        binding.ibResetCallRed.setOnClickListener {
+            interAd.showInter()
+            mediaPlayer.stop()
+            findNavController().popBackStack()
+            findNavController().navigate(R.id.progressFragment)
+        }
+        binding.ibAccept.setOnClickListener {
+            interAd.showInter()
+            isCall = true
+            trueOrFalse()
+        }
+        binding.ibReset.setOnClickListener {
+            interAd.showInter()
+            findNavController().popBackStack()
+            findNavController().navigate(R.id.contactFragment)
+        }
+        binding.tvVideoCall.setOnClickListener {
+            interAd.showInter()
+            navigateInCall()
+            mediaPlayer.stop()
+        }
+        binding.tvMicrophone.setOnClickListener {
+            microphone = if (!microphone) {
+                binding.tvMicrophone.setImageResource(R.drawable.microphone)
+                true
+            } else {
+                binding.tvMicrophone.setImageResource(R.drawable.microphone_off)
+                false
+            }
+        }
+        binding.tvCharacters.setOnClickListener {
+            interAd.showInter()
+            findNavController().navigate(R.id.contactFragment)
+        }
+        binding.tvChat.setOnClickListener {
+            interAd.showInter()
+            findNavController().navigate(R.id.messageFragment)
+        }
+        binding.tvAudioLevel.setOnClickListener {
+            when (audioLevel) {
+                100 -> {
+                    binding.tvAudioLevel.setImageResource(R.drawable.audio_level_50)
+                    audioLevel = 50
+                }
+
+                50 -> {
+                    binding.tvAudioLevel.setImageResource(R.drawable.audio_level_0)
+                    audioLevel = 0
+                }
+
+                0 -> {
+                    binding.tvAudioLevel.setImageResource(R.drawable.audio_level_100)
+                    audioLevel = 100
+                }
+            }
+        }
+    }
+
+    private fun animBtn() {
         binding.ibAccept.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             requireContext(),
             R.animator.button_click_animation
@@ -87,85 +173,6 @@ class CallFragment : Fragment() {
             requireContext(),
             R.animator.button_click_animation
         )
-        binding.ibAccept.setOnClickListener {
-            interAd.showInter()
-            isCall = true
-            trueOrFalse()
-        }
-        binding.ibReset.setOnClickListener {
-            interAd.showInter()
-            findNavController().popBackStack()
-            findNavController().navigate(R.id.contactFragment)
-        }
-        binding.tvVideoCall.setOnClickListener {
-            interAd.showInter()
-            navigateInCall()
-            mediaPlayer.stop()
-        }
-        binding.tvMicrophone.setOnClickListener {
-            microphone = if (!microphone) {
-                binding.tvMicrophone.setImageResource(R.drawable.microphone)
-                true
-            } else {
-                binding.tvMicrophone.setImageResource(R.drawable.microphone_off)
-                false
-            }
-        }
-        binding.tvCharacters.setOnClickListener{
-            interAd.showInter()
-            findNavController().navigate(R.id.contactFragment)
-        }
-        binding.tvChat.setOnClickListener {
-            interAd.showInter()
-            findNavController().navigate(R.id.messageFragment)
-        }
-        binding.tvAudioLevel.setOnClickListener {
-            when (audioLevel) {
-                100 -> {
-                    binding.tvAudioLevel.setImageResource(R.drawable.audio_level_50)
-                    audioLevel = 50
-                }
-                50 -> {
-                    binding.tvAudioLevel.setImageResource(R.drawable.audio_level_0)
-                    audioLevel = 0
-                }
-                0 -> {
-                    binding.tvAudioLevel.setImageResource(R.drawable.audio_level_100)
-                    audioLevel = 100
-                }
-            }
-        }
-        when (pref.saveContact) {
-            1 -> {
-                binding.tvName.text = "Max"
-                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
-            }
-
-            2 -> {
-                binding.tvName.text = "Rocky"
-                binding.ivLogo.setImageResource(R.drawable.c2)
-            }
-
-            3 -> {
-                binding.tvName.text = "Charlie"
-                binding.ivLogo.setImageResource(R.drawable.c3)
-            }
-
-            4 -> {
-                binding.tvName.text = "Milo"
-                binding.ivLogo.setImageResource(R.drawable.c4)
-            }
-        }
-
-        trueOrFalse()
-
-        binding.ibResetCallRed.setOnClickListener {
-            interAd.showInter()
-            mediaPlayer.stop()
-            findNavController().popBackStack()
-            findNavController().navigate(R.id.progressFragment)
-        }
-
     }
 
     private fun navigateInCall() {
@@ -207,6 +214,7 @@ class CallFragment : Fragment() {
                 1 -> {
                     mediaPlayer = MediaPlayer.create(requireContext(), R.raw.voice_call_character_1)
                 }
+
                 2 -> {
                     mediaPlayer = MediaPlayer.create(requireContext(), R.raw.voice_call_character_2)
                 }
@@ -235,9 +243,9 @@ class CallFragment : Fragment() {
     }
 
     private fun updateTimer() {
-        millisseconds += 10
-        val minutes = (millisseconds % 3600000) / 60000
-        val secs = (millisseconds % 60000) / 1000
+        milliseconds += 10
+        val minutes = (milliseconds % 3600000) / 60000
+        val secs = (milliseconds % 60000) / 1000
         val timeString = String.format("%02d:%02d", minutes, secs)
         binding.tvTimer.text = timeString
     }

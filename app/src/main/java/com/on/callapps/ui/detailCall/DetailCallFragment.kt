@@ -13,7 +13,6 @@ import com.on.callapps.R
 import com.on.callapps.WebViewActivity
 import com.on.callapps.data.local.Pref
 import com.on.callapps.databinding.DialogChooseBinding
-import com.on.callapps.databinding.DialogTargetBinding
 import com.on.callapps.databinding.FragmentDetailCallBinding
 import com.on.callapps.utils.InterAd
 import com.on.callapps.utils.Key
@@ -25,7 +24,7 @@ class DetailCallFragment : Fragment() {
     private lateinit var binding: FragmentDetailCallBinding
     private val pref by lazy { Pref(requireContext()) }
     private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
-    private val rewardAd by lazy { RewardAd(requireContext()) }
+    private val rewardAd by lazy { RewardAd(requireContext(), requireActivity()) }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,12 +35,38 @@ class DetailCallFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val adRequest = AdRequest.Builder().build()
         interAd.loadAd()
+        binding.adView.loadAd(adRequest)
+
+        initListener()
+
+        when (pref.saveContact) {
+            1 -> {
+                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
+            }
+
+            2 -> {
+                binding.ivLogo.setImageResource(R.drawable.c2)
+            }
+
+            3 -> {
+                binding.ivLogo.setImageResource(R.drawable.c3)
+            }
+
+            4 -> {
+                binding.ivLogo.setImageResource(R.drawable.c4)
+            }
+        }
+    }
+
+    private fun initListener() {
         binding.constCall.setOnClickListener {
             interAd.showInter()
             val dialog = requireContext().createDialog(DialogChooseBinding::inflate)
             dialog.first.tvChoose.text =
-                "                                 Choose:                                "
+                getString(R.string.choose)
             dialog.first.btnChat.setOnClickListener {
                 interAd.showInter()
                 findNavController().popBackStack()
@@ -71,9 +96,6 @@ class DetailCallFragment : Fragment() {
             }
         }
 
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
-
         binding.constPlay.setOnClickListener {
             interAd.showInter()
             val intent = Intent(requireContext(), WebViewActivity::class.java)
@@ -86,27 +108,27 @@ class DetailCallFragment : Fragment() {
             findNavController().navigate(R.id.contactFragment)
         }
         binding.contact2.setOnClickListener {
-            if (pref.getNameVolume(Key.KEY_ONE) == 2) {
-                interAd.showInter()
-                findNavController().navigate(R.id.contactFragment)
-            } else {
-                pref.getNameVolume(Key.KEY_ONE)?.let { it1 -> onClick(it1, Key.KEY_ONE) }
-            }
-        }
-        binding.contact3.setOnClickListener {
             if (pref.getNameVolume(Key.KEY_TWO) == 2) {
                 interAd.showInter()
                 findNavController().navigate(R.id.contactFragment)
             } else {
-                pref.getNameVolume(Key.KEY_TWO)?.let { it1 -> onClick(it1, Key.KEY_TWO) }
+                rewardAd.onClick(pref.getNameVolume(Key.KEY_TWO), Key.KEY_TWO)
             }
         }
-        binding.contact4.setOnClickListener {
+        binding.contact3.setOnClickListener {
             if (pref.getNameVolume(Key.KEY_THREE) == 2) {
                 interAd.showInter()
                 findNavController().navigate(R.id.contactFragment)
             } else {
-                pref.getNameVolume(Key.KEY_THREE)?.let { it1 -> onClick(it1, Key.KEY_THREE) }
+                rewardAd.onClick(pref.getNameVolume(Key.KEY_THREE), Key.KEY_THREE)
+            }
+        }
+        binding.contact4.setOnClickListener {
+            if (pref.getNameVolume(Key.KEY_FOUR) == 2) {
+                interAd.showInter()
+                findNavController().navigate(R.id.contactFragment)
+            } else {
+                rewardAd.onClick(pref.getNameVolume(Key.KEY_FOUR), Key.KEY_FOUR)
             }
         }
 
@@ -134,7 +156,7 @@ class DetailCallFragment : Fragment() {
                 Intent.EXTRA_TEXT,
                 getString(R.string.share_url)
             )
-            startActivity(Intent.createChooser(intent, "Share"))
+            startActivity(Intent.createChooser(intent, getString(R.string.share)))
         }
 
         binding.imgSettingsDetail.setOnClickListener {
@@ -145,53 +167,6 @@ class DetailCallFragment : Fragment() {
         binding.imageView.setOnClickListener {
             interAd.showInter()
             findNavController().navigateUp()
-        }
-
-        when (pref.saveContact) {
-            1 -> {
-                binding.ivLogo.setImageResource(R.drawable.ic_image_dog)
-            }
-
-            2 -> {
-                binding.ivLogo.setImageResource(R.drawable.c2)
-            }
-
-            3 -> {
-                binding.ivLogo.setImageResource(R.drawable.c3)
-            }
-
-            4 -> {
-                binding.ivLogo.setImageResource(R.drawable.c4)
-            }
-        }
-    }
-
-    private fun onClick(text: Int, key: String) {
-        val dialog = requireContext().createDialog(DialogTargetBinding::inflate)
-        dialog.first.tvTitle.text = "Watch the short video to unlock the character "
-        when (key) {
-            Key.KEY_ONE -> {
-                dialog.first.tvNumber.text = "${pref.getNameVolume(Key.KEY_ONE)}/2"
-            }
-
-            Key.KEY_TWO -> {
-                dialog.first.tvNumber.text = "${pref.getNameVolume(Key.KEY_TWO)}/3"
-            }
-
-            Key.KEY_THREE -> {
-                dialog.first.tvNumber.text = "${pref.getNameVolume(Key.KEY_THREE)}/4"
-            }
-        }
-        rewardAd.loadAd(text, key, dialog)
-        dialog.first.btnYes.setOnClickListener {
-            rewardAd.rewardedAd?.show(requireActivity()) {
-                pref.saveNumVolume(key, text + 1)
-                dialog.second.dismiss()
-            }
-        }
-        dialog.first.btnNo.setOnClickListener {
-            dialog.second.dismiss()
-            rewardAd.rewardedAd = null
         }
     }
 }

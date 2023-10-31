@@ -1,22 +1,16 @@
 package com.on.callapps.ui.live
 
-import android.Manifest
 import android.animation.AnimatorInflater
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.SurfaceHolder
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.google.android.gms.ads.AdRequest
 import androidx.lifecycle.lifecycleScope
@@ -41,7 +35,7 @@ class LiveFragment : Fragment(), ScrollToBottomListener {
     private lateinit var binding: FragmentLiveBinding
     private val adapter by lazy { LiveAdapter() }
     private var people = 10
-    private var millisseconds = 0
+    private var milliseconds = 0
     private val interAd by lazy { InterAd(requireContext(), requireActivity()) }
     private val handler = Handler(Looper.getMainLooper())
     private val runnable = object : Runnable {
@@ -80,40 +74,17 @@ class LiveFragment : Fragment(), ScrollToBottomListener {
         val adRequest = AdRequest.Builder().build()
         binding.adView.loadAd(adRequest)
 
+        animBtn()
         initListener()
 
+    }
+
+    private fun initListener() {
         binding.btnEnd.setOnClickListener {
             interAd.showInter()
             findNavController().popBackStack()
             findNavController().navigate(R.id.progressFragment)
         }
-    }
-
-    private fun initListener() {
-        binding.ibFavorite.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
-        binding.tvEmoji.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
-        binding.ibLike.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
-        binding.btnPlay.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
-        binding.btnEnd.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
-        binding.ibEndStream.stateListAnimator = AnimatorInflater.loadStateListAnimator(
-            requireContext(),
-            R.animator.button_click_animation
-        )
         binding.ibFavorite.setOnClickListener {
             interAd.showInter()
             favorite = if (favorite) {
@@ -152,12 +123,39 @@ class LiveFragment : Fragment(), ScrollToBottomListener {
         }
     }
 
+    private fun animBtn() {
+        binding.ibFavorite.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.tvEmoji.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.ibLike.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.btnPlay.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.btnEnd.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+        binding.ibEndStream.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+            requireContext(),
+            R.animator.button_click_animation
+        )
+    }
+
     private fun updateTimer() {
-        millisseconds += 10
-        val minutes = (millisseconds % 3600000) / 60000
-        val secs = (millisseconds % 60000) / 1000
+        milliseconds += 10
+        val minutes = (milliseconds % 3600000) / 60000
+        val secs = (milliseconds % 60000) / 1000
         val timeString = String.format("%02d:%02d", minutes, secs)
-        binding.tvLife.text = "LIVE $timeString"
+        binding.tvLife.text = getString(R.string.live_time, timeString)
     }
 
     private fun scheduleDataUpdate() {
@@ -214,7 +212,6 @@ class LiveFragment : Fragment(), ScrollToBottomListener {
 
         barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
             override fun release() {
-                Toast.makeText(requireContext(), "OPLOLOL", Toast.LENGTH_SHORT).show()
             }
 
             override fun receiveDetections(detections: Detector.Detections<Barcode>) {
