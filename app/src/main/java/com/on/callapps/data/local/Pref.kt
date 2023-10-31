@@ -10,25 +10,21 @@ class Pref(context: Context) {
     fun saveNumVolume(key: String, volume: Int) {
         pref.edit().putInt(key, volume).apply()
     }
-
-    fun getNameVolume(key: String): Int? {
+    fun getNameVolume(key: String): Int {
         return pref.getInt(key, 0)
     }
     var saveContact: Int
-        set(value) = pref.edit().putInt("contact", value).apply()
-        get() = pref.getInt("contact", 1)
+        set(value) = pref.edit().putInt(ARGS_CONTACT, value).apply()
+        get() = pref.getInt(ARGS_CONTACT, 1)
 
     var interAd: Int
-        set(value) = pref.edit().putInt("inter", value).apply()
-        get() = pref.getInt("inter", 0)
+        set(value) = pref.edit().putInt(ARGS_INTER_AD, value).apply()
+        get() = pref.getInt(ARGS_INTER_AD, 0)
 
 
     companion object {
         const val SHARE_PREF = "pref"
-
-//        const val KEY_ONE = "one"
-//        const val KEY_TWO = "two"
-//        const val KEY_THREE = "three"
-//        const val KEY_FOUR = "four"
+        const val ARGS_CONTACT = "contact"
+        const val ARGS_INTER_AD = "inter"
     }
 }
