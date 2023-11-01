@@ -89,7 +89,6 @@ class CallFragment : Fragment() {
             findNavController().navigate(R.id.progressFragment)
         }
         binding.ibAccept.setOnClickListener {
-            interAd.showInter()
             isCall = true
             trueOrFalse()
         }

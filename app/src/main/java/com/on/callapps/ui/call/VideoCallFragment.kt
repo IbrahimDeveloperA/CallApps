@@ -59,7 +59,6 @@ class VideoCallFragment : Fragment() {
             R.animator.button_click_animation
         )
         binding.ibAccept.setOnClickListener {
-            interAd.showInter()
             findNavController().popBackStack()
             findNavController().navigate(R.id.detailVideoCallFragment)
         }

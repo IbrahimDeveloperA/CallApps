@@ -44,27 +44,27 @@ class SettingsFragment : Fragment() {
             requireContext(),
             R.animator.button_click_animation
         )
-        binding.tvPrivacy.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+        binding.llPrivacy.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             requireContext(),
             R.animator.button_click_animation
         )
-        binding.btnPlay.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+        binding.llPlayGames.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             requireContext(),
             R.animator.button_click_animation
         )
-        binding.tvLicence.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+        binding.llLicence.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             requireContext(),
             R.animator.button_click_animation
         )
-        binding.tvRate.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+        binding.llRateUs.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             requireContext(),
             R.animator.button_click_animation
         )
-        binding.tvShare.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+        binding.llShare.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             requireContext(),
             R.animator.button_click_animation
         )
-        binding.tvMoreApp.stateListAnimator = AnimatorInflater.loadStateListAnimator(
+        binding.llMoreApps.stateListAnimator = AnimatorInflater.loadStateListAnimator(
             requireContext(),
             R.animator.button_click_animation
         )
@@ -76,36 +76,30 @@ class SettingsFragment : Fragment() {
             findNavController().navigateUp()
         }
 
-        binding.tvPrivacy.setOnClickListener {
+        binding.llPrivacy.setOnClickListener {
             interAd.showInter()
             val intent = Intent(requireContext(), WebViewActivity::class.java)
             intent.putExtra("url", getString(R.string.privacy_url))
             startActivity(intent)
         }
-        binding.btnPlay.setOnClickListener {
-            interAd.showInter()
-            val intent = Intent(requireContext(), WebViewActivity::class.java)
-            intent.putExtra("url", getString(R.string.gamezop))
-            startActivity(intent)
-        }
 
-        binding.tvLicence.setOnClickListener {
+        binding.llLicence.setOnClickListener {
             interAd.showInter()
             val intent = Intent(requireContext(), WebViewActivity::class.java)
             intent.putExtra("url", getString(R.string.license_url))
             startActivity(intent)
         }
-        binding.tvRate.setOnClickListener {
+        binding.llRateUs.setOnClickListener {
             interAd.showInter()
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.rate_url)))
             startActivity(intent)
         }
-        binding.tvMoreApp.setOnClickListener {
+        binding.llMoreApps.setOnClickListener {
             interAd.showInter()
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.more_app_url)))
             startActivity(intent)
         }
-        binding.tvShare.setOnClickListener {
+        binding.llShare.setOnClickListener {
             interAd.showInter()
             val intent = Intent(Intent.ACTION_SEND)
             intent.type = "text/plain"
@@ -113,7 +107,7 @@ class SettingsFragment : Fragment() {
             startActivity(Intent.createChooser(intent, getString(R.string.share)))
         }
 
-        binding.btnPlay.setOnClickListener {
+        binding.llPlayGames.setOnClickListener {
             interAd.showInter()
             findNavController().navigate(R.id.playGameFragment)
         }

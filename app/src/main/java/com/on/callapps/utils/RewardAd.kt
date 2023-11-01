@@ -3,6 +3,7 @@ package com.on.callapps.utils
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.view.View
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.google.android.gms.ads.AdError
@@ -46,7 +47,7 @@ class RewardAd(
     ) {
         if (rewardedAd == null) {
             val adRequest = AdRequest.Builder().build()
-            dialog.first.progressBar.isVisible = true
+            dialog.first.progressBar.visibility = View.VISIBLE
             dialog.first.btnYes.isEnabled = false
             RewardedAd.load(context,
                 context.getString(R.string.reward_key),
@@ -58,11 +59,14 @@ class RewardAd(
 
                     override fun onAdLoaded(ad: RewardedAd) {
                         rewardedAd = ad
-                        dialog.first.progressBar.isVisible = false
+                        dialog.first.progressBar.visibility = View.GONE
                         dialog.first.btnYes.isEnabled = true
                         rewardedAd?.fullScreenContentCallback = adListener(text, key, dialog)
                     }
                 })
+        }else{
+            dialog.first.progressBar.visibility = View.GONE
+            dialog.first.btnYes.isEnabled = true
         }
     }
 
@@ -98,8 +102,12 @@ class RewardAd(
                     context.getString(R.string._4, pref.getNameVolume(Key.KEY_FOUR))
             }
         }
-
-        loadAd(text, key, dialog)
+        if (rewardedAd == null) {
+            loadAd(text, key, dialog)
+        }else{
+            dialog.first.progressBar.visibility = View.GONE
+            dialog.first.btnYes.isEnabled = true
+        }
 
         dialog.first.btnYes.setOnClickListener {
             rewardedAd?.show(activity) {
@@ -138,7 +146,6 @@ class RewardAd(
         }
         dialog.first.btnNo.setOnClickListener {
             dialog.second.dismiss()
-            rewardedAd = null
         }
     }
 }

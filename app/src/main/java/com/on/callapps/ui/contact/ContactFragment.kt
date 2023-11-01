@@ -100,9 +100,9 @@ class ContactFragment : Fragment() {
                 rewardAd.onClick(
                     pref.getNameVolume(Key.KEY_TWO),
                     Key.KEY_TWO,
-                    two = { two() },
+                    tvRatingTwo = binding.tvRatingTwo,
                     whenTwo = { whenTwo() },
-                    tvRatingTwo = binding.tvRatingTwo
+                    two = { two() }
                 )
             }
         }
@@ -185,8 +185,8 @@ class ContactFragment : Fragment() {
                     pref.getNameVolume(Key.KEY_FOUR),
                     Key.KEY_FOUR,
                     tvRateTwo = binding.tvRateTwo,
-                    four = { four() },
-                    whenFour = { whenFour() }
+                    whenFour = { whenFour() },
+                    four = { four() }
                 )
             }
         }

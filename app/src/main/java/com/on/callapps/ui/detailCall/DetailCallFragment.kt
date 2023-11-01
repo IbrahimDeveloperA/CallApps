@@ -116,7 +116,7 @@ class DetailCallFragment : Fragment() {
             }
         }
         binding.contact3.setOnClickListener {
-            if (pref.getNameVolume(Key.KEY_THREE) == 2) {
+            if (pref.getNameVolume(Key.KEY_THREE) == 3) {
                 interAd.showInter()
                 findNavController().navigate(R.id.contactFragment)
             } else {
@@ -124,7 +124,7 @@ class DetailCallFragment : Fragment() {
             }
         }
         binding.contact4.setOnClickListener {
-            if (pref.getNameVolume(Key.KEY_FOUR) == 2) {
+            if (pref.getNameVolume(Key.KEY_FOUR) == 4) {
                 interAd.showInter()
                 findNavController().navigate(R.id.contactFragment)
             } else {

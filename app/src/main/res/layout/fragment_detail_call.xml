@@ -149,7 +149,7 @@
                 android:id="@+id/contact3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/c4" />
+                android:src="@drawable/c3" />
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
@@ -169,7 +169,7 @@
                 android:id="@+id/contact4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/c3" />
+                android:src="@drawable/c4" />
         </androidx.cardview.widget.CardView>
     </LinearLayout>
 
